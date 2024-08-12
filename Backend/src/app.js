@@ -1,6 +1,8 @@
 import express from 'express';
 import { resolve } from 'path';
 
+import './database/';
+
 import homeRoutes from './routes/homeRoutes';
 
 class App {

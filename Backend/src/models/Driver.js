@@ -79,4 +79,9 @@ export default class Driver extends Model {
     }, { sequelize });
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.DriverStat);
+  }
+
 }

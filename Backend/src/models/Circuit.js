@@ -43,4 +43,9 @@ export default class Circuit extends Model {
     }, { sequelize });
     return this;
   }
+
+  static associate(models) {
+    this.hasMany(models.Race, { foreignKey: 'circuit_id' });
+  }
+
 }

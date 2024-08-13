@@ -57,4 +57,9 @@ export default class Race extends Model {
     }, { sequelize });
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.Circuit);
+  }
+
 }

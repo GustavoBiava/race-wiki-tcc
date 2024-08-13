@@ -143,5 +143,10 @@ export default class Team extends Model {
     }, { sequelize });
     return this;
   }
+
+  static associate(models) {
+    this.belongsToMany(models.Driver, { through: 'career_contracts' });
+  }
+
 }
 

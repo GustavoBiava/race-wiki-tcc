@@ -82,6 +82,7 @@ export default class Driver extends Model {
 
   static associate(models) {
     this.belongsTo(models.DriverStat);
+    this.belongsToMany(models.Driver, { through: 'career_contracts' });
   }
 
 }

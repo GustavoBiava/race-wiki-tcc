@@ -6,9 +6,10 @@ import Race from "../models/Race";
 import Season from "../models/Season";
 import Driver from "../models/Driver";
 import DriverStat from "../models/DriverStat";
+import Team from "../models/Team";
 
 const connection = new Sequelize(databaseConfig);
-const models = [Circuit, Race, Season, Driver, DriverStat];
+const models = [Circuit, Race, Season, Driver, DriverStat, Team];
 
 models.forEach(model => model.init(connection));
 

@@ -21,4 +21,9 @@ export default class Qualifying extends Model {
     }, { sequelize });
     return this;
   }
+
+  static associate(models) {
+    this.belongsToMany(models.Driver, { through: 'driver_pratice_results' });
+  }
+
 }

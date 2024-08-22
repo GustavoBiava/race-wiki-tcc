@@ -61,6 +61,7 @@ export default class Race extends Model {
   static associate(models) {
     this.belongsTo(models.Circuit);
     this.belongsToMany(models.Team, { through: 'team_race_results' });
+    this.belongsToMany(models.Driver, { through: 'driver_race_results' });
   }
 
 }

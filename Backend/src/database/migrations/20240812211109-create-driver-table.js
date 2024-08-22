@@ -19,6 +19,11 @@ module.exports = {
           type: Sequelize.STRING,
           allowNull:false,
         },
+        description: {
+          type: Sequelize.TEXT,
+          allowNull: false,
+          defaultValue: '',
+        },
         height: {
           type: Sequelize.FLOAT,
           allowNull:false,

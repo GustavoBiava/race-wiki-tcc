@@ -14,6 +14,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        defaultValue: '',
+      },
       first_participation: {
         type: Sequelize.DATEONLY,
         allowNull: false,

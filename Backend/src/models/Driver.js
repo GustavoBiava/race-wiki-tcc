@@ -25,6 +25,11 @@ export default class Driver extends Model {
           }
         }
       },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        defaultValue: '',
+      },
       height: {
         type: Sequelize.FLOAT,
         allowNull:false,

@@ -12,9 +12,10 @@ import Practice from "../models/Practice";
 import CareerContracts from "../models/CareerContracts";
 import TeamClassification from "../models/TeamClassification";
 import DriverClassification from "../models/DriverClassification";
+import TeamRaceResult from "../models/TeamRaceResult";
 
 const connection = new Sequelize(databaseConfig);
-const models = [Circuit, Race, Season, Driver, DriverStat, Team, Qualifying, Practice, CareerContracts, TeamClassification, DriverClassification];
+const models = [Circuit, Race, Season, Driver, DriverStat, Team, Qualifying, Practice, CareerContracts, TeamClassification, DriverClassification, TeamRaceResult];
 
 models.forEach(model => model.init(connection));
 

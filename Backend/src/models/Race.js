@@ -64,6 +64,7 @@ export default class Race extends Model {
     this.belongsToMany(models.Driver, { through: 'driver_race_results' });
     this.belongsTo(models.Season);
     this.hasMany(models.Practice, { foreignKey: 'race_id' });
+    this.hasOne(models.Practice, { foreignKey: 'race_id' });
   }
 
 }

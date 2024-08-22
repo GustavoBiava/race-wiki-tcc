@@ -39,4 +39,9 @@ export default class Season extends Model {
     }, { sequelize });
     return this;
   }
+
+  static associate(models) {
+    this.belongsToMany(models.Team, { through: 'team_classifications' });
+  }
+
 }

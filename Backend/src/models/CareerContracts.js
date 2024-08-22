@@ -26,17 +26,22 @@ export default class CareerContracts extends Model {
       begin_date: {
         type: Sequelize.DATEONLY,
         allowNull: false,
+        validate: {
+          isDate: {
+            msg: 'Invalid Date!',
+          }
+        }
       },
       end_date: {
         type: Sequelize.DATEONLY,
         allowNull: false,
+        validate: {
+          isDate: {
+            msg: 'Invalid Date!',
+          }
+        }
       },
     }, { sequelize });
     return this;
   }
-
-  static associate(models) {
-    this.hasMany(models.Race, { foreignKey: 'circuit_id' });
-  }
-
 }

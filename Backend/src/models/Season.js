@@ -42,6 +42,7 @@ export default class Season extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Team, { through: 'team_classifications' });
+    this.belongsToMany(models.Driver, { through: 'driver_classifications' });
   }
 
 }

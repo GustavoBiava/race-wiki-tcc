@@ -1,16 +1,8 @@
-'use strict';
+import Sequelize, { Model } from "sequelize";
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('career_contracts',
-    {
-      id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true,
-      },
+export default class CareerContracts extends Model {
+  static init(sequelize) {
+    super.init({
       driver_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -39,16 +31,12 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
-      created_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-    });
-  },
+    }, { sequelize });
+    return this;
+  }
 
-  async down () {}
-};
+  static associate(models) {
+    this.hasMany(models.Race, { foreignKey: 'circuit_id' });
+  }
+
+}

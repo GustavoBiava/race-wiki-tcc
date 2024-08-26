@@ -10,7 +10,7 @@ export default class DriverStat extends Model {
         unique: true,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Number field not a Integer value!',
           }
         }
       },
@@ -20,7 +20,7 @@ export default class DriverStat extends Model {
         defaultValue: 0,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Races_entered not a Integer value!',
           }
         }
       },
@@ -30,7 +30,7 @@ export default class DriverStat extends Model {
         defaultValue: 0,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Drivers_championships not a Integer value!',
           }
         }
       },
@@ -40,7 +40,7 @@ export default class DriverStat extends Model {
         defaultValue: 0,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Victories not a Integer value!',
           }
         }
       },
@@ -50,7 +50,7 @@ export default class DriverStat extends Model {
         defaultValue: 0,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Podiums not a Integer value!',
           }
         }
       },
@@ -60,7 +60,7 @@ export default class DriverStat extends Model {
         defaultValue: 0,
         validate: {
           isFloat: {
-            msg: 'Not a Float value!',
+            msg: 'Career_points not a Float value!',
           }
         }
       },
@@ -69,8 +69,8 @@ export default class DriverStat extends Model {
         allowNull: false,
         defaultValue: 0,
         validate: {
-          isFloat: {
-            msg: 'Not a Integer value!',
+          isInt: {
+            msg: 'Highest_grid_position not a Integer value!',
           }
         }
       },
@@ -79,8 +79,8 @@ export default class DriverStat extends Model {
         allowNull: false,
         defaultValue: 0,
         validate: {
-          isFloat: {
-            msg: 'Not a Integer value!',
+          isInt: {
+            msg: 'Highest_race_finish not a Integer value!',
           }
         }
       },
@@ -89,8 +89,8 @@ export default class DriverStat extends Model {
         allowNull: false,
         defaultValue: 0,
         validate: {
-          isFloat: {
-            msg: 'Not a Integer value!',
+          isInt: {
+            msg: 'Times_highest_finish not a Integer value!',
           }
         }
       },

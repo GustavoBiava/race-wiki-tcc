@@ -4,6 +4,7 @@ import { resolve } from 'path';
 import './database/';
 
 import circuitRoutes from './routes/circuitRoutes';
+import driverStatRoutes from './routes/driverStatRoutes';
 
 class App {
 
@@ -21,6 +22,7 @@ class App {
 
   routes() {
     this.app.use('/circuits', circuitRoutes);
+    this.app.use('/driverStats', driverStatRoutes);
   }
 
 }

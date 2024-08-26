@@ -28,7 +28,6 @@ class CircuitController {
       return res.status(201).json(circuit);
     }
     catch (err) {
-      console.log(err);
       return res.status(400).json({ errors: err.errors.map(e => e.message) });
     }
   }

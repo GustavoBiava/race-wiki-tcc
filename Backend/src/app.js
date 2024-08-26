@@ -3,7 +3,7 @@ import { resolve } from 'path';
 
 import './database/';
 
-import homeRoutes from './routes/homeRoutes';
+import circuitRoutes from './routes/circuitRoutes';
 
 class App {
 
@@ -20,7 +20,7 @@ class App {
   }
 
   routes() {
-    this.app.use('/', homeRoutes);
+    this.app.use('/circuits', circuitRoutes);
   }
 
 }

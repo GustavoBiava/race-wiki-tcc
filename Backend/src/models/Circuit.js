@@ -10,7 +10,7 @@ export default class Circuit extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Invalid length (Min: 3, Max: 50)'
+            msg: 'Name invalid length (Min: 3, Max: 50)'
           }
         }
       },
@@ -20,8 +20,7 @@ export default class Circuit extends Model {
         defaultValue: Sequelize.NOW,
         validate: {
           isDate: {
-            args: true,
-            msg: 'Invalid date!',
+            msg: 'First_apparition invalid date!',
           },
         }
       },
@@ -31,7 +30,7 @@ export default class Circuit extends Model {
         defaultValue: 0,
         validate: {
           isFloat: {
-            msg: 'Not a float value'
+            msg: 'Circuit_length not a float value'
           }
         }
 
@@ -39,6 +38,12 @@ export default class Circuit extends Model {
       fastest_lap_record: {
         type: Sequelize.TIME,
         allowNull: true,
+        validate: {
+          is: {
+            args: /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/,
+            msg: 'Fastest_lap_record is not a valid Time (HH:mm:ss)',
+          },
+        }
       },
     }, { sequelize });
     return this;

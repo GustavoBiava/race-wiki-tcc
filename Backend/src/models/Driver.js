@@ -81,6 +81,10 @@ export default class Driver extends Model {
           }
         }
       },
+      driver_stat_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      }
     }, { sequelize });
     return this;
   }
@@ -92,6 +96,7 @@ export default class Driver extends Model {
     this.belongsToMany(models.Race, { through: 'driver_race_results' });
     this.belongsToMany(models.Practice, { through: 'driver_pratice_results' });
     this.belongsToMany(models.Qualifying, { through: 'driver_qualifying_results' });
+    this.hasMany(models.Season, { foreignKey: 'winner_driver' });
   }
 
 }

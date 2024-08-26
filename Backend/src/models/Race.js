@@ -54,6 +54,14 @@ export default class Race extends Model {
         allowNull: false,
         defaultValue: false,
       },
+      circuit_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      season_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      }
     }, { sequelize });
     return this;
   }

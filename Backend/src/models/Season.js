@@ -36,6 +36,14 @@ export default class Season extends Model {
           },
         }
       },
+      winner_driver: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      winner_constructor: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      }
     }, { sequelize });
     return this;
   }
@@ -44,6 +52,8 @@ export default class Season extends Model {
     this.belongsToMany(models.Team, { through: 'team_classifications' });
     this.belongsToMany(models.Driver, { through: 'driver_classifications' });
     this.hasMany(models.Race, { foreignKey: 'season_id' });
+    this.belongsTo(models.Driver);
+    this.belongsTo(models.Team);
   }
 
 }

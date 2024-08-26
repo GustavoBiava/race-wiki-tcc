@@ -46,6 +46,14 @@ export default class DriverRaceResult extends Model {
           msg: 'Not a double value',
         }
       },
+      total_race_duration: {
+        type: Sequelize.TIME,
+        allowNull: false,
+      },
+      interval_to_leader: {
+        type: Sequelize.TIME,
+        allowNull: false,
+      },
     }, { sequelize });
     return this;
   }

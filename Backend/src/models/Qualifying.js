@@ -18,6 +18,10 @@ export default class Qualifying extends Model {
         allowNull: false,
         defaultValue: false,
       },
+      race_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      }
     }, { sequelize });
     return this;
   }

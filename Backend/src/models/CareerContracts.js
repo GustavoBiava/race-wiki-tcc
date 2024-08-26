@@ -41,6 +41,11 @@ export default class CareerContracts extends Model {
           }
         }
       },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      }
     }, { sequelize });
     return this;
   }

@@ -6,6 +6,7 @@ import './database/';
 import circuitRoutes from './routes/circuitRoutes';
 import driverStatRoutes from './routes/driverStatRoutes';
 import driverRoutes from './routes/driverRoutes';
+import teamRoutes from './routes/teamRoutes';
 
 class App {
 
@@ -25,6 +26,7 @@ class App {
     this.app.use('/circuits', circuitRoutes);
     this.app.use('/driverStats', driverStatRoutes);
     this.app.use('/drivers', driverRoutes);
+    this.app.use('/teams', teamRoutes);
   }
 
 }

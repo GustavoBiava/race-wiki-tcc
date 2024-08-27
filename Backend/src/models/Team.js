@@ -10,7 +10,7 @@ export default class Team extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Invalid length (Min: 3, Max: 50)'
+            msg: 'Name invalid length (Min: 3, Max: 50)'
           }
         }
       },
@@ -24,9 +24,10 @@ export default class Team extends Model {
         allowNull: false,
         defaultValue: Sequelize.NOW,
         validate: {
-          isDate: {
-            msg: 'Invalid date!',
-          }
+          is: {
+            args: /^\d{4}(-\d{2}(-\d{2})?)?$/,
+            msg: 'first_participation is not a valid Date (YY-MM-DD)',
+          },
         }
       },
       team_chief: {
@@ -36,7 +37,7 @@ export default class Team extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Invalid length (Min: 3, Max: 50)'
+            msg: 'Team_chief invalid length (Min: 3, Max: 50)'
           }
         }
       },
@@ -47,7 +48,7 @@ export default class Team extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Invalid length (Min: 3, Max: 50)'
+            msg: 'Technical_chief invalid length (Min: 3, Max: 50)'
           }
         }
       },
@@ -57,7 +58,7 @@ export default class Team extends Model {
         defaultValue: 0,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Constructors_championships not a Integer value!',
           }
         }
       },
@@ -67,7 +68,7 @@ export default class Team extends Model {
         defaultValue: 0,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Highest_race_finish not a Integer value!',
           }
         }
       },
@@ -77,7 +78,7 @@ export default class Team extends Model {
         defaultValue: 0,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Times_highest_finish not a Integer value!',
           }
         }
       },
@@ -87,7 +88,7 @@ export default class Team extends Model {
         defaultValue: 0,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Fastest_laps not a Integer value!',
           }
         }
       },
@@ -97,7 +98,7 @@ export default class Team extends Model {
         defaultValue: 0,
         validate: {
           isInt: {
-            msg: 'Not a Integer value!',
+            msg: 'Pole_positions not a Integer value!',
           }
         }
       },
@@ -107,8 +108,8 @@ export default class Team extends Model {
         defaultValue: '',
         validate: {
           len: {
-            args: [3, 20],
-            msg: 'Invalid length (Min: 3, Max: 20)'
+            args: [4, 20],
+            msg: 'Main_color invalid length (Min: 4, Max: 20)'
           }
         }
       },
@@ -118,8 +119,8 @@ export default class Team extends Model {
         defaultValue: '',
         validate: {
           len: {
-            args: [3, 20],
-            msg: 'Invalid length (Min: 3, Max: 20)'
+            args: [4, 20],
+            msg: 'Secondary_color invalid length (Min: 4, Max: 20)'
           }
         }
       },

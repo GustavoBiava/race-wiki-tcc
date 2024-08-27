@@ -5,18 +5,7 @@ class DriverStatController {
   async index(req, res) {
     try {
       const driverStats = await DriverStat.findAll({
-        attributes: [
-          'id',
-          'number',
-          'races_entered',
-          'drivers_championships',
-          'victories',
-          'podiums',
-          'career_points',
-          'highest_grid_position',
-          'highest_race_finish',
-          'times_highest_finish'
-        ],
+        attributes: { exclude: ['created_at', 'updated_at']},
         order: [ ['created_at', 'DESC'] ],
       });
 
@@ -27,7 +16,8 @@ class DriverStatController {
       return res.status(200).json(driverStats);
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 
@@ -39,7 +29,8 @@ class DriverStatController {
       return res.status(201).json(driverStat);
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 
@@ -54,7 +45,8 @@ class DriverStatController {
       return res.status(200).json(driverStat);
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 
@@ -73,7 +65,8 @@ class DriverStatController {
       return res.status(200).json({updatedDriverStat});
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 
@@ -83,18 +76,7 @@ class DriverStatController {
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
       const driverStat = await DriverStat.findByPk(id, {
-        attributes: [
-          'id',
-          'number',
-          'races_entered',
-          'drivers_championships',
-          'victories',
-          'podiums',
-          'career_points',
-          'highest_grid_position',
-          'highest_race_finish',
-          'times_highest_finish'
-        ],
+        attributes: { exclude: ['created_at', 'updated_at']},
       });
       if (!driverStat) return res.status(404).json({ errors: ['Driver Stat doesn\'t exists!'] });
 
@@ -103,7 +85,8 @@ class DriverStatController {
       return res.status(200).json({deletedDriverStat: driverStat});
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 }

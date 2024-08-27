@@ -10,7 +10,7 @@ export default class Driver extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Invalid length (Min: 3, Max: 50)'
+            msg: 'Name invalid length (Min: 3, Max: 50)'
           }
         }
       },
@@ -21,7 +21,7 @@ export default class Driver extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Invalid length (Min: 3, Max: 50)'
+            msg: 'Surname invalid length (Min: 3, Max: 50)'
           }
         }
       },
@@ -35,7 +35,7 @@ export default class Driver extends Model {
         allowNull:false,
         validate: {
           isFloat: {
-            msg: 'Not a Float value!',
+            msg: 'Height not a Float value!',
           }
         }
       },
@@ -46,7 +46,7 @@ export default class Driver extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Invalid length (Min: 3, Max: 50)'
+            msg: 'Nationality invalid length (Min: 3, Max: 50)'
           }
         }
       },
@@ -54,9 +54,10 @@ export default class Driver extends Model {
         type: Sequelize.DATEONLY,
         allowNull: false,
         validate: {
-          isDate: {
-            msg: 'Invalid date!',
-          }
+          is: {
+            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+            msg: 'birth_date is not a valid Date (YY-MM-DD)',
+          },
         }
       },
       birth_place: {
@@ -66,7 +67,7 @@ export default class Driver extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Invalid length (Min: 3, Max: 50)'
+            msg: 'Birth_place invalid length (Min: 3, Max: 50)'
           }
         }
       },
@@ -77,20 +78,26 @@ export default class Driver extends Model {
         validate: {
           len: {
             args: [3, 10],
-            msg: 'Invalid length (Min: 3, Max: 10)'
+            msg: 'Short_name invalid length (Min: 3, Max: 10)'
           }
         }
       },
       driver_stat_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        unique: true,
+        validate: {
+          isInt: {
+            msg: 'Driver_stat_id need to be a Integer!',
+          }
+        }
       }
     }, { sequelize });
     return this;
   }
 
   static associate(models) {
-    this.belongsTo(models.DriverStat);
+    this.belongsTo(models.DriverStat, { as: 'driver_stat' });
     this.belongsToMany(models.Team, { through: 'career_contracts' });
     this.belongsToMany(models.Season, { through: 'driver_classifications' });
     this.belongsToMany(models.Race, { through: 'driver_race_results' });

@@ -5,7 +5,7 @@ class CircuitController {
   async index(req, res) {
     try {
       const circuits = await Circuit.findAll({
-        attributes: ['id', 'name', 'first_apparition', 'circuit_length', 'fastest_lap_record',],
+        attributes: { exclude: ['created_at', 'updated_at'] },
         order: [ ['created_at', 'DESC'] ],
       });
 
@@ -16,7 +16,8 @@ class CircuitController {
       return res.status(200).json(circuits);
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 
@@ -28,7 +29,8 @@ class CircuitController {
       return res.status(201).json(circuit);
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 
@@ -43,7 +45,8 @@ class CircuitController {
       return res.status(200).json(circuit);
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 
@@ -62,7 +65,8 @@ class CircuitController {
       return res.status(200).json({updatedCircuit});
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 
@@ -71,7 +75,7 @@ class CircuitController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const circuit = await Circuit.findByPk(id, { attributes: ['id', 'name', 'first_apparition', 'circuit_length', 'fastest_lap_record']});
+      const circuit = await Circuit.findByPk(id, { attributes: { exclude: ['created_at', 'updated_at'] } });
       if (!circuit) return res.status(404).json({ errors: ['Circuit doesn\'t exists!'] });
 
       await circuit.destroy();
@@ -79,7 +83,8 @@ class CircuitController {
       return res.status(200).json({deletedCircuit: circuit});
     }
     catch (err) {
-      return res.status(400).json({ errors: err.errors.map(e => e.message) });
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 }

@@ -7,6 +7,7 @@ module.exports = {
     {
       type: Sequelize.INTEGER,
         allowNull: false,
+        unique: true,
         references: {
           model: 'driver_stats',
           key: 'id',

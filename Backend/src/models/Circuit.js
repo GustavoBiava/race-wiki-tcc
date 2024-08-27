@@ -19,8 +19,9 @@ export default class Circuit extends Model {
         allowNull: false,
         defaultValue: Sequelize.NOW,
         validate: {
-          isDate: {
-            msg: 'First_apparition invalid date!',
+          is: {
+            args: /^\d{4}(-\d{2}(-\d{2})?)?$/,
+            msg: 'first_apparition is not a valid Date (YY-MM-DD)',
           },
         }
       },
@@ -33,7 +34,6 @@ export default class Circuit extends Model {
             msg: 'Circuit_length not a float value'
           }
         }
-
       },
       fastest_lap_record: {
         type: Sequelize.TIME,

@@ -7,10 +7,11 @@ export default class Season extends Model {
         type: Sequelize.DATEONLY,
         allowNull: false,
         defaultValue: Sequelize.NOW,
+        unique: true,
         validate: {
-          isDate: {
-            args: true,
-            msg: 'Invalid date!',
+          is: {
+            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+            msg: 'Year is not a valid year (YYYY)',
           },
         }
       },
@@ -19,9 +20,9 @@ export default class Season extends Model {
         allowNull: false,
         defaultValue: Sequelize.NOW,
         validate: {
-          isDate: {
-            args: true,
-            msg: 'Invalid date!',
+          is: {
+            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+            msg: 'Begin_date is not a valid Date (YYYY:MM:DD)',
           },
         }
       },
@@ -30,21 +31,32 @@ export default class Season extends Model {
         allowNull: false,
         defaultValue: Sequelize.NOW,
         validate: {
-          isDate: {
-            args: true,
-            msg: 'Invalid date!',
+          is: {
+            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+            msg: 'End_date is not a valid Date (YYYY:MM:DD)',
           },
         }
       },
-      winner_driver: {
+      driver_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        validate: {
+          isInt: {
+            msg: 'Driver_id need to be a integer!',
+          }
+        }
       },
-      winner_constructor: {
+      team_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        validate: {
+          isInt: {
+            msg: 'Team_id need to be a integer!',
+          }
+        }
       }
     }, { sequelize });
+
     return this;
   }
 
@@ -52,8 +64,8 @@ export default class Season extends Model {
     this.belongsToMany(models.Team, { through: 'team_classifications' });
     this.belongsToMany(models.Driver, { through: 'driver_classifications' });
     this.hasMany(models.Race, { foreignKey: 'season_id' });
-    this.belongsTo(models.Driver);
-    this.belongsTo(models.Team);
+    this.belongsTo(models.Driver, { foreignKey: 'driver_id', as: 'winner_driver'});
+    this.belongsTo(models.Team, { foreignKey: 'team_id', as: 'winner_constructor'});
   }
 
 }

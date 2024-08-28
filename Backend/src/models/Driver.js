@@ -56,7 +56,7 @@ export default class Driver extends Model {
         validate: {
           is: {
             args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-            msg: 'birth_date is not a valid Date (YY-MM-DD)',
+            msg: 'birth_date is not a valid Date (YYYY-MM-DD)',
           },
         }
       },
@@ -103,7 +103,7 @@ export default class Driver extends Model {
     this.belongsToMany(models.Race, { through: 'driver_race_results' });
     this.belongsToMany(models.Practice, { through: 'driver_pratice_results' });
     this.belongsToMany(models.Qualifying, { through: 'driver_qualifying_results' });
-    this.hasMany(models.Season, { foreignKey: 'winner_driver' });
+    this.hasMany(models.Season, { foreignKey: 'driver_id' });
   }
 
 }

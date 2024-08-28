@@ -26,7 +26,7 @@ export default class Team extends Model {
         validate: {
           is: {
             args: /^\d{4}(-\d{2}(-\d{2})?)?$/,
-            msg: 'first_participation is not a valid Date (YY-MM-DD)',
+            msg: 'first_participation is not a valid Date (YYYY-MM-DD)',
           },
         }
       },
@@ -131,7 +131,7 @@ export default class Team extends Model {
         validate: {
           len: {
             args: [3, 20],
-            msg: 'Invalid length (Min: 3, Max: 20)'
+            msg: 'Power_unit invalid length (Min: 3, Max: 20)'
           }
         }
       },
@@ -142,7 +142,7 @@ export default class Team extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Invalid length (Min: 3, Max: 50)'
+            msg: 'Base invalid length (Min: 3, Max: 50)'
           }
         }
       },
@@ -154,7 +154,7 @@ export default class Team extends Model {
     this.belongsToMany(models.Driver, { through: 'career_contracts' });
     this.belongsToMany(models.Season, { through: 'team_classifications' });
     this.belongsToMany(models.Race, { through: 'team_race_results' });
-    this.hasMany(models.Season, { foreignKey: 'winner_constructor' });
+    this.hasMany(models.Season, { foreignKey: 'team_id' });
   }
 
 }

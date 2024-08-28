@@ -21,7 +21,7 @@ export default class Circuit extends Model {
         validate: {
           is: {
             args: /^\d{4}(-\d{2}(-\d{2})?)?$/,
-            msg: 'first_apparition is not a valid Date (YY-MM-DD)',
+            msg: 'first_apparition is not a valid Date (YYYY-MM-DD)',
           },
         }
       },

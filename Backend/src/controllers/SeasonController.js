@@ -1,20 +1,21 @@
-import Driver from "../models/Driver";
-import DriverStat from "../models/DriverStat";
+import Season from '../models/Season';
+import Driver from '../models/Driver';
+import Team from '../models/Team';
 
-class DriverController {
+class SeasonController {
 
   async index(req, res) {
     try {
-      const drivers = await Driver.findAll({
-        attributes: { exclude: ['created_at', 'updated_at']},
+      const seasons = await Season.findAll({
+        attributes: { exclude: ['created_at', 'updated_at'] },
         order: [ ['created_at', 'DESC'] ],
       });
 
-      if (drivers.length < 0) {
-        return res.status(204).json({ message: ['There is no Drivers registered!'] });
+      if (seasons.length < 0) {
+        return res.status(204).json({ message: ['There is no Seasons registered!'] });
       }
 
-      return res.status(200).json(drivers);
+      return res.status(200).json(seasons);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -26,8 +27,8 @@ class DriverController {
     try {
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const driver = await Driver.create(req.body);
-      return res.status(201).json(driver);
+      const season = await Season.create(req.body);
+      return res.status(201).json(season);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
@@ -40,17 +41,17 @@ class DriverController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const driver = await Driver.findByPk(id, {
-        include: {
-          model: DriverStat,
-          as: 'driver_stat',
-        },
-        attributes: { exclude: ['driver_stat_id'] }
+      const season = await Season.findByPk(id, {
+        include: [
+          { model: Driver, as: 'winner_driver' },
+          { model: Team, as: 'winner_constructor' }
+        ],
+        attributes: { exclude: ['team_id', 'driver_id'] }
       });
 
-      if (!driver) return res.status(404).json({ errors: ['Driver doesn\'t exists!'] });
+      if (!season) return res.status(404).json({ errors: ['Season doesn\'t exists!'] });
 
-      return res.status(200).json(driver);
+      return res.status(200).json(season);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -65,12 +66,12 @@ class DriverController {
 
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const driver = await Driver.findByPk(id);
-      if (!driver) return res.status(404).json({ errors: ['Driver doesn\'t exists!'] });
+      const season = await Season.findByPk(id);
+      if (!season) return res.status(404).json({ errors: ['Season doesn\'t exists!'] });
 
-      const updatedDriver = await driver.update(req.body);
+      const updatedSeason = await season.update(req.body);
 
-      return res.status(200).json(updatedDriver);
+      return res.status(200).json(updatedSeason);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -83,12 +84,12 @@ class DriverController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const driver = await Driver.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
-      if (!driver) return res.status(404).json({ errors: ['Driver doesn\'t exists!'] });
+      const season = await Season.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
+      if (!season) return res.status(404).json({ errors: ['Season doesn\'t exists!'] });
 
-      await driver.destroy();
+      await season.destroy();
 
-      return res.status(200).json({deletedDriver: driver});
+      return res.status(200).json({deletedSeason: season});
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -97,4 +98,4 @@ class DriverController {
   }
 }
 
-export default new DriverController();
+export default new SeasonController();

@@ -13,6 +13,7 @@ module.exports = {
       year: {
         type: Sequelize.DATEONLY,
         allowNull: false,
+        unique: true,
       },
       begin_date: {
         type: Sequelize.DATEONLY,

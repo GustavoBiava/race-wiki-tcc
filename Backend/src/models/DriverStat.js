@@ -99,7 +99,7 @@ export default class DriverStat extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Driver, { foreignKey: 'driver_stat_id'});
+    this.hasOne(models.Driver, { foreignKey: 'driver_stat_id'} );
   }
 
 }

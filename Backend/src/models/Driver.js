@@ -97,7 +97,7 @@ export default class Driver extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.DriverStat, { as: 'driver_stat' });
+    this.belongsTo(models.DriverStat, { foreignKey: 'driver_stat_id', as: 'driver_stat',});
     this.belongsToMany(models.Team, { through: 'career_contracts' });
     this.belongsToMany(models.Season, { through: 'driver_classifications' });
     this.belongsToMany(models.Race, { through: 'driver_race_results' });

@@ -58,7 +58,7 @@ class DriverController {
           model: DriverStat,
           as: 'driver_stat',
         },
-        attributes: { exclude: ['driver_stat_id', 'driverStatId'] }
+        attributes: { exclude: ['driver_stat_id'] }
       });
 
       if (!driver) return res.status(404).json({ errors: ['Driver doesn\'t exists!'] });

@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('qualifiers', {
+    await queryInterface.createTable('qualifyings', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -14,7 +14,7 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
-      isDone: {
+      is_done: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },

@@ -8,12 +8,13 @@ export default class Qualifying extends Model {
         allowNull: false,
         defaultValue: Sequelize.NOW,
         validate: {
-          isDate: {
-            msg: 'Invalid date!',
-          }
+          is: {
+            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+            msg: 'Date is not a valid Date (YYYY-MM-DD)',
+          },
         }
       },
-      isDone: {
+      is_done: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,
@@ -21,6 +22,11 @@ export default class Qualifying extends Model {
       race_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        validate: {
+          isInt: {
+            msg: 'Race_id need to be a integer!',
+          }
+        },
       }
     }, { sequelize });
     return this;
@@ -28,7 +34,6 @@ export default class Qualifying extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Driver, { through: 'driver_qualifying_results' });
-    this.belongsTo(models.Race);
+    this.belongsTo(models.Race, { foreignKey: 'race_id', as: 'race' });
   }
-
 }

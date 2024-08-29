@@ -1,20 +1,20 @@
-import Practice from "../models/Practice";
-import Race from "../models/Race";
+import Qualifying from '../models/Qualifying';
+import Race from '../models/Race';
 
-class PracticeController {
+class QualifyingController {
 
   async index(req, res) {
     try {
-      const practices = await Practice.findAll({
+      const qualifiers = await Qualifying.findAll({
         attributes: { exclude: ['created_at', 'updated_at'] },
         order: [ ['created_at', 'DESC'] ],
       });
 
-      if (practices.length < 0) {
-        return res.status(204).json({ message: ['There is no Practices registered!'] });
+      if (qualifiers.length < 0) {
+        return res.status(204).json({ message: ['There is no Qualifiers registered!'] });
       }
 
-      return res.status(200).json(practices);
+      return res.status(200).json(qualifiers);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -26,8 +26,8 @@ class PracticeController {
     try {
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const practice = await Practice.create(req.body);
-      return res.status(201).json(practice);
+      const qualifying = await Qualifying.create(req.body);
+      return res.status(201).json(qualifying);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
@@ -40,16 +40,16 @@ class PracticeController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const practice = await Practice.findByPk(id, {
+      const qualifying = await Qualifying.findByPk(id, {
         include: [
           { model: Race, as: 'race' },
         ],
         attributes: { exclude: ['race_id'] }
       });
 
-      if (!practice) return res.status(404).json({ errors: ['Practice doesn\'t exists!'] });
+      if (!qualifying) return res.status(404).json({ errors: ['Qualifying doesn\'t exists!'] });
 
-      return res.status(200).json(practice);
+      return res.status(200).json(qualifying);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -64,12 +64,12 @@ class PracticeController {
 
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const practice = await Practice.findByPk(id);
-      if (!practice) return res.status(404).json({ errors: ['Practice doesn\'t exists!'] });
+      const qualifying = await Qualifying.findByPk(id);
+      if (!qualifying) return res.status(404).json({ errors: ['Qualifying doesn\'t exists!'] });
 
-      const updatedPractice = await practice.update(req.body);
+      const updatedQualifying = await qualifying.update(req.body);
 
-      return res.status(200).json(updatedPractice);
+      return res.status(200).json(updatedQualifying);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
@@ -82,12 +82,12 @@ class PracticeController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const practice = await Practice.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
-      if (!practice) return res.status(404).json({ errors: ['Practice doesn\'t exists!'] });
+      const qualifying = await Qualifying.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
+      if (!qualifying) return res.status(404).json({ errors: ['Qualifying doesn\'t exists!'] });
 
-      await practice.destroy();
+      await qualifying.destroy();
 
-      return res.status(200).json({deletedPractice: practice});
+      return res.status(200).json({deletedQualifying: qualifying});
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -96,4 +96,4 @@ class PracticeController {
   }
 }
 
-export default new PracticeController();
+export default new QualifyingController();

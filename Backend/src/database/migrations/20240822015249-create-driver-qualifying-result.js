@@ -23,7 +23,7 @@ module.exports = {
         qualifying_id: {
           type: Sequelize.INTEGER,
           references: {
-            model: 'qualifiers',
+            model: 'qualifyings',
             key: 'id'
           },
           onDelete: 'SET NULL',

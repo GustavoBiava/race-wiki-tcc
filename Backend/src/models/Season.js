@@ -39,7 +39,7 @@ export default class Season extends Model {
       },
       driver_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: {
           isInt: {
             msg: 'Driver_id need to be a integer!',
@@ -48,7 +48,7 @@ export default class Season extends Model {
       },
       team_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         validate: {
           isInt: {
             msg: 'Team_id need to be a integer!',

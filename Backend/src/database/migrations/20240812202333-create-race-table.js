@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
-      isDone: {
+      is_done: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },

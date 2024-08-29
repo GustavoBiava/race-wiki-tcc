@@ -78,7 +78,7 @@ class RaceController {
       return res.status(200).json(updatedRace);
     }
     catch (err) {
-      const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Keys or the type ENUM field value (NORMAL or SPRINT) .'}];
+      const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Keys or the type ENUM field value (NORMAL or SPRINT).'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }

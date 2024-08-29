@@ -45,6 +45,11 @@ export default class Circuit extends Model {
           },
         }
       },
+      is_active: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      }
     }, { sequelize });
     return this;
   }

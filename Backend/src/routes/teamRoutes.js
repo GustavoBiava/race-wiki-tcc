@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
-import teamController from '../controllers/TeamController';
+import TeamController from '../controllers/TeamController';
 
 const route = Router();
 
-route.get('/', teamController.index);
-route.post('/', teamController.store);
-route.get('/:id', teamController.show);
-route.put('/:id', teamController.update);
-route.delete('/:id', teamController.delete);
+route.get('/', TeamController.index);
+route.post('/', TeamController.store);
+route.get('/:id', TeamController.show);
+route.put('/:id', TeamController.update);
+route.delete('/:id', TeamController.delete);
 
 export default route;

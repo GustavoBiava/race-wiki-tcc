@@ -9,6 +9,7 @@ import driverRoutes from './routes/driverRoutes';
 import teamRoutes from './routes/teamRoutes';
 import seasonRoutes from './routes/seasonRoutes';
 import raceRoutes from './routes/raceRoutes';
+import practiceRoutes from './routes/practiceRoutes';
 
 class App {
 
@@ -31,6 +32,7 @@ class App {
     this.app.use('/teams', teamRoutes);
     this.app.use('/seasons', seasonRoutes);
     this.app.use('/races', raceRoutes);
+    this.app.use('/practices', practiceRoutes);
   }
 
 }

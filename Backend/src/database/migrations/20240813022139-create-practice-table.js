@@ -14,7 +14,7 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
-      isDone: {
+      is_done: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },

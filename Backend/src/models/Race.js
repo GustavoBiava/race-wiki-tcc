@@ -21,7 +21,7 @@ export default class Race extends Model {
         validate: {
           is: {
             args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-            msg: 'Date is not a valid Date (YYYY:MM:DD)',
+            msg: 'Date is not a valid Date (YYYY-MM-DD)',
           },
         }
       },

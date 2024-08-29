@@ -151,7 +151,7 @@ export default class Team extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.Driver, { through: 'career_contracts' });
+    this.belongsToMany(models.Driver, { through: 'career_contracts', foreignKey: 'team_id', as: 'team' });
     this.belongsToMany(models.Season, { through: 'team_classifications' });
     this.belongsToMany(models.Race, { through: 'team_race_results' });
     this.hasMany(models.Season, { foreignKey: 'team_id' });

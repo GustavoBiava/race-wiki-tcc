@@ -33,7 +33,7 @@ export default class Practice extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.Driver, { through: 'driver_pratice_results' });
+    this.belongsToMany(models.Driver, { through: 'driver_pratice_results', foreignKey: 'practice_id', as: 'practice' });
     this.belongsTo(models.Race, { foreignKey: 'race_id', as: 'race' });
   }
 

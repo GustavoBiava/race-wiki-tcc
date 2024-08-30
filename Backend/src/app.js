@@ -12,6 +12,7 @@ import raceRoutes from './routes/raceRoutes';
 import practiceRoutes from './routes/practiceRoutes';
 import qualifyingRoutes from './routes/qualifyingRoutes';
 import careerContractsRoutes from './routes/careerContractRoutes';
+import driverPracticeResultRoutes from './routes/driverPracticeResultRoutes';
 
 class App {
 
@@ -37,6 +38,7 @@ class App {
     this.app.use('/practices', practiceRoutes);
     this.app.use('/qualifiers', qualifyingRoutes);
     this.app.use('/careerContracts', careerContractsRoutes);
+    this.app.use('/driverPracticeResults', driverPracticeResultRoutes);
   }
 
 }

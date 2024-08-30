@@ -20,7 +20,7 @@ module.exports = {
           onDelete: 'SET NULL',
           onUpdate: 'CASCADE'
         },
-        pratice_id: {
+        practice_id: {
           type: Sequelize.INTEGER,
           references: {
             model: 'practices',

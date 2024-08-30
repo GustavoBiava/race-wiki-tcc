@@ -101,7 +101,7 @@ export default class Driver extends Model {
     this.belongsToMany(models.Team, { through: 'career_contracts', foreignKey: 'driver_id', as: 'driver' });
     this.belongsToMany(models.Season, { through: 'driver_classifications' });
     this.belongsToMany(models.Race, { through: 'driver_race_results' });
-    this.belongsToMany(models.Practice, { through: 'driver_pratice_results' });
+    this.belongsToMany(models.Practice, { through: 'driver_pratice_results', foreignKey: 'driver_id', as: 'driver_practice' });
     this.belongsToMany(models.Qualifying, { through: 'driver_qualifying_results' });
     this.hasMany(models.Season, { foreignKey: 'driver_id' });
     this.hasMany(models.Race, { foreignKey: 'pole_position'});

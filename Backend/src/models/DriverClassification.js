@@ -10,7 +10,12 @@ export default class DriverClassification extends Model {
           key: 'id'
         },
         onDelete: 'SET NULL',
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        validate: {
+          isInt: {
+            msg: 'Season_id need to be a integer!',
+          }
+        }
       },
       driver_id: {
         type: Sequelize.INTEGER,
@@ -19,14 +24,19 @@ export default class DriverClassification extends Model {
           key: 'id'
         },
         onDelete: 'SET NULL',
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        validate: {
+          isInt: {
+            msg: 'Driver_id need to be a integer!',
+          }
+        }
       },
       position: {
         type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
           isInt: {
-            msg: 'Not a integer value!',
+            msg: 'Position not a integer value!',
           }
         }
       },
@@ -35,11 +45,17 @@ export default class DriverClassification extends Model {
         allowNull: false,
         validate: {
           isFloat: {
-            msg: 'Not a float value!',
+            msg: 'Points not a float value!',
           }
         }
       },
     }, { sequelize });
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.Driver, { foreignKey: 'driver_id' });
+    this.belongsTo(models.Season, { foreignKey: 'season_id' });
+  }
+
 }

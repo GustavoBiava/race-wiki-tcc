@@ -62,7 +62,7 @@ export default class Season extends Model {
 
   static associate(models) {
     this.belongsToMany(models.Team, { through: 'team_classifications' });
-    this.belongsToMany(models.Driver, { through: 'driver_classifications' });
+    this.belongsToMany(models.Driver, { through: 'driver_classifications', foreignKey: 'season_id' });
     this.hasMany(models.Race, { foreignKey: 'season_id' });
     this.belongsTo(models.Driver, { foreignKey: 'driver_id', as: 'winner_driver'});
     this.belongsTo(models.Team, { foreignKey: 'team_id', as: 'winner_constructor'});

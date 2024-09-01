@@ -1,21 +1,21 @@
-import DriverRaceResult from "../models/DriverRaceResult";
-import Driver from "../models/Driver";
 import Race from "../models/Race";
+import Team from "../models/Team";
+import TeamRaceResult from "../models/TeamRaceResult";
 
-class DriverRaceResultController {
+class TeamRaceResultController {
 
   async index(req, res) {
     try {
-      const driverRaceResults = await DriverRaceResult.findAll({
+      const teamRaceResults = await TeamRaceResult.findAll({
         attributes: { exclude: ['created_at', 'updated_at'] },
         order: [ ['created_at', 'DESC'] ],
       });
 
-      if (driverRaceResults.length < 0) {
-        return res.status(204).json({ message: ['There is no DriverRaceResults registered!'] });
+      if (teamRaceResults.length < 0) {
+        return res.status(204).json({ message: ['There is no TeamRaceResults registered!'] });
       }
 
-      return res.status(200).json(driverRaceResults);
+      return res.status(200).json(teamRaceResults);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -27,8 +27,8 @@ class DriverRaceResultController {
     try {
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const driverRaceResult = await DriverRaceResult.create(req.body);
-      return res.status(201).json(driverRaceResult);
+      const teamRaceResult = await TeamRaceResult.create(req.body);
+      return res.status(201).json(teamRaceResult);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
@@ -41,17 +41,17 @@ class DriverRaceResultController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const driverRaceResult = await DriverRaceResult.findByPk(id, {
+      const teamRaceResult = await TeamRaceResult.findByPk(id, {
         include: [
-          { model: Driver},
+          { model: Team},
           { model: Race},
         ],
-        attributes: { exclude: ['race_id', 'driver_id'] }
+        attributes: { exclude: ['race_id', 'team_id'] }
       });
 
-      if (!driverRaceResult) return res.status(404).json({ errors: ['DriverRaceResult doesn\'t exists!'] });
+      if (!teamRaceResult) return res.status(404).json({ errors: ['TeamRaceResult doesn\'t exists!'] });
 
-      return res.status(200).json(driverRaceResult);
+      return res.status(200).json(teamRaceResult);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -66,12 +66,12 @@ class DriverRaceResultController {
 
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const driverRaceResult = await DriverRaceResult.findByPk(id);
-      if (!driverRaceResult) return res.status(404).json({ errors: ['DriverRaceResult doesn\'t exists!'] });
+      const teamRaceResult = await TeamRaceResult.findByPk(id);
+      if (!teamRaceResult) return res.status(404).json({ errors: ['TeamRaceResult doesn\'t exists!'] });
 
-      const updatedDriverRaceResult = await driverRaceResult.update(req.body);
+      const updatedTeamRaceResult = await teamRaceResult.update(req.body);
 
-      return res.status(200).json(updatedDriverRaceResult);
+      return res.status(200).json(updatedTeamRaceResult);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
@@ -84,12 +84,12 @@ class DriverRaceResultController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const driverRaceResult = await DriverRaceResult.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
-      if (!driverRaceResult) return res.status(404).json({ errors: ['DriverRaceResult doesn\'t exists!'] });
+      const teamRaceResult = await TeamRaceResult.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
+      if (!teamRaceResult) return res.status(404).json({ errors: ['TeamRaceResult doesn\'t exists!'] });
 
-      await driverRaceResult.destroy();
+      await teamRaceResult.destroy();
 
-      return res.status(200).json({deletedDriverRaceResult: driverRaceResult});
+      return res.status(200).json({deletedTeamRaceResult: teamRaceResult});
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -99,4 +99,4 @@ class DriverRaceResultController {
 
 }
 
-export default new DriverRaceResultController();
+export default new TeamRaceResultController();

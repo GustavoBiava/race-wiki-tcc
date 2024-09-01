@@ -10,7 +10,12 @@ export default class DriverRaceResult extends Model {
           key: 'id'
         },
         onDelete: 'SET NULL',
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        validate: {
+          isInt: {
+            msg: 'Driver_id need to be a integer!',
+          }
+        }
       },
       race_id: {
         type: Sequelize.INTEGER,
@@ -19,7 +24,12 @@ export default class DriverRaceResult extends Model {
           key: 'id'
         },
         onDelete: 'SET NULL',
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        validate: {
+          isInt: {
+            msg: 'Race_id need to be a integer!',
+          }
+        }
       },
       position: {
         type: Sequelize.INTEGER,
@@ -44,7 +54,7 @@ export default class DriverRaceResult extends Model {
         allowNull: false,
         validate: {
           isFloat: {
-            msg: 'Points not a float value',
+            msg: 'Points not a double value',
           }
         }
       },
@@ -64,7 +74,7 @@ export default class DriverRaceResult extends Model {
         validate: {
           is: {
             args: /^[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}$/,
-            msg: 'Total_race_duration is not a valid Time (HH:mm:ss.SSS)',
+            msg: 'Interval_to_leader is not a valid Time (HH:mm:ss.SSS)',
           },
         }
       },

@@ -29,10 +29,6 @@ module.exports = {
           onDelete: 'SET NULL',
           onUpdate: 'CASCADE'
         },
-        position: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
         laps: {
           type: Sequelize.INTEGER,
           allowNull: false,

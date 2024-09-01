@@ -10,7 +10,12 @@ export default class TeamRaceResult extends Model {
           key: 'id'
         },
         onDelete: 'SET NULL',
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        validate: {
+          isInt: {
+            msg: 'Team_id need to be a integer!',
+          }
+        }
       },
       race_id: {
         type: Sequelize.INTEGER,
@@ -19,14 +24,10 @@ export default class TeamRaceResult extends Model {
           key: 'id'
         },
         onDelete: 'SET NULL',
-        onUpdate: 'CASCADE'
-      },
-      position: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+        onUpdate: 'CASCADE',
         validate: {
           isInt: {
-            msg: 'Not a integer value',
+            msg: 'Race_id need to be a integer!',
           }
         }
       },
@@ -35,7 +36,7 @@ export default class TeamRaceResult extends Model {
         allowNull: false,
         validate: {
           isInt: {
-            msg: 'Not a integer value',
+            msg: 'Laps not a integer value',
           }
         }
       },
@@ -43,10 +44,18 @@ export default class TeamRaceResult extends Model {
         type: Sequelize.DOUBLE,
         allowNull: false,
         validate: {
-          msg: 'Not a double value',
+          isFloat: {
+            msg: 'Points not a double value',
+          }
         }
       },
     }, { sequelize });
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.Race, { foreignKey: 'race_id' });
+    this.belongsTo(models.Team, { foreignKey: 'team_id' });
+  }
+
 }

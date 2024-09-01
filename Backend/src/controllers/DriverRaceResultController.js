@@ -1,21 +1,21 @@
-import DriverQualifyingResult from "../models/DriverQualifyingResult";
 import Driver from "../models/Driver";
-import Qualifying from "../models/Qualifying";
+import DriverRaceResult from "../models/DriverRaceResult";
+import Race from "../models/Race";
 
-class DriverQualifyingResultController {
+class DriverRaceResultController {
 
   async index(req, res) {
     try {
-      const driverQualifyingResults = await DriverQualifyingResult.findAll({
+      const driverRaceResults = await DriverRaceResult.findAll({
         attributes: { exclude: ['created_at', 'updated_at'] },
         order: [ ['created_at', 'DESC'] ],
       });
 
-      if (driverQualifyingResults.length < 0) {
-        return res.status(204).json({ message: ['There is no DriverQualifyingResults registered!'] });
+      if (driverRaceResults.length < 0) {
+        return res.status(204).json({ message: ['There is no DriverRaceResults registered!'] });
       }
 
-      return res.status(200).json(driverQualifyingResults);
+      return res.status(200).json(driverRaceResults);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -27,8 +27,8 @@ class DriverQualifyingResultController {
     try {
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const driverQualifyingResult = await DriverQualifyingResult.create(req.body);
-      return res.status(201).json(driverQualifyingResult);
+      const driverRaceResult = await DriverRaceResult.create(req.body);
+      return res.status(201).json(driverRaceResult);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
@@ -41,17 +41,17 @@ class DriverQualifyingResultController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const driverQualifyingResult = await DriverQualifyingResult.findByPk(id, {
+      const driverRaceResult = await DriverRaceResult.findByPk(id, {
         include: [
-          { model: Driver, as: 'driver_qualifying'},
-          { model: Qualifying, as: 'qualifying'},
+          { model: Driver},
+          { model: Race},
         ],
-        attributes: { exclude: ['qualifying_id', 'driver_id'] }
+        attributes: { exclude: ['race_id', 'driver_id'] }
       });
 
-      if (!driverQualifyingResult) return res.status(404).json({ errors: ['DriverQualifyingResult doesn\'t exists!'] });
+      if (!driverRaceResult) return res.status(404).json({ errors: ['DriverRaceResult doesn\'t exists!'] });
 
-      return res.status(200).json(driverQualifyingResult);
+      return res.status(200).json(driverRaceResult);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -66,12 +66,12 @@ class DriverQualifyingResultController {
 
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const driverQualifyingResult = await DriverQualifyingResult.findByPk(id);
-      if (!driverQualifyingResult) return res.status(404).json({ errors: ['DriverQualifyingResult doesn\'t exists!'] });
+      const driverRaceResult = await DriverRaceResult.findByPk(id);
+      if (!driverRaceResult) return res.status(404).json({ errors: ['DriverRaceResult doesn\'t exists!'] });
 
-      const updatedDriverQualifyingResult = await driverQualifyingResult.update(req.body);
+      const updatedDriverRaceResult = await driverRaceResult.update(req.body);
 
-      return res.status(200).json(updatedDriverQualifyingResult);
+      return res.status(200).json(updatedDriverRaceResult);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
@@ -84,18 +84,19 @@ class DriverQualifyingResultController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const driverQualifyingResult = await DriverQualifyingResult.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
-      if (!driverQualifyingResult) return res.status(404).json({ errors: ['DriverQualifyingResult doesn\'t exists!'] });
+      const driverRaceResult = await DriverRaceResult.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
+      if (!driverRaceResult) return res.status(404).json({ errors: ['DriverRaceResult doesn\'t exists!'] });
 
-      await driverQualifyingResult.destroy();
+      await driverRaceResult.destroy();
 
-      return res.status(200).json({deletedDriverQualifyingResult: driverQualifyingResult});
+      return res.status(200).json({deletedDriverRaceResult: driverRaceResult});
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
+
 }
 
-export default new DriverQualifyingResultController();
+export default new DriverRaceResultController();

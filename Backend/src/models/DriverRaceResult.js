@@ -26,7 +26,7 @@ export default class DriverRaceResult extends Model {
         allowNull: false,
         validate: {
           isInt: {
-            msg: 'Not a integer value',
+            msg: 'Position not a integer value',
           }
         }
       },
@@ -35,7 +35,7 @@ export default class DriverRaceResult extends Model {
         allowNull: false,
         validate: {
           isInt: {
-            msg: 'Not a integer value',
+            msg: 'Laps not a integer value',
           }
         }
       },
@@ -43,18 +43,38 @@ export default class DriverRaceResult extends Model {
         type: Sequelize.DOUBLE,
         allowNull: false,
         validate: {
-          msg: 'Not a double value',
+          isFloat: {
+            msg: 'Points not a float value',
+          }
         }
       },
       total_race_duration: {
         type: Sequelize.TIME,
         allowNull: false,
+        validate: {
+          is: {
+            args: /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/,
+            msg: 'Total_race_duration is not a valid Time (HH:mm:ss)',
+          },
+        }
       },
       interval_to_leader: {
         type: Sequelize.TIME,
         allowNull: false,
+        validate: {
+          is: {
+            args: /^[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}$/,
+            msg: 'Total_race_duration is not a valid Time (HH:mm:ss.SSS)',
+          },
+        }
       },
     }, { sequelize });
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.Driver, { foreignKey: 'driver_id' });
+    this.belongsTo(models.Race, { foreignKey: 'race_id'});
+  }
+
 }

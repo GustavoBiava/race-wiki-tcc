@@ -29,15 +29,15 @@ module.exports = {
           onDelete: 'SET NULL',
           onUpdate: 'CASCADE'
         },
-        Q1_TIME: {
+        q1_time: {
           type: Sequelize.TIME,
           allowNull: false,
         },
-        Q2_TIME: {
+        q2_time: {
           type: Sequelize.TIME,
           allowNull: false,
         },
-        Q3_TIME: {
+        q3_time: {
           type: Sequelize.TIME,
           allowNull: false,
         },

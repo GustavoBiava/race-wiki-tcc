@@ -33,7 +33,7 @@ export default class Qualifying extends Model {
   }
 
   static associate(models) {
-    this.belongsToMany(models.Driver, { through: 'driver_qualifying_results', foreignKey: 'qualifying_id', as: 'qualifying' });
+    this.belongsToMany(models.Driver, { through: 'driver_qualifying_results', foreignKey: 'qualifying_id',});
     this.belongsTo(models.Race, { foreignKey: 'race_id', as: 'race' });
   }
 }

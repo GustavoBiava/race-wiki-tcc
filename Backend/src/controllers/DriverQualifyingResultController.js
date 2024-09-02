@@ -43,8 +43,8 @@ class DriverQualifyingResultController {
 
       const driverQualifyingResult = await DriverQualifyingResult.findByPk(id, {
         include: [
-          { model: Driver, as: 'driver_qualifying'},
-          { model: Qualifying, as: 'qualifying'},
+          { model: Driver},
+          { model: Qualifying},
         ],
         attributes: { exclude: ['qualifying_id', 'driver_id'] }
       });

@@ -94,8 +94,8 @@ export default class DriverQualifyingResult extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Driver, { foreignKey: 'driver_id', as: 'driver_qualifying'});
-    this.belongsTo(models.Qualifying, { foreignKey: 'qualifying_id', as: 'qualifying' });
+    this.belongsTo(models.Driver, { foreignKey: 'driver_id'});
+    this.belongsTo(models.Qualifying, { foreignKey: 'qualifying_id'});
   }
 
 }

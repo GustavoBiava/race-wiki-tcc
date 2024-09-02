@@ -43,8 +43,8 @@ class DriverPracticeResultController {
 
       const driverPracticeResult = await DriverPracticeResult.findByPk(id, {
         include: [
-          { model: Driver, as: 'driver_practice' },
-          { model: Practice, as: 'practice' },
+          { model: Driver },
+          { model: Practice },
         ],
         attributes: { exclude: ['practice_id', 'driver_id'] }
       });

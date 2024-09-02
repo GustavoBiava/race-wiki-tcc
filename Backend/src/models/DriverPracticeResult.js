@@ -66,8 +66,8 @@ export default class DriverPracticeResult extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Driver, { foreignKey: 'driver_id', as: 'driver_practice' });
-    this.belongsTo(models.Practice, { foreignKey: 'practice_id', as: 'practice' });
+    this.belongsTo(models.Driver, { foreignKey: 'driver_id'});
+    this.belongsTo(models.Practice, { foreignKey: 'practice_id'});
   }
 
 }

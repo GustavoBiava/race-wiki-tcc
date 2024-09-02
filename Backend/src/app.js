@@ -17,6 +17,7 @@ import driverQualifyingResultRoutes from './routes/driverQualifyingResultRoutes'
 import driverRaceResultRoutes from './routes/driverRaceResultRoutes';
 import teamRaceResultRoutes from './routes/teamRaceResultRoutes';
 import driverClassificationRoutes from './routes/driverClassificationRoutes';
+import teamClassificationRoutes from './routes/teamClassificationRoutes';
 
 class App {
 
@@ -47,6 +48,7 @@ class App {
     this.app.use('/driverRaceResults', driverRaceResultRoutes);
     this.app.use('/teamRaceResults', teamRaceResultRoutes);
     this.app.use('/driverClassifications', driverClassificationRoutes);
+    this.app.use('/teamClassifications', teamClassificationRoutes);
   }
 
 }

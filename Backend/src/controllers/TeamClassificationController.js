@@ -1,21 +1,21 @@
-import Driver from '../models/Driver';
-import DriverClassification from '../models/DriverClassification';
+import TeamClassification from '../models/TeamClassification';
 import Season from '../models/Season';
+import Team from '../models/Team';
 
-class DriverClassificationController {
+class TeamClassificationController {
 
   async index(req, res) {
     try {
-      const driverClassifications = await DriverClassification.findAll({
+      const teamClassifications = await TeamClassification.findAll({
         attributes: { exclude: ['created_at', 'updated_at'] },
         order: [ ['created_at', 'DESC'] ],
       });
 
-      if (driverClassifications.length < 0) {
-        return res.status(204).json({ message: ['There is no DriverClassifications registered!'] });
+      if (teamClassifications.length < 0) {
+        return res.status(204).json({ message: ['There is no TeamClassifications registered!'] });
       }
 
-      return res.status(200).json(driverClassifications);
+      return res.status(200).json(teamClassifications);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -27,8 +27,8 @@ class DriverClassificationController {
     try {
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const driverClassification = await DriverClassification.create(req.body);
-      return res.status(201).json(driverClassification);
+      const teamClassification = await TeamClassification.create(req.body);
+      return res.status(201).json(teamClassification);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
@@ -41,17 +41,17 @@ class DriverClassificationController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const driverClassification = await DriverClassification.findByPk(id, {
+      const teamClassification = await TeamClassification.findByPk(id, {
         include: [
-          { model: Driver},
+          { model: Team},
           { model: Season},
         ],
-        attributes: { exclude: ['season_id', 'driver_id'] }
+        attributes: { exclude: ['season_id', 'team_id'] }
       });
 
-      if (!driverClassification) return res.status(404).json({ errors: ['DriverClassification doesn\'t exists!'] });
+      if (!teamClassification) return res.status(404).json({ errors: ['TeamClassification doesn\'t exists!'] });
 
-      return res.status(200).json(driverClassification);
+      return res.status(200).json(teamClassification);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -66,12 +66,12 @@ class DriverClassificationController {
 
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-      const driverClassification = await DriverClassification.findByPk(id);
-      if (!driverClassification) return res.status(404).json({ errors: ['DriverClassification doesn\'t exists!'] });
+      const teamClassification = await TeamClassification.findByPk(id);
+      if (!teamClassification) return res.status(404).json({ errors: ['TeamClassification doesn\'t exists!'] });
 
-      const updatedDriverClassification = await driverClassification.update(req.body);
+      const updatedTeamClassification = await teamClassification.update(req.body);
 
-      return res.status(200).json(updatedDriverClassification);
+      return res.status(200).json(updatedTeamClassification);
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
@@ -84,12 +84,12 @@ class DriverClassificationController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const driverClassification = await DriverClassification.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
-      if (!driverClassification) return res.status(404).json({ errors: ['DriverClassification doesn\'t exists!'] });
+      const teamClassification = await TeamClassification.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at']}});
+      if (!teamClassification) return res.status(404).json({ errors: ['TeamClassification doesn\'t exists!'] });
 
-      await driverClassification.destroy();
+      await teamClassification.destroy();
 
-      return res.status(200).json({deletedDriverClassification: driverClassification});
+      return res.status(200).json({deletedTeamClassification: teamClassification});
     }
     catch (err) {
       const errors = err.errors || [{ message: 'Fatal Error!'}];
@@ -99,4 +99,4 @@ class DriverClassificationController {
 
 }
 
-export default new DriverClassificationController();
+export default new TeamClassificationController();

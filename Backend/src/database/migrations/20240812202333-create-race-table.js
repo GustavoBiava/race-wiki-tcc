@@ -45,5 +45,7 @@ module.exports = {
     });
   },
 
-  async down () {}
+  async down (queryInterface) {
+    await queryInterface.dropTable('races');
+  }
 };

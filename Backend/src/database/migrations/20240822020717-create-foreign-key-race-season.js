@@ -16,5 +16,7 @@ module.exports = {
     });
   },
 
-  async down () {}
+  async down (queryInterface) {
+    await queryInterface.removeColumn('races', 'season_id');
+  }
 };

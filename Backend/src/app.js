@@ -20,6 +20,7 @@ import driverClassificationRoutes from './routes/driverClassificationRoutes';
 import teamClassificationRoutes from './routes/teamClassificationRoutes';
 
 import userRoutes from './routes/Auth/userRoutes';
+import tokenRoutes from './routes/Auth/tokenRoutes';
 
 class App {
 
@@ -53,6 +54,7 @@ class App {
     this.app.use('/teamClassifications', teamClassificationRoutes);
 
     this.app.use('/users', userRoutes);
+    this.app.use('/tokens', tokenRoutes);
   }
 
 }

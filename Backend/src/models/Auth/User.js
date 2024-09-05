@@ -150,6 +150,15 @@ export default class User extends Model {
       if (user.password) {
         user.password_hash = await bcryptjs.hash(user.password, 10);
       }
+
+      if (user.type) {
+        user.type = (user.type).toUpperCase();
+      }
+
+      if (user.status) {
+        user.status = (user.status).toUpperCase();
+      }
+
     });
 
     return this;

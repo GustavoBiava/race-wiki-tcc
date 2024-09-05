@@ -50,7 +50,6 @@ module.exports = {
     });
   },
 
-  async down (queryInterface) {
-    await queryInterface.dropTable('career_contracts');
+  async down () {
   }
 };

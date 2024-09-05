@@ -78,7 +78,6 @@ module.exports = {
     });
   },
 
-  async down (queryInterface) {
-    await queryInterface.dropTable('teams');
+  async down () {
   }
 };

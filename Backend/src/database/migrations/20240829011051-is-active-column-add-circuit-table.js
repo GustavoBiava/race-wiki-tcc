@@ -11,7 +11,6 @@ module.exports = {
       });
   },
 
-  async down (queryInterface) {
-    await queryInterface.removeColumn('circuits', 'is_active');
+  async down () {
   }
 };

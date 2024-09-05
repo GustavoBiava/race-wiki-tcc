@@ -64,7 +64,6 @@ module.exports = {
       });
   },
 
-  async down (queryInterface) {
-    await queryInterface.dropTable('driver_qualifying_results');
+  async down () {
   }
 };

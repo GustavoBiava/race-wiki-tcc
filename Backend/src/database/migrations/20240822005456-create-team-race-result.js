@@ -47,7 +47,6 @@ module.exports = {
         },
       });
   },
-  async down (queryInterface) {
-    await queryInterface.dropTable('team_race_results');
+  async down () {
   }
 };

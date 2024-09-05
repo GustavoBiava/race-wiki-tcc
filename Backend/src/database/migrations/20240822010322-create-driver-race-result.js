@@ -60,7 +60,6 @@ module.exports = {
       });
   },
 
-  async down (queryInterface) {
-    await queryInterface.dropTable('driver_race_results');
+  async down () {
   }
 };

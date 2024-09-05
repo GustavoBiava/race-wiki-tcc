@@ -57,7 +57,6 @@ class RaceController {
       return res.status(200).json(race);
     }
     catch (err) {
-      console.log(err)
       const errors = err.errors || [{ message: 'Fatal Error!'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }

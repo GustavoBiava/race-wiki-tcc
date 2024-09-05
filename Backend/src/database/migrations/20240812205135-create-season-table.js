@@ -34,7 +34,6 @@ module.exports = {
     });
   },
 
-  async down (queryInterface) {
-    await queryInterface.dropTable('seasons');
+  async down () {
   }
 };

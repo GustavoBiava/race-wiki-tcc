@@ -11,7 +11,6 @@ module.exports = {
       });
   },
 
-  async down (queryInterface) {
-    await queryInterface.removeColumn('career_contracts', 'is_active');
+  async down () {
   }
 };

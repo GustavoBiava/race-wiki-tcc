@@ -17,7 +17,6 @@ module.exports = {
     });
   },
 
-  async down (queryInterface) {
-    await queryInterface.removeColumn('drivers', 'driver_stat_id');
+  async down () {
   }
 };

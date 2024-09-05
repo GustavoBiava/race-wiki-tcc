@@ -17,6 +17,8 @@ import DriverRaceResult from "../models/DriverRaceResult";
 import DriverPracticeResult from "../models/DriverPracticeResult";
 import DriverQualifyingResult from "../models/DriverQualifyingResult";
 
+import User from "../models/Auth/User";
+
 const connection = new Sequelize(databaseConfig);
 const models = [
   Circuit,
@@ -33,7 +35,8 @@ const models = [
   TeamRaceResult,
   DriverRaceResult,
   DriverPracticeResult,
-  DriverQualifyingResult
+  DriverQualifyingResult,
+  User
 ];
 
 models.forEach(model => model.init(connection));

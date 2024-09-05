@@ -52,7 +52,6 @@ module.exports = {
       });
   },
 
-  async down (queryInterface) {
-    await queryInterface.dropTable('driver_practice_results');
+  async down () {
   }
 };

@@ -19,6 +19,8 @@ import teamRaceResultRoutes from './routes/teamRaceResultRoutes';
 import driverClassificationRoutes from './routes/driverClassificationRoutes';
 import teamClassificationRoutes from './routes/teamClassificationRoutes';
 
+import userRoutes from './routes/Auth/userRoutes';
+
 class App {
 
   constructor() {
@@ -49,6 +51,8 @@ class App {
     this.app.use('/teamRaceResults', teamRaceResultRoutes);
     this.app.use('/driverClassifications', driverClassificationRoutes);
     this.app.use('/teamClassifications', teamClassificationRoutes);
+
+    this.app.use('/users', userRoutes);
   }
 
 }

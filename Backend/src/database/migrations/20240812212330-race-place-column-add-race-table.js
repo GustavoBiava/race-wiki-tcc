@@ -10,7 +10,6 @@ module.exports = {
       });
   },
 
-  async down (queryInterface) {
-    await queryInterface.removeColumn('races', 'race_place');
+  async down () {
   }
 };

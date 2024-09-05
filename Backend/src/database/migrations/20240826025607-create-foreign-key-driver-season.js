@@ -16,7 +16,6 @@ module.exports = {
     });
   },
 
-  async down (queryInterface) {
-    await queryInterface.removeColumn('seasons', 'driver_id');
+  async down () {
   }
 };

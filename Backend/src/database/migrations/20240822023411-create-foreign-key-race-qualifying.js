@@ -16,7 +16,6 @@ module.exports = {
     });
   },
 
-  async down (queryInterface) {
-    await queryInterface.removeColumn('qualifyings', 'race_id');
+  async down () {
   }
 };

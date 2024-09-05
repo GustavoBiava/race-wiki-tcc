@@ -53,7 +53,6 @@ module.exports = {
 
   },
 
-  async down (queryInterface) {
-    await queryInterface.dropTable('team_classifications');
+  async down () {
   }
 };

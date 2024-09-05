@@ -58,7 +58,6 @@ module.exports = {
     });
   },
 
-  async down (queryInterface) {
-    await queryInterface.dropTable('driver_stats');
+  async down () {
   }
 };

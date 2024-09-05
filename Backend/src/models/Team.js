@@ -155,6 +155,8 @@ export default class Team extends Model {
     this.belongsToMany(models.Season, { through: 'team_classifications', foreignKey: 'team_id', });
     this.belongsToMany(models.Race, { through: 'team_race_results', foreignKey: 'team_id' });
     this.hasMany(models.Season, { foreignKey: 'team_id' });
+
+    this.hasOne(models.User, { foreignKey: 'favorite_team' });
   }
 
 }

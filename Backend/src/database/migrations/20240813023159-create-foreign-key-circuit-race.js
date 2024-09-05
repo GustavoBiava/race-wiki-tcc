@@ -16,7 +16,6 @@ module.exports = {
     });
   },
 
-  async down (queryInterface) {
-    await queryInterface.removeColumn('races', 'circuit_id');
+  async down () {
   }
 };

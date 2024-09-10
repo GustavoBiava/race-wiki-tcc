@@ -76,8 +76,8 @@ class UserController {
 
   async update(req, res) {
     try {
-      const { id } = req.params;
-      if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
+      const { id } = req.user;
+      if (!id) return res.status(401).json({ errors: ['Login required!'] });
 
       if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
@@ -111,13 +111,14 @@ class UserController {
 
   async delete(req, res) {
     try {
-      const { id } = req.params;
-      if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
+      const { id } = req.user;
+      if (!id) return res.status(401).json({ errors: ['Login required!'] });
 
       const user = await User.findByPk(id, { attributes: {exclude: ['created_at', 'updated_at', 'password_hash']}});
       if (!user) return res.status(404).json({ errors: ['User doesn\'t exists!'] });
 
       await user.destroy();
+      req.user = {};
 
       return res.status(200).json({deletedUser: user});
     }

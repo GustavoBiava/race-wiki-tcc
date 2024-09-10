@@ -171,6 +171,7 @@ export default class User extends Model {
   static associate(models) {
     this.belongsTo(models.Driver, { foreignKey: 'favorite_driver' });
     this.belongsTo(models.Team, { foreignKey: 'favorite_team' });
+    this.hasMany(models.Publication, { foreignKey: 'author' });
   }
 
 }

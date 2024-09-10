@@ -22,6 +22,8 @@ import teamClassificationRoutes from './routes/teamClassificationRoutes';
 import userRoutes from './routes/Auth/userRoutes';
 import tokenRoutes from './routes/Auth/tokenRoutes';
 
+import publicationRoutes from './routes/Social/publicationRoutes';
+
 class App {
 
   constructor() {
@@ -55,6 +57,8 @@ class App {
 
     this.app.use('/users', userRoutes);
     this.app.use('/tokens', tokenRoutes);
+
+    this.app.use('/publications', publicationRoutes);
   }
 
 }

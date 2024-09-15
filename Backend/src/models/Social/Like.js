@@ -1,5 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-import slugify from 'slugify';
 
 export default class Like extends Model{
   static init(sequelize) {

@@ -63,6 +63,7 @@ export default class Publication extends Model{
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'author' });
     this.belongsToMany(models.User, { through: 'likes' });
+    this.belongsToMany(models.User, { through: 'comments' });
   }
 
 }

@@ -174,6 +174,7 @@ export default class User extends Model {
 
     this.hasMany(models.Publication, { foreignKey: 'author' });
     this.belongsToMany(models.Publication, { through: 'likes' });
+    this.belongsToMany(models.Publication, { through: 'comments' });
   }
 
 }

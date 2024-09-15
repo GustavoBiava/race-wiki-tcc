@@ -1,19 +1,8 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class Comment extends Model{
+export default class CommentsComment extends Model{
   static init(sequelize) {
     super.init({
-      title: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: '',
-        validate: {
-          len: {
-            args: [],
-            msg: 'Title invalid length! (Min: 3, Max: 25)',
-          }
-        }
-      },
       body: {
         type: Sequelize.TEXT,
         allowNull: false,
@@ -34,7 +23,7 @@ export default class Comment extends Model{
           }
         }
       },
-      publication_id: {
+      comment_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -45,7 +34,7 @@ export default class Comment extends Model{
         onUpdate: 'CASCADE',
         validate: {
           isInt: {
-            msg: 'Publication_id need to be a integer!',
+            msg: 'Comment_id need to be a integer!',
           }
         }
       },
@@ -56,8 +45,7 @@ export default class Comment extends Model{
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id' });
-    this.belongsTo(models.Publication, { foreignKey: 'publication_id' });
-    this.belongsToMany(models.User, { through: 'comments_comments' });
+    this.belongsTo(models.Comment, { foreignKey: 'comment_id' });
   }
 
 }

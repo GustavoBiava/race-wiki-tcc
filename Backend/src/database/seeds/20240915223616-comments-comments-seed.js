@@ -5,21 +5,19 @@
 module.exports = {
   async up(queryInterface) {
     await queryInterface.bulkInsert(
-      "comments",
+      "comments_comments",
       [
         {
-          title: 'Opinião sobre renovação',
-          body: 'Max vacilou... Devia ter aceitado a proposta da McLaren, melhor carro do grid faz anos.',
-          user_id: 1,
-          publication_id: 1,
+          body: 'Sainz tá merecendo um carro competitivo faz tempo...',
+          user_id: 2,
+          comment_id: 2,
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          title: 'Muito bom!',
-          body: 'Hmmm isso me cheira a transferência... Mercedes tava de olho faz tempo.',
+          body: 'Concordo com você, ele não deveria ter renovado, quem sabe ir para a Mercedes seria uma boa...',
           user_id: 2,
-          publication_id: 2,
+          comment_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },

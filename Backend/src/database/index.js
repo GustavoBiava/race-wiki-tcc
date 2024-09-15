@@ -20,6 +20,7 @@ import DriverQualifyingResult from "../models/DriverQualifyingResult";
 import User from "../models/Auth/User";
 
 import Publication from "../models/Social/Publication";
+import Like from '../models/Social/Like';
 
 const connection = new Sequelize(databaseConfig);
 const models = [
@@ -40,6 +41,7 @@ const models = [
   DriverQualifyingResult,
   User,
   Publication,
+  Like,
 ];
 
 models.forEach(model => model.init(connection));

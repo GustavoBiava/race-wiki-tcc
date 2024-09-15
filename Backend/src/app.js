@@ -23,6 +23,7 @@ import userRoutes from './routes/Auth/userRoutes';
 import tokenRoutes from './routes/Auth/tokenRoutes';
 
 import publicationRoutes from './routes/Social/publicationRoutes';
+import likeRoutes from './routes/Social/likeRoutes';
 
 class App {
 
@@ -59,6 +60,7 @@ class App {
     this.app.use('/tokens', tokenRoutes);
 
     this.app.use('/publications', publicationRoutes);
+    this.app.use('/likes', likeRoutes);
   }
 
 }

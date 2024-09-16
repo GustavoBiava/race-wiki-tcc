@@ -64,6 +64,7 @@ export default class Publication extends Model{
     this.belongsTo(models.User, { foreignKey: 'author' });
     this.belongsToMany(models.User, { through: 'likes' });
     this.belongsToMany(models.User, { through: 'comments' });
+    this.belongsToMany(models.Tag, { through: 'tags_publications' });
   }
 
 }

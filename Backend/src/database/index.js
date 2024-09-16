@@ -24,6 +24,7 @@ import Like from '../models/Social/Like';
 import Comment from "../models/Social/Comment";
 import CommentsComment from "../models/Social/CommentsComment";
 import Tag from "../models/Social/Tag";
+import TagsPublication from "../models/Social/TagsPublication";
 
 const connection = new Sequelize(databaseConfig);
 const models = [
@@ -47,7 +48,8 @@ const models = [
   Like,
   Comment,
   CommentsComment,
-  Tag
+  Tag,
+  TagsPublication,
 ];
 
 models.forEach(model => model.init(connection));

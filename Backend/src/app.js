@@ -27,6 +27,7 @@ import likeRoutes from './routes/Social/likeRoutes';
 import commentRoutes from './routes/Social/commentRoutes';
 import commentsCommentRoutes from './routes/Social/commentsCommentRoutes';
 import tagRoutes from './routes/Social/tagRoutes';
+import tagsPublicationRoutes from './routes/Social/tagsPublicationRoutes';
 
 class App {
 
@@ -67,6 +68,7 @@ class App {
     this.app.use('/comments', commentRoutes);
     this.app.use('/commentsComments', commentsCommentRoutes);
     this.app.use('/tags', tagRoutes);
+    this.app.use('/tagsPublications', tagsPublicationRoutes);
   }
 
 }

@@ -48,6 +48,7 @@ export default class Tag extends Model{
   }
 
   static associate(models) {
+    this.belongsToMany(models.Publication, { through: 'tags_publications' });
   }
 
 }

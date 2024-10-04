@@ -8,3 +8,5 @@ export const darkText = '#000000';
 
 // Main
 export const mainRed = '#D30013';
+export const mainGray = '#1e1e21';
+export const mainGrayLight = '#303036';

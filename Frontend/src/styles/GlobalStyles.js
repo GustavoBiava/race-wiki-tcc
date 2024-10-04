@@ -10,7 +10,8 @@ export default createGlobalStyle`
         outline: none;
         box-sizing: border-box;
         transition: all 0.1s;
-        font-family: "RBNo3.1";
+        font-family:  sans-serif;
+        transition: all 0.2s;
     }
     
     body {
@@ -28,6 +29,9 @@ export default createGlobalStyle`
 
     a {
         text-decoration: none;
+        outline: none;
+        font-weight: normal;
+        color: ${colors.lightText};
     }
 
     ul {

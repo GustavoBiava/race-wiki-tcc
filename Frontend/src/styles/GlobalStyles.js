@@ -9,9 +9,8 @@ export default createGlobalStyle`
         padding: 0;
         outline: none;
         box-sizing: border-box;
-        transition: all 0.1s;
-        font-family:  sans-serif;
         transition: all 0.2s;
+        font-family: 'Poppins';
     }
     
     body {
@@ -37,4 +36,27 @@ export default createGlobalStyle`
     ul {
         list-style: none;
     }
+
+    .navbar-responsive {
+        background-color: ${colors.mainRed};
+        color: ${colors.lightText};
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.8em;
+
+        .NavItems {
+            display: block;
+        }
+
+        .Menu {
+            display: block;
+        }
+
+        .Login {
+            margin: 1em 0;
+        }
+    }
+
 `;

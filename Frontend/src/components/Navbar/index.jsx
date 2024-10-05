@@ -1,16 +1,14 @@
 import { IoLogIn } from "react-icons/io5";
 import { FiMenu } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 
-import { Navbar, NavItem, NavGroup, NavLogo } from "./styled";
-import { useEffect, useState } from "react";
+import { Navbar, NavItem, NavGroup, NavLogo, LoginLink, MenuLink } from "./styled";
+import { useState } from "react";
+import { useExpanded } from "../../hooks/useExpanded";
 
 function Nav() {
-    const [expand, setExpand] = useState(false);
-
-    useEffect(() => {
-        
-    }, [expand]);
+    const {isExpanded, setIsExpanded, handleMenuClick } = useExpanded();
 
     return (
         <Navbar>
@@ -46,18 +44,22 @@ function Nav() {
                         </NavItem>
                     </li>
                     <li>
-                        <NavItem className="LoginLink">
+                        <LoginLink className="Login">
                             <h1>Entrar/Cadastrar</h1>
                             <IoLogIn size={36}/>
-                        </NavItem>
+                        </LoginLink>
                     </li>
                 </ul>
 
-                <NavItem className="Menu" onClick={() => expandNavbar}>
-                    <FiMenu size={48}/>
-                </NavItem>
-                
             </NavGroup>
+
+            <MenuLink className="Menu" onClick={handleMenuClick}>
+               {isExpanded 
+               ? <IoClose size={48}/>
+               : <FiMenu size={48}/> 
+               }
+            </MenuLink>
+
         </Navbar>
     );
 }

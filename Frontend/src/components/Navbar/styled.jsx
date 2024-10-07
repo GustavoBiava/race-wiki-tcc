@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import * as colors from '../../config/colors';
 
 export const Navbar = styled.nav`
+    position: fixed;
+    top: 0;
+    width: 100%;
     background-color: ${colors.mainRed};
     color: ${colors.lightText};
     display: flex;

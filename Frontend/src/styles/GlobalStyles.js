@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import * as colors from '../config/colors';
 
@@ -14,9 +14,15 @@ export default createGlobalStyle`
     }
     
     body {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         background-color: ${props => props.theme.mode === 'dark' ? colors.darkBackground : colors.lightText};
         color: ${props => props.theme.mode === 'dark' ? colors.lightBackground : colors.darkText};
     }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }   
 
     html, body, #root {
         height: 100%;
@@ -59,4 +65,30 @@ export default createGlobalStyle`
         }
     }
 
+`;
+
+export const Container = styled.div`
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const Button = styled.button`
+    all: unset;
+    background-color: ${colors.mainRed};
+    text-align: center;
+    border-radius: 0.3em;
+    width: 100%;
+    height: 2.3em;
+    padding: 0.2em;
+    font-weight: bold;
+    color: ${colors.lightText};
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${colors.secondRed};
+    }
 `;

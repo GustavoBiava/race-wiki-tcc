@@ -68,13 +68,12 @@ export default createGlobalStyle`
 `;
 
 export const Container = styled.div`
-    width: 100%;
-    height: 100%;
-    display: grid;
-    place-items: center;
-    justify-content: center;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
     align-items: center;
-    margin: 6.6em 0 0 0;
+    justify-content: center;
+    margin: 6em 0 0 0;
 `;
 
 export const Button = styled.button`

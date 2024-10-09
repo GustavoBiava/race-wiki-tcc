@@ -11,3 +11,4 @@ export const mainRed = '#D30013';
 export const secondRed = '#b3000f';
 export const mainGray = '#1e1e21';
 export const mainGrayLight = '#303036';
+export const secondGray = '#0B0B0E';

@@ -5,7 +5,6 @@ import * as colors from '../../../config/colors';
 export const Form = styled.form`
     color: ${props => props.theme.mode === 'dark' ? colors.lightText : colors.darkText};
     width: 60vw;
-    max-width: 50em;
 
     input[type="text"], input[type="password"], input[type="email"], input[type="date"] {
         all: unset;

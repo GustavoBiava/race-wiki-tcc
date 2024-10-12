@@ -10,7 +10,7 @@ export default createGlobalStyle`
         outline: none;
         box-sizing: border-box;
         transition: all 0.2s;
-        font-family: 'Poppins';
+        font-family: 'Arial';
     }
     
     body {
@@ -73,7 +73,6 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 6em 0 0 0;
 `;
 
 export const Button = styled.button`

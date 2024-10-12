@@ -1,5 +1,6 @@
 import express from 'express';
 import { resolve } from 'path';
+import cors from 'cors';
 
 import './database/';
 
@@ -41,6 +42,7 @@ class App {
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(express.json());
     this.app.use(express.static(resolve(__dirname, 'static')));
+    this.app.use(cors({ origin: 'http://localhost:5173', optionsSuccessStatus: 200 }));
   }
 
   routes() {

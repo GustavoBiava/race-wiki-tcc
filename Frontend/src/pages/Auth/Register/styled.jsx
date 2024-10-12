@@ -33,6 +33,7 @@ export const FormHeader = styled.div`
         font-size: 2em;
         text-align: center;
         width: 100%;
+        margin: 4em 0 0 0;
     }
 
     @media (max-width: 890px) {

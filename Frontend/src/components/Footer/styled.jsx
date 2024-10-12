@@ -71,6 +71,7 @@ export const SocialMedia = styled.div`
 
     &:hover {
         background-color: ${colors.mainRed};
+        transform: scale(1.1);
     }
 `;
 

@@ -40,13 +40,12 @@ export default class Driver extends Model {
         }
       },
       nationality: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: '',
         validate: {
-          len: {
-            args: [3, 50],
-            msg: 'Nationality invalid length (Min: 3, Max: 50)'
+          isInt: {
+            msg: 'Nationality need to be a integer!',
           }
         }
       },
@@ -82,22 +81,12 @@ export default class Driver extends Model {
           }
         }
       },
-      driver_stat_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        unique: true,
-        validate: {
-          isInt: {
-            msg: 'Driver_stat_id need to be a Integer!',
-          }
-        }
-      }
     }, { sequelize });
     return this;
   }
 
   static associate(models) {
-    this.belongsTo(models.DriverStat, { foreignKey: 'driver_stat_id', as: 'driver_stat',});
+    this.hasOne(models.DriverStat, { foreignKey: 'driver_id', as: 'driver_stat'});
     this.belongsToMany(models.Team, { through: 'career_contracts', foreignKey: 'driver_id'});
     this.belongsToMany(models.Season, { through: 'driver_classifications', foreignKey: 'driver_id' });
     this.belongsToMany(models.Race, { through: 'driver_race_results', foreignKey: 'driver_id'});
@@ -108,6 +97,7 @@ export default class Driver extends Model {
     this.hasMany(models.Race, { foreignKey: 'race_winner'});
 
     this.hasOne(models.User, { foreignKey: 'favorite_driver' });
+    this.hasOne(models.DriverPicture, { foreignKey: 'driver_id', as: 'driver_picture'})
   }
 
 }

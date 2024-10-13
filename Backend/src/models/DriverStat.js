@@ -94,12 +94,22 @@ export default class DriverStat extends Model {
           }
         }
       },
+      driver_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
+        validate: {
+          isInt: {
+            msg: 'Driver_id need to be a Integer!',
+          }
+        }
+      }
     }, { sequelize });
     return this;
   }
 
   static associate(models) {
-    this.hasOne(models.Driver, { foreignKey: 'driver_stat_id'} );
+    this.belongsTo(models.Driver, { foreignKey: 'driver_id'} );
   }
 
 }

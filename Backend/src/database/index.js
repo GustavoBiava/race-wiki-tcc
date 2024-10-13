@@ -26,6 +26,10 @@ import CommentsComment from "../models/Social/CommentsComment";
 import Tag from "../models/Social/Tag";
 import TagsPublication from "../models/Social/TagsPublication";
 
+import DriverPicture from "../models/Pictures/DriverPicture";
+import Country from "../models/Country";
+import CountryPicture from "../models/Pictures/CountryPicture";
+
 const connection = new Sequelize(databaseConfig);
 const models = [
   Circuit,
@@ -50,6 +54,9 @@ const models = [
   CommentsComment,
   Tag,
   TagsPublication,
+  DriverPicture,
+  Country,
+  CountryPicture,
 ];
 
 models.forEach(model => model.init(connection));

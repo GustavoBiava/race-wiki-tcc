@@ -12,7 +12,7 @@ export const Navbar = styled.nav`
     align-items: center;
     justify-content: space-between;
     font-size: 0.8em;
-    z-index: 1;
+    z-index: 1000;
 
     @media (max-width: 890px) {
         display: flex;

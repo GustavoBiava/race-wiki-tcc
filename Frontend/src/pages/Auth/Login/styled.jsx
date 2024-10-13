@@ -24,9 +24,9 @@ export const FormHeader = styled.div`
     justify-content: center;
 
     hr {
-        border: 1px solid ${colors.mainRed};
+        border: 2px solid ${colors.mainRed}; 
         width:100%;
-        margin: 1em 0;
+        margin: 0.5em 0;
     }
 
     h1 {

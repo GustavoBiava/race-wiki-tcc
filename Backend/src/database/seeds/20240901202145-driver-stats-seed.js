@@ -16,6 +16,7 @@ module.exports = {
           highest_grid_position: 1,
           highest_race_finish: 1,
           times_highest_finish: 25,
+          driver_id: 1,
           created_at: new Date(),
           updated_at: new Date(),
         },
@@ -29,6 +30,7 @@ module.exports = {
           highest_grid_position: 1,
           highest_race_finish: 1,
           times_highest_finish: 66,
+          driver_id: 2,
           created_at: new Date(),
           updated_at: new Date(),
         }

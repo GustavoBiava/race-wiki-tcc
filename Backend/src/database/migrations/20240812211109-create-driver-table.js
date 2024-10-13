@@ -28,10 +28,6 @@ module.exports = {
           type: Sequelize.FLOAT,
           allowNull:false,
         },
-        nationality: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
         birth_date: {
           type: Sequelize.DATEONLY,
           allowNull: false,

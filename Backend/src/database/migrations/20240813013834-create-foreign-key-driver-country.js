@@ -1,15 +1,14 @@
-"use strict";
+'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn('driver_stats', 'driver_id',
+  async up (queryInterface, Sequelize) {
+    await queryInterface.addColumn('drivers', 'nationality',
     {
       type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
-          model: 'drivers',
+          model: 'countries',
           key: 'id',
         },
         onDelete: 'CASCADE',
@@ -17,6 +16,5 @@ module.exports = {
     });
   },
 
-  async down () {
-  }
+  async down () {}
 };

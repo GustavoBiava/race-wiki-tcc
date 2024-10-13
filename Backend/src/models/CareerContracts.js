@@ -63,7 +63,7 @@ export default class CareerContracts extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Driver, { foreignKey: 'driver_id' });
+    this.belongsTo(models.Driver, { foreignKey: 'driver_id'});
     this.belongsTo(models.Team, { foreignKey: 'team_id' });
   }
 

@@ -19,6 +19,7 @@ import driverRaceResultRoutes from './routes/driverRaceResultRoutes';
 import teamRaceResultRoutes from './routes/teamRaceResultRoutes';
 import driverClassificationRoutes from './routes/driverClassificationRoutes';
 import teamClassificationRoutes from './routes/teamClassificationRoutes';
+import countryRoutes from './routes/countryRoutes';
 
 import userRoutes from './routes/Auth/userRoutes';
 import tokenRoutes from './routes/Auth/tokenRoutes';
@@ -29,6 +30,11 @@ import commentRoutes from './routes/Social/commentRoutes';
 import commentsCommentRoutes from './routes/Social/commentsCommentRoutes';
 import tagRoutes from './routes/Social/tagRoutes';
 import tagsPublicationRoutes from './routes/Social/tagsPublicationRoutes';
+
+import picturesRoutes from './routes/Pictures/picturesRoutes';
+
+import driverPageRoutes from './routes/Pages/driversPageRoutes';
+
 
 class App {
 
@@ -41,7 +47,7 @@ class App {
   middlewares() {
     this.app.use(express.urlencoded({ extended: true }))
     this.app.use(express.json());
-    this.app.use(express.static(resolve(__dirname, 'static')));
+    this.app.use(express.static(resolve(__dirname, '..', 'uploads')));
     this.app.use(cors({ origin: 'http://localhost:5173', optionsSuccessStatus: 200 }));
   }
 
@@ -61,6 +67,7 @@ class App {
     this.app.use('/teamRaceResults', teamRaceResultRoutes);
     this.app.use('/driverClassifications', driverClassificationRoutes);
     this.app.use('/teamClassifications', teamClassificationRoutes);
+    this.app.use('/countries', countryRoutes);
 
     this.app.use('/users', userRoutes);
     this.app.use('/tokens', tokenRoutes);
@@ -71,6 +78,10 @@ class App {
     this.app.use('/commentsComments', commentsCommentRoutes);
     this.app.use('/tags', tagRoutes);
     this.app.use('/tagsPublications', tagsPublicationRoutes);
+
+    this.app.use('/pictures', picturesRoutes);
+
+    this.app.use('/pages/drivers', driverPageRoutes);
   }
 
 }

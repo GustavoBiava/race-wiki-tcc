@@ -6,13 +6,13 @@ module.exports = {
     await queryInterface.addColumn('races', 'pole_position',
     {
       type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'drivers',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+      allowNull: true,
+      references: {
+        model: 'drivers',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     });
   },
 

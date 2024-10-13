@@ -10,7 +10,7 @@ export default createGlobalStyle`
         outline: none;
         box-sizing: border-box;
         transition: all 0.2s;
-        font-family: 'Arial';
+        font-family: 'Poppins';
     }
     
     body {

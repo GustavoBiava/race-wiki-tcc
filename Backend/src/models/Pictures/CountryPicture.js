@@ -41,7 +41,7 @@ export default class CountryPicture extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Country, { foreignKey: 'country_id' });
+    this.belongsTo(models.Country, { foreignKey: 'country_id', as: 'country_picture'});
   }
 }
 

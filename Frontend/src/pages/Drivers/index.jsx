@@ -1,26 +1,11 @@
-import { useEffect, useState } from "react";
-
 import { Container } from "../../styles/GlobalStyles";
 import { DriversContainer, TitleHeader, AllDrivers, Driver, DriverBackground, DriverHeader, DriverName, Name, Surname, DriverCountry, DriverInfo, Number, BackgroundImg, DriverImg, DriverPicture } from './styled';
-import axios from '../../config/axios';
 import { Link } from 'react-router-dom';
+import { useDrivers } from "../../hooks/useDrivers";
 
 function Drivers() {
 
-    const [drivers, setDrivers] = useState([]);
-
-    useEffect(() => {
-        try {
-            (async function() {
-                const response = await axios.get('/pages/drivers');
-                return setDrivers(response.data);
-            })();
-        }
-        catch (err) {
-            const errors = err.errors || [{ message: 'FATAL ERROR!' }];
-            return errors.map(e => alert(e.message));
-        }
-    }, []);
+    const { drivers } = useDrivers();
 
     return (
         <>
@@ -45,7 +30,7 @@ function Drivers() {
                                     </DriverInfo>
 
                                     <DriverCountry>
-                                        <img src="flag-test.png" alt="driver-country-flag" />
+                                        <img src={driver.country ? driver.country.country_picture.url : 'flag-test.png'} alt="driver-country-flag" />
                                     </DriverCountry>
                                 </DriverHeader>
 

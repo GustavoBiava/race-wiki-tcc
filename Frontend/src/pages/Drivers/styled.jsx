@@ -57,7 +57,7 @@ export const AllDrivers = styled.div`
 export const Driver = styled.div``;
 
 export const DriverBackground = styled.div`
-    background-color: ${props => props.driverColor || '#757678'};
+    background-color: ${props => props.driverColor || '#1212ew'};
     width: 23vw;
     display: grid;
     place-items: center;

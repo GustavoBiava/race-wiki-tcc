@@ -95,6 +95,7 @@ export default class Driver extends Model {
     this.hasMany(models.Season, { foreignKey: 'driver_id' });
     this.hasMany(models.Race, { foreignKey: 'pole_position'});
     this.hasMany(models.Race, { foreignKey: 'race_winner'});
+    this.belongsTo(models.Country, { foreignKey: 'nationality', as: 'country' });
 
     this.hasOne(models.User, { foreignKey: 'favorite_driver' });
     this.hasOne(models.DriverPicture, { foreignKey: 'driver_id', as: 'driver_picture'})

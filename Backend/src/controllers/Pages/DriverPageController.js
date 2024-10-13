@@ -3,6 +3,8 @@ import Driver from '../../models/Driver';
 import DriverStat from '../../models/DriverStat';
 import DriverPicture from '../../models/Pictures/DriverPicture';
 import Team from '../../models/Team';
+import Country from '../../models/Country';
+import CountryPicture from '../../models/Pictures/CountryPicture';
 
 class DriverPageController {
 
@@ -21,6 +23,18 @@ class DriverPageController {
             as: 'driver_picture',
             attributes: ['url', 'filename'],
           },
+          {
+            model: Country,
+            as: 'country',
+            attributes: ['name'],
+            include: [
+              {
+                model: CountryPicture,
+                as: 'country_picture',
+                attributes: ['url', 'filename'],
+              }
+            ]
+          },
         ]
       });
 
@@ -36,9 +50,9 @@ class DriverPageController {
 
         const driverContract = driverContracts[0];
 
-        if (!driverContract) return driver.setDataValue('color', '#757678');
+        if (!driverContract) return driver.setDataValue('color', null);
 
-        if (!driverContract.is_active) return driver.setDataValue('color', '#757678');
+        if (!driverContract.is_active) return driver.setDataValue('color', null);
 
         const { main_color } = await Team.findOne({
           where: { id: driverContract.team_id }
@@ -52,6 +66,7 @@ class DriverPageController {
 
     }
     catch (err) {
+      console.log(err)
       const errors = err.errors || [{ message: 'Fatal Error!'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }

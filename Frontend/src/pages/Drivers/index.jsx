@@ -30,7 +30,7 @@ function Drivers() {
                                     </DriverInfo>
 
                                     <DriverCountry>
-                                        <img src={driver.country ? driver.country.country_picture.url : 'flag-test.png'} alt="driver-country-flag" />
+                                        <img src={driver.country.country_picture ? driver.country.country_picture.url : 'country-default-picture.png'} alt="driver-country-flag" />
                                     </DriverCountry>
                                 </DriverHeader>
 
@@ -39,12 +39,12 @@ function Drivers() {
                                         
                                             <DriverPicture>
                                                 {driver.driver_picture
-                                                    ? <DriverImg src={driver.driver_picture.url} alt="driver-picture" className="driver-image"/>
-                                                    : <DriverImg src="driver-default-picture.png" alt="driver-picture" className="driver-image"/>
+                                                    ? <DriverImg src={driver.driver_picture.url} alt="driver-picture" />
+                                                    : <DriverImg src="driver-default-picture.png" alt="driver-picture"/>
                                                 }
                                             </DriverPicture>
 
-                                        <BackgroundImg src="driver-background.jpg" alt="driver-background" className="background-image"/>
+                                        <BackgroundImg src="driver-background.jpg" alt="driver-background"/>
                                     </DriverBackground>
                                 </Link>
                             </Driver>

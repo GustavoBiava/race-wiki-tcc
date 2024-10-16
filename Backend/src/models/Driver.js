@@ -42,7 +42,12 @@ export default class Driver extends Model {
       nationality: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: '',
+        references: {
+          model: 'countries',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         validate: {
           isInt: {
             msg: 'Nationality need to be a integer!',
@@ -74,6 +79,7 @@ export default class Driver extends Model {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: '',
+        unique: true,
         validate: {
           len: {
             args: [3, 10],

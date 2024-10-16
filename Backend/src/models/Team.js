@@ -146,6 +146,33 @@ export default class Team extends Model {
           }
         }
       },
+      nationality: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'countries',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        validate: {
+          isInt: {
+            msg: 'Nationality need to be a integer!',
+          }
+        }
+      },
+      short_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: '',
+        unique: true,
+        validate: {
+          len: {
+            args: [1, 3],
+            msg: 'Short_name invalid length! (Min: 1, Max: 3)',
+          }
+        }
+      }
     }, { sequelize });
     return this;
   }
@@ -155,6 +182,8 @@ export default class Team extends Model {
     this.belongsToMany(models.Season, { through: 'team_classifications', foreignKey: 'team_id', });
     this.belongsToMany(models.Race, { through: 'team_race_results', foreignKey: 'team_id' });
     this.hasMany(models.Season, { foreignKey: 'team_id' });
+    this.belongsTo(models.Country, { foreignKey: 'nationality', as: 'country' });
+    this.hasOne(models.TeamPicture, { foreignKey: 'team_id', as: 'team_picture'});
 
     this.hasOne(models.User, { foreignKey: 'favorite_team' });
   }

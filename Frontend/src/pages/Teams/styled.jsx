@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import * as colors from '../../config/colors';
 
-export const DriversContainer = styled.div`
+export const TeamsContainer = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -40,30 +40,26 @@ export const TitleHeader = styled.div`
 
     `;
 
-export const AllDrivers = styled.div`
+export const AllTeams = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
     min-width: 100%;
     place-items: center;
-    gap: 3em 3.5em;
-    
-
-    @media (max-width: 1165px) {
-        grid-template-columns: 1fr;
-        gap: 3em 0;
-    }
+    gap: 3em 0;
 `;
 
-export const Driver = styled.div``;
+export const Team = styled.div``;
 
-export const DriverBackground = styled.div`
-    background-color: ${props => props.driverColor || '#1212ew'};
-    width: 23vw;
+export const TeamBackground = styled.div`
+    background-color: ${props => props.teamColor || '#1212ew'};
+    min-width: 70vw;
     display: grid;
     place-items: center;
+    height: 35vh;
     
     @media (max-width: 1165px) {
         width: 70vw;
+        height: 40vh;
     }
 
     &:hover {
@@ -72,65 +68,61 @@ export const DriverBackground = styled.div`
 `;
 
 export const BackgroundImg = styled.img`
+    display: block;
     z-index: 1;
     opacity: 0.45;
-    width: 23vw;
+    width: 70vw;
+    height: 35vh;
 
     @media (max-width: 1165px) {
-        width: 70vw;
+        display: none;
+        height: 40vh;
     }
+
 `;
 
-export const DriverImg = styled.img`
+export const ResponsiveImg = styled.img`
+    display: none;
+    z-index: 1;
+    opacity: 0.45;
+    width: 70vw;
+
+    @media (max-width: 1165px) {
+        display: block;
+        height: 40vh;
+    }
+
+`;
+
+export const TeamImg = styled.img`
     z-index: 2;
-    width: 24vw;
+    width: 20vw;
+    max-height: 35vh;
 
-    @media (max-width: 1165px) {
-        width: 70vw;
+    @media (max-width: 900px) {
+        width: 65vw;
     }
 
 `;
 
-export const DriverPicture = styled.div`
+export const TeamPicture = styled.div`
     position: absolute;
     display: grid;
-    place-items: end;
+    place-items: center;
 `;
 
-export const DriverHeader = styled.div`
+export const TeamHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 0 0 0.6em 0;
 `;
 
-export const DriverName = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-`;
-
-export const Name = styled.p`
-    font-weight: normal;
-    font-size: 1em;
-`;
-
-export const Surname = styled.h2`  
-    line-height: 0.9em;
+export const TeamTitle = styled.h2`  
     font-size: 2em;
-
-    @media (max-width: 1474px) {
-        font-size: 1.4em;
-    }
 `;
 
-export const Number = styled.h2`
-    color: ${props => props.color || '#757678'};
-    font-size: 2.9em;
-    margin: 0 0.2em 0 0;
-`;
-
-export const DriverCountry = styled.div`
+export const TeamCountry = styled.div`
     display: flex;
     align-items: center;
 
@@ -140,7 +132,13 @@ export const DriverCountry = styled.div`
 
 `;
 
-export const DriverInfo = styled.div`
+export const TeamInfo = styled.div`
     display: flex;
     align-items: center;
+`;
+
+// No use
+export const Titles = styled.span`
+    color: ${props => props.color || '#757678'};
+    font-size: 1.1em;
 `;

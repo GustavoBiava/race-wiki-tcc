@@ -30,6 +30,7 @@ export default class Country extends Model {
   static associate(models) {
     this.hasOne(models.CountryPicture, { foreignKey: 'country_id', as: 'country_picture'});
     this.hasMany(models.Driver, { foreignKey: 'nationality'});
+    this.hasMany(models.Team, { foreignKey: 'nationality'});
   }
 
 }

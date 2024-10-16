@@ -47,6 +47,10 @@ export const NavItem = styled.div`
         color: ${props => props.theme.mode === 'dark' ? colors.mainRed : colors.lightText};
     }
 
+    h1 {
+        font-weight: 600;
+    }
+
 `;
 
 export const LoginLink = styled.div`
@@ -62,6 +66,10 @@ export const LoginLink = styled.div`
 
     &:hover {
         background-color: ${colors.mainGrayLight};
+    }
+
+    h1 {
+        font-weight: 600;
     }
 
 `;

@@ -4,9 +4,11 @@ import multerConfig from '../../config/multer';
 
 import DriverPicture from "../../models/Pictures/DriverPicture";
 import CountryPicture from '../../models/Pictures/CountryPicture';
+import TeamPicture from '../../models/Pictures/TeamPicture';
 
 import Driver from "../../models/Driver";
 import Country from "../../models/Country";
+import Team from "../../models/Team";
 
 const upload = multer(multerConfig).single('archive');
 
@@ -58,6 +60,33 @@ class PicturesController {
 
         const countryPicture = await CountryPicture.create({ original_name: originalname, filename, country_id });
         return res.status(200).json(countryPicture);
+      }
+      catch (err) {
+        const errors = err.errors || [{ message: 'Fatal Error!'}];
+        return res.status(400).json({ errors: errors.map(e => e.message) });
+      }
+    });
+  }
+
+  storeTeam(req, res) {
+    return upload(req, res, async (err) => {
+      if (err) return res.status(400).json({ errors: [err.code] });
+
+      try {
+        if (!req.file) return res.status(400).json({ errors: ['Picture not found!'] });
+        if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
+
+        const { originalname, filename } = req.file;
+
+        const { team_id } = req.body;
+        if (!team_id) return res.status(400).json({ errors: ['Invalid id!'] });
+
+        const team = await Team.findOne({ where: { id: team_id } });
+
+        if (!team) return res.status(400).json({ errors: ['Invalid Team!'] });
+
+        const teamPicture = await TeamPicture.create({ original_name: originalname, filename, team_id });
+        return res.status(200).json(teamPicture);
       }
       catch (err) {
         const errors = err.errors || [{ message: 'Fatal Error!'}];

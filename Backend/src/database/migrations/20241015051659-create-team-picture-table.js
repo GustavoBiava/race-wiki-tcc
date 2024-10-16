@@ -1,45 +1,35 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('drivers',
+    await queryInterface.createTable(
+      "team_pictures",
       {
         id: {
           type: Sequelize.INTEGER,
-          autoIncrement: true,
           allowNull: false,
+          autoIncrement: true,
           primaryKey: true,
         },
-        name: {
+        original_name: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        surname: {
-          type: Sequelize.STRING,
-          allowNull:false,
-        },
-        description: {
-          type: Sequelize.TEXT,
-          allowNull: false,
-          defaultValue: '',
-        },
-        height: {
-          type: Sequelize.FLOAT,
-          allowNull:false,
-        },
-        birth_date: {
-          type: Sequelize.DATEONLY,
-          allowNull: false,
-        },
-        birth_place: {
+        filename: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        short_name: {
-          type: Sequelize.STRING,
+        team_id: {
+          type: Sequelize.INTEGER,
           allowNull: false,
           unique: true,
+          references: {
+            model: "teams",
+            key: "id",
+          },
+          onDelete: "CASCADE",
+          onUpdate: "CASCADE",
         },
         created_at: {
           type: Sequelize.DATE,
@@ -49,9 +39,8 @@ module.exports = {
           type: Sequelize.DATE,
           allowNull: false,
         },
-      });
+    });
   },
 
-  async down () {
-  }
+  async down() {},
 };

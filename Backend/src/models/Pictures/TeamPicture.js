@@ -2,7 +2,7 @@ import Sequelize, { Model } from 'sequelize';
 
 import appConfig from '../../config/appConfig';
 
-export default class CountryPicture extends Model {
+export default class TeamPicture extends Model {
   static init(sequelize) {
     super.init({
       original_name: {
@@ -13,12 +13,12 @@ export default class CountryPicture extends Model {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      country_id: {
+      team_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
         references: {
-          model: "countries",
+          model: "teams",
           key: "id",
         },
         onDelete: "CASCADE",
@@ -41,7 +41,7 @@ export default class CountryPicture extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Country, { foreignKey: 'country_id', as: 'country_picture'});
+    this.belongsTo(models.Team, { foreignKey: 'team_id', as: 'team_picture'});
   }
 }
 

@@ -34,6 +34,7 @@ import tagsPublicationRoutes from './routes/Social/tagsPublicationRoutes';
 import picturesRoutes from './routes/Pictures/picturesRoutes';
 
 import driverPageRoutes from './routes/Pages/driversPageRoutes';
+import teamPageRoutes from './routes/Pages/teamsPageRoutes';
 
 
 class App {
@@ -82,6 +83,7 @@ class App {
     this.app.use('/pictures', picturesRoutes);
 
     this.app.use('/pages/drivers', driverPageRoutes);
+    this.app.use('/pages/teams', teamPageRoutes);
   }
 
 }

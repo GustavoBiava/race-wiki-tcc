@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import Login from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
 import Drivers from '../pages/Drivers';
+import Teams from '../pages/Teams';
 
 function Router() {
     
@@ -13,6 +14,7 @@ function Router() {
                 <Route exact path='entrar' element={<Login/>} />
                 <Route exact path='registrar' element={<Register/>} />
                 <Route exact path='pilotos' element={<Drivers />} />
+                <Route exact path='equipes' element={<Teams />} />
             </Route>
         </Routes>
     );

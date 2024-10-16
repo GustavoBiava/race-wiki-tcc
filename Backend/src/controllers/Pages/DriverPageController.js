@@ -12,6 +12,7 @@ class DriverPageController {
     try {
       const drivers = await Driver.findAll({
         attributes: ['id', 'name', 'surname', 'short_name'],
+        order: [ ['name', 'ASC'] ],
         include: [
           {
             model: DriverStat,
@@ -35,7 +36,7 @@ class DriverPageController {
               }
             ]
           },
-        ]
+        ],
       });
 
       if (drivers.length < 0) {
@@ -66,7 +67,6 @@ class DriverPageController {
 
     }
     catch (err) {
-      console.log(err)
       const errors = err.errors || [{ message: 'Fatal Error!'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }

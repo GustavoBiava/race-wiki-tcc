@@ -32,7 +32,7 @@ function Teams() {
                                     </TeamCountry>
                                 </TeamHeader>
 
-                                <Link to={`/equipe/${team.name}`}>
+                                <Link to={`/equipe/${team.short_name}`}>
                                     <TeamBackground teamColor={team.main_color}>
                                         
                                             {<TeamPicture>

@@ -38,7 +38,7 @@ export const TitleHeader = styled.div`
         }
     }
 
-    `;
+`;
 
 export const AllDrivers = styled.div`
     display: grid;

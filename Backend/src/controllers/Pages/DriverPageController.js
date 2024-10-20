@@ -39,7 +39,7 @@ class DriverPageController {
         ],
       });
 
-      if (drivers.length < 0) {
+      if (drivers.length < 1) {
         return res.status(204).json({ message: ['There is no Drivers registered!'] });
       }
 

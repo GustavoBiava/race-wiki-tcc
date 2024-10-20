@@ -7,6 +7,7 @@ import Drivers from '../pages/Drivers';
 import Teams from '../pages/Teams';
 
 import FavoriteTeam from '../pages/FavoriteTeam';
+import FavoriteDriver from '../pages/FavoriteDriver';
 
 function Router() {
     
@@ -19,6 +20,7 @@ function Router() {
                 <Route exact path='equipes' element={<Teams />} />
 
                 <Route exact path='equipe-favorita' element={<FavoriteTeam />} />
+                <Route exact path='piloto-favorito' element={<FavoriteDriver />} />
             </Route>
         </Routes>
     );

@@ -31,7 +31,7 @@ class TeamPageController {
         ]
       });
 
-      if (teams.length < 0) {
+      if (teams.length < 1) {
         return res.status(204).json({ message: ['There is no Teams registered!'] });
       }
 

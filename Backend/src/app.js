@@ -36,6 +36,7 @@ import picturesRoutes from './routes/Pictures/picturesRoutes';
 import driverPageRoutes from './routes/Pages/driversPageRoutes';
 import teamPageRoutes from './routes/Pages/teamsPageRoutes';
 import favoriteTeamPageRoutes from './routes/Pages/favoriteTeamPageRoutes';
+import favoriteDriverPageRoutes from './routes/Pages/favoriteDriverPageRoutes';
 
 
 class App {
@@ -86,6 +87,7 @@ class App {
     this.app.use('/pages/drivers', driverPageRoutes);
     this.app.use('/pages/teams', teamPageRoutes);
     this.app.use('/pages/favoriteTeams', favoriteTeamPageRoutes);
+    this.app.use('/pages/favoriteDrivers', favoriteDriverPageRoutes);
   }
 
 }

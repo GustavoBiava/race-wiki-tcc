@@ -6,7 +6,7 @@ import { TitleHeader, Content, Teams, Team, TeamCircle, BackgroundImg, TeamPictu
 
 function FavoriteTeam() {
 
-    const { teams, selectedTeam, handleTeamClick } = useFavoriteTeams();
+    const { teams, handleTeamClick, handleButtonClick } = useFavoriteTeams();
 
     return (
         <>
@@ -42,11 +42,9 @@ function FavoriteTeam() {
 
                     </Teams>
 
-                    <Link to='/piloto-favorito' state={selectedTeam}>
-                        <ButtonDiv>
-                            <Button>ESCOLHER</Button>
-                        </ButtonDiv>
-                    </Link>
+                    <ButtonDiv onClick={handleButtonClick}>
+                        <Button>ESCOLHER</Button>
+                    </ButtonDiv>
 
                 </Content>
             </Container>

@@ -1,6 +1,7 @@
 import React from "react";
 
-import axios from '../config/axios';
+import axios from '../services/axios';
+import { toast } from "react-toastify";
 
 export const useTeams = () => {
     const [teams, setTeams] = React.useState([]);
@@ -13,8 +14,8 @@ export const useTeams = () => {
             })();
         }
         catch (err) {
-            const errors = err.errors || [{ message: 'FATAL ERROR!' }];
-            return errors.map(e => alert(e.message));
+            const errors = err.response.data.errors || ['FATAL ERROR!'];
+            return errors.map(e => toast.error(e));
         }
     }, []);
 

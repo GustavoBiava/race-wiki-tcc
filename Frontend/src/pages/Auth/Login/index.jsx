@@ -2,8 +2,12 @@ import { Link } from 'react-router-dom';
 
 import { Form, FormHeader, FormBody, FormButton, RegisterDiv } from "./styled";
 import { Container, Button } from "../../../styles/GlobalStyles";
+import { useLogin } from '../../../hooks/useLogin';
 
 function Login() {
+
+   const { setEmail, setPassword, handleButtonClick } = useLogin();
+
 
     return (
         <>
@@ -17,16 +21,16 @@ function Login() {
 
                     <FormBody>
                         <label htmlFor="email">Seu endereço de e-mail:</label>
-                        <input type="email" placeholder='Digite aqui seu e-mail...'/>
+                        <input type="email" placeholder='Digite aqui seu e-mail...' onChange={e => setEmail(e.target.value)}/>
 
                         <label htmlFor="password">Sua senha:</label>
-                        <input type="password" placeholder='Digite aqui sua senha...'/>
+                        <input type="password" placeholder='Digite aqui sua senha...' onChange={e => setPassword(e.target.value)}/>
 
                         <p>Esqueceu sua senha?</p>
                     </FormBody>
 
                     <FormButton>
-                        <Button>ENTRAR</Button>
+                        <Button onClick={handleButtonClick}>ENTRAR</Button>
                     </FormButton>
 
                     <RegisterDiv>

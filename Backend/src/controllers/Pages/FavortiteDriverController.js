@@ -35,7 +35,7 @@ class FavoriteDriverController {
         ],
       });
 
-      if (careerContracts < 1) return res.status(404).json({ errors: ['Team doesn\'t have drivers!'] });
+      if (careerContracts < 1) return res.status(204).json({ errors: ['Team doesn\'t have drivers!'] });
 
       return res.status(200).json(careerContracts);
     }

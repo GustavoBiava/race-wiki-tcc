@@ -6,7 +6,7 @@ import { useFavoriteDrivers } from '../../hooks/useFavoriteDrivers';
 
 function FavoriteDriver() {
 
-    const { drivers, selectedDriver, handleDriverClick } = useFavoriteDrivers();
+    const { drivers, handleDriverClick, handleButtonClick } = useFavoriteDrivers();
 
     return (
         <>
@@ -41,11 +41,9 @@ function FavoriteDriver() {
                         ))}
                     </Drivers>
 
-                    <Link to='/piloto-favorito'>
-                        <ButtonDiv>
-                            <Button>ESCOLHER</Button>
-                        </ButtonDiv>
-                    </Link>
+                    <ButtonDiv>
+                        <Button onClick={handleButtonClick}>ESCOLHER</Button>
+                    </ButtonDiv>
 
                 </Content>
             </Container>

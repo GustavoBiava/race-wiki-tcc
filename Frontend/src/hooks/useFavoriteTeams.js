@@ -1,8 +1,13 @@
 import React, { useState } from "react"
-import axios from "../config/axios";
+import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import axios from "../services/axios";
 
 export const useFavoriteTeams = () => {
 
+    const navigate = useNavigate();
+    const { state: userData } = useLocation();
     const [teams, setTeams] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState(0);
 
@@ -18,23 +23,31 @@ export const useFavoriteTeams = () => {
         } 
 
         const selectedClasses = document.querySelectorAll('.selected'); 
-        if (selectedClasses.length > 0) return;
-        
+        if (selectedClasses.length > 0) {
+            toast.error('Você só pode selecionar uma equipe favorita!');
+            return;
+        }
+
         el.classList.add('selected');
-        
         return setSelectedTeam(el.id);
     }
- 
 
+    const handleButtonClick = (e) => {
+        e.preventDefault();
+        if (!selectedTeam) return toast.error('Você deve escolher uma equipe para continuar!');
+        return navigate('/piloto-favorito', { state: { ...userData, favoriteTeam: selectedTeam } });
+    }
+ 
     React.useEffect(() => {
+        if (!userData) return navigate('/');
         (async function() {
             try {
                 const response = await axios.get('/pages/favoriteTeams');
                 return setTeams(response.data);
             }
             catch (err) {
-                const errors = err.errors || [{ message: 'FATAL ERROR!' }];
-                return errors.map(e => alert(e.message));
+                const errors = err.response.data.errors || ['FATAL ERROR!'];
+                return errors.map(e => toast.error(e));
             }
         })();
     }, []);
@@ -43,6 +56,8 @@ export const useFavoriteTeams = () => {
         teams,
         selectedTeam,
         handleTeamClick,
+        userData,
+        handleButtonClick,
     }
 
 }

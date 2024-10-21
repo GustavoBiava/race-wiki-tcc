@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import 'react-toastify/dist/ReactToastify.css';
 
 import * as colors from '../config/colors';
 
@@ -63,6 +64,11 @@ export default createGlobalStyle`
         .Login {
             margin: 1em 0;
         }
+    }
+
+    .Toastify__toast {
+        background-color: ${colors.secondGray} !important; 
+        color: ${colors.lightText} !important;
     }
 
 `;

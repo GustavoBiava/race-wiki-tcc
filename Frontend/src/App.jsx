@@ -1,6 +1,10 @@
 import { ThemeProvider } from "styled-components";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter} from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
+import store, { persistor } from './store';
 import GlobalStyles from "./styles/GlobalStyles";
 import Nav from './components/Navbar';
 import { useTheme } from "./hooks/useTheme";
@@ -11,14 +15,20 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <Nav />
-          <Router />
-          <button onClick={handleThemeChange}>Trocar tema</button>
-          <GlobalStyles />
-        </ThemeProvider>
-      </BrowserRouter>
+    <BrowserRouter basename="/">
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <ThemeProvider theme={theme}>
+              <Nav />
+              <Router />
+              <button onClick={handleThemeChange}>Trocar tema</button>
+              <GlobalStyles />
+              <ToastContainer theme='dark' pauseOnHover draggable/>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+    </BrowserRouter>
+      
     </>
   );
 }

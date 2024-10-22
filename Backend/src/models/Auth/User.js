@@ -44,7 +44,7 @@ export default class User extends Model {
         validate: {
           isEmail: {
             msg: 'Invalid email!',
-          }
+          },
         }
       },
       password_hash: {

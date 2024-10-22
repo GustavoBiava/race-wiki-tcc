@@ -9,11 +9,12 @@ import * as actions from '../store/modules/auth/actions';
 
 export const useFavoriteDrivers = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const { state: userData } = useLocation();
-    const navigate = useNavigate();
     const [drivers, setDrivers] = useState([]);
     const [selectedDriver, setSelectedDriver] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleDriverClick = (e) => {
         const el = e.currentTarget;
@@ -23,7 +24,8 @@ export const useFavoriteDrivers = () => {
     const handleButtonClick = (e) => {
         e.preventDefault();
         if (!selectedDriver) return toast.error('Você deve escolher um piloto para continuar!');
-        return dispatch(actions.registerRequest({ ...userData, favoriteDriver: selectedDriver }));
+        dispatch(actions.registerRequest({ ...userData, favoriteDriver: selectedDriver }));
+        return navigate('/entrar');
     }
 
     const selectDriver = (el) => {
@@ -42,26 +44,35 @@ export const useFavoriteDrivers = () => {
         return setSelectedDriver(el.id);
     }
 
+    const returnFavoriteTeam = () => {
+        toast.error('Essa equipe não possui pilotos! Por favor, escolha outra equipe.');
+        return navigate('/equipe-favorita', { state: { ...userData }});
+    }
+
     React.useEffect(() => {
         if (!userData) return navigate('/');
+        setIsLoading(true);
         try {
             (async function() {
                 const response = await axios.get(`/pages/favoriteDrivers/${userData.favoriteTeam}`);
-                return setDrivers(response.data);
+                setDrivers(response.data);
+                return setIsLoading(false);
             })();
-
         }
         catch (err) {
             const errors = get(err, 'response.data.errors', []);
-            return errors.map(e => toast.error(e));
+            errors.map(e => toast.error(e));
+            return setIsLoading(false);
         }
-    }, []);
+    }, [navigate, userData]);
 
     return {
         drivers,
         selectedDriver,
         handleDriverClick,
         handleButtonClick,
+        isLoading,
+        returnFavoriteTeam,
     }
 
 }

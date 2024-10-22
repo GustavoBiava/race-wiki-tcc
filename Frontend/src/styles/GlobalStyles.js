@@ -4,7 +4,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as colors from '../config/colors';
 
 export default createGlobalStyle`
-
     * {
         margin: 0;
         padding: 0;

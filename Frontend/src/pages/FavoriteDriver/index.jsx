@@ -1,16 +1,16 @@
-import { Link } from 'react-router-dom';
-
 import { Container, Button } from '../../styles/GlobalStyles';
 import { TitleHeader, Content, Drivers, Driver, DriverCircle, BackgroundImg, DriverPicture, DriverImg, DriverName, Name, ButtonDiv, DriverContainer } from './styled';
 import { useFavoriteDrivers } from '../../hooks/useFavoriteDrivers';
+import Loading from '../../components/Loading';
 
 function FavoriteDriver() {
 
-    const { drivers, handleDriverClick, handleButtonClick } = useFavoriteDrivers();
+    const { drivers, handleDriverClick, handleButtonClick, isLoading, returnFavoriteTeam } = useFavoriteDrivers();
 
     return (
         <>
             <Container>
+                <Loading isLoading={isLoading}/>
                 <Content>
                     <TitleHeader>
                         <h1>ESCOLHA SEU PILOTO FAVORITO</h1>
@@ -18,7 +18,7 @@ function FavoriteDriver() {
                     </TitleHeader>
 
                     <Drivers>
-                        {drivers.map((driver, index) => (
+                        {drivers ? drivers.map((driver, index) => (
                             <DriverContainer key={index} color={driver.Team.main_color}>
                                 <Driver id={driver.Driver.id} onClick={handleDriverClick}>
                                     <DriverCircle color={driver.Team.main_color}>
@@ -38,7 +38,7 @@ function FavoriteDriver() {
                                     <Name>{`${driver.Driver.name} ${driver.Driver.surname}`}</Name>
                                 </DriverName>
                             </DriverContainer>
-                        ))}
+                        )) : returnFavoriteTeam()}
                     </Drivers>
 
                     <ButtonDiv>

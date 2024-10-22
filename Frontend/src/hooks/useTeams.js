@@ -1,26 +1,31 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 import axios from '../services/axios';
 import { toast } from "react-toastify";
 
 export const useTeams = () => {
-    const [teams, setTeams] = React.useState([]);
+    const [teams, setTeams] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
+        setIsLoading(true);
         try {
             (async function() {
                 const response = await axios.get('/pages/teams');
-                return setTeams(response.data);
+                setTeams(response.data);
+                return setIsLoading(false);
             })();
         }
         catch (err) {
             const errors = err.response.data.errors || ['FATAL ERROR!'];
-            return errors.map(e => toast.error(e));
+            errors.map(e => toast.error(e));
+            return setIsLoading(false);
         }
     }, []);
 
     return {
         teams,
         setTeams,
+        isLoading,
     }
 }

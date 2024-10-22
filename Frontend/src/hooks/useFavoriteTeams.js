@@ -10,6 +10,7 @@ export const useFavoriteTeams = () => {
     const { state: userData } = useLocation();
     const [teams, setTeams] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleTeamClick = (e) => {
         const el = e.currentTarget;
@@ -40,14 +41,17 @@ export const useFavoriteTeams = () => {
  
     React.useEffect(() => {
         if (!userData) return navigate('/');
+        setIsLoading(true);
         (async function() {
             try {
                 const response = await axios.get('/pages/favoriteTeams');
-                return setTeams(response.data);
+                setTeams(response.data);
+                return setIsLoading(false);
             }
             catch (err) {
                 const errors = err.response.data.errors || ['FATAL ERROR!'];
-                return errors.map(e => toast.error(e));
+                errors.map(e => toast.error(e));
+                return setIsLoading(false);
             }
         })();
     }, []);
@@ -58,6 +62,7 @@ export const useFavoriteTeams = () => {
         handleTeamClick,
         userData,
         handleButtonClick,
+        isLoading,
     }
 
 }

@@ -2,14 +2,16 @@ import { Container } from "../../styles/GlobalStyles";
 import { DriversContainer, TitleHeader, AllDrivers, Driver, DriverBackground, DriverHeader, DriverName, Name, Surname, DriverCountry, DriverInfo, Number, BackgroundImg, DriverImg, DriverPicture } from './styled';
 import { Link } from 'react-router-dom';
 import { useDrivers } from "../../hooks/useDrivers";
+import Loading from '../../components/Loading';
 
 function Drivers() {
 
-    const { drivers } = useDrivers();
+    const { drivers, isLoading } = useDrivers();
 
     return (
         <>
             <Container>
+            <Loading isLoading={isLoading}/>
                 <DriversContainer>
 
                     <TitleHeader>

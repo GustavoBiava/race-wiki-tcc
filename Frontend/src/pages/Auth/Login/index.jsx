@@ -3,17 +3,19 @@ import { Link } from 'react-router-dom';
 import { Form, FormHeader, FormBody, FormButton, RegisterDiv } from "./styled";
 import { Container, Button } from "../../../styles/GlobalStyles";
 import { useLogin } from '../../../hooks/useLogin';
+import Loading from '../../../components/Loading';
+import { useSelector } from 'react-redux';
 
 function Login() {
 
    const { setEmail, setPassword, handleButtonClick } = useLogin();
-
+   const isLoading = useSelector(states => states.auth.isLoading);
 
     return (
         <>
             <Container>
+            <Loading isLoading={isLoading}/>
                 <Form>
-
                     <FormHeader>
                         <h1>ENTRAR EM SUA CONTA</h1>
                         <hr />

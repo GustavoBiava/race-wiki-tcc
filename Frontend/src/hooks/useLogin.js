@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
 
+import * as actions from '../store/modules/auth/actions';
+
 export const useLogin = () => {
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -10,10 +14,8 @@ export const useLogin = () => {
     const handleButtonClick = (e) => {
         e.preventDefault();
         if (!validateForm()) return;
-       return;
+        return dispatch(actions.loginRequest({ email, password }));
     }
-
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
 
     const validateForm = () => {
         if (!email || !isEmail(email)) {
@@ -26,10 +28,6 @@ export const useLogin = () => {
             return false;
         }
 
-        if (!passwordRegex.test(password)) {
-            toast.error('Senha deve conter: Letras maiúsculas e minúsculas, caracteres especiais e números!');
-            return false;
-        }
         return true;
     }
 

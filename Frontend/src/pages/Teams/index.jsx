@@ -2,16 +2,16 @@ import { Container } from "../../styles/GlobalStyles";
 import { TeamsContainer, TitleHeader, AllTeams, Team, TeamBackground, TeamHeader, TeamTitle, TeamCountry, TeamInfo, BackgroundImg, TeamImg, TeamPicture, ResponsiveImg } from './styled';
 import { Link } from 'react-router-dom';
 import { useTeams } from "../../hooks/useTeams";
-import { useState } from "react";
+import Loading from '../../components/Loading';
 
 function Teams() {
 
-    const { teams, setTeams } = useTeams();
-    const { isReponsive, setIsResponsive } = useState(false);
+    const { teams, isLoading } = useTeams();
 
     return (
         <>
             <Container>
+                <Loading isLoading={isLoading}/>
                 <TeamsContainer>
 
                     <TitleHeader>

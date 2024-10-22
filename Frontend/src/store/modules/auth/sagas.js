@@ -14,12 +14,10 @@ function* loginRequest({ payload }) {
         toast.success('Você fez login com successo!');
 
         axios.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-
-
     }   
-    catch (err) {
-        toast.error('E-mail ou senha inválidos!');
-        yield put(actions.loginFailure);
+    catch {
+        toast.error('E-mail ou senha do login inválidos!');
+        yield put(actions.loginFailure());
     }
 }
 

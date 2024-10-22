@@ -1,16 +1,16 @@
-import { Link } from 'react-router-dom';
-
 import { Container, Button } from '../../styles/GlobalStyles';
 import { useFavoriteTeams } from '../../hooks/useFavoriteTeams';
 import { TitleHeader, Content, Teams, Team, TeamCircle, BackgroundImg, TeamPicture, TeamImg, TeamName, Name, ButtonDiv, TeamContainer } from './styled';
+import Loading from '../../components/Loading';
 
 function FavoriteTeam() {
 
-    const { teams, handleTeamClick, handleButtonClick } = useFavoriteTeams();
+    const { teams, handleTeamClick, handleButtonClick, isLoading } = useFavoriteTeams();
 
     return (
         <>
             <Container>
+                <Loading isLoading={isLoading}/>
                 <Content>
                     <TitleHeader>
                         <h1>ESCOLHA SUA EQUIPE FAVORITA</h1>

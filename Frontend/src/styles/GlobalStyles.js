@@ -1,5 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import 'react-toastify/dist/ReactToastify.css';
+import 'swiper/css';
+import 'swiper/css/bundle';
 
 import * as colors from '../config/colors';
 
@@ -18,6 +20,8 @@ export default createGlobalStyle`
         -ms-overflow-style: none;
         background-color: ${props => props.theme.mode === 'dark' ? colors.darkBackground : colors.lightText};
         color: ${props => props.theme.mode === 'dark' ? colors.lightBackground : colors.darkText};
+        --swiper-navigation-color: ${colors.lightText};
+        --swiper-pagination-color: ${colors.lightText};
     }
 
     ::-webkit-scrollbar {
@@ -70,6 +74,32 @@ export default createGlobalStyle`
         color: ${colors.lightText} !important;
     }
 
+    .swiper-button-prev, .swiper-button-next {
+        color: ${colors.lightText};
+
+        &:hover {
+            color: ${colors.mainRed};
+        }
+    }
+
+    .swiper-pagination {
+        margin: 0 0 0.3em 0;
+    }
+
+    .swiper-pagination-bullet {
+        background-color: ${colors.lightText};
+        opacity: 0.7;
+
+        &:hover {
+            background-color: ${colors.mainRed};
+            opacity: 0.7;
+        }
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: ${colors.mainRed};
+        opacity: 0.7;
+    }
 `;
 
 export const Container = styled.div`

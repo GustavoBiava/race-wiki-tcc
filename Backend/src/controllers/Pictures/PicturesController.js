@@ -5,10 +5,12 @@ import multerConfig from '../../config/multer';
 import DriverPicture from "../../models/Pictures/DriverPicture";
 import CountryPicture from '../../models/Pictures/CountryPicture';
 import TeamPicture from '../../models/Pictures/TeamPicture';
+import RacePicture from '../../models/Pictures/RacePicture';
 
 import Driver from "../../models/Driver";
 import Country from "../../models/Country";
 import Team from "../../models/Team";
+import Race from "../../models/Race";
 
 const upload = multer(multerConfig).single('archive');
 const uploadFiles = multer(multerConfig).array('archives', 10);
@@ -96,25 +98,31 @@ class PicturesController {
     });
   }
 
-  storeRaces(req, res) {
-    return upload(req, res, async (err) => {
+  storeRace(req, res) {
+    return uploadFiles(req, res, async (err) => {
       if (err) return res.status(400).json({ errors: [err.code] });
 
       try {
-        if (!req.file) return res.status(400).json({ errors: ['Picture not found!'] });
+        if (!req.files) return res.status(400).json({ errors: ['Picture(s) not found!'] });
         if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
 
-        const { originalname, filename } = req.file;
+        const { race_id } = req.body;
+        if (!race_id) return res.status(400).json({ errors: ['Invalid id!'] });
 
-        const { team_id } = req.body;
-        if (!team_id) return res.status(400).json({ errors: ['Invalid id!'] });
+        const race = await Race.findOne({ where: { id: race_id } });
+        if (!race) return res.status(400).json({ errors: ['Invalid Race!'] });
 
-        const team = await Team.findOne({ where: { id: team_id } });
+        const racePictures = [];
 
-        if (!team) return res.status(400).json({ errors: ['Invalid Team!'] });
+        await Promise.all(req.files.map(async (file) => {
+          const { originalname, filename } = file;
 
-        const teamPicture = await TeamPicture.create({ original_name: originalname, filename, team_id });
-        return res.status(200).json(teamPicture);
+          const racePicture = await RacePicture.create({ original_name: originalname, filename, race_id });
+
+          return racePictures.push(racePicture);
+        }));
+
+        return res.status(200).json(racePictures);
       }
       catch (err) {
         const errors = err.errors || [{ message: 'Fatal Error!'}];

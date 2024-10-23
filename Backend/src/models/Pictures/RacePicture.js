@@ -2,7 +2,7 @@ import Sequelize, { Model } from 'sequelize';
 
 import appConfig from '../../config/appConfig';
 
-export default class TeamPicture extends Model {
+export default class RacePicture extends Model {
   static init(sequelize) {
     super.init({
       original_name: {
@@ -13,19 +13,18 @@ export default class TeamPicture extends Model {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      team_id: {
+      race_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
-          model: "teams",
+          model: "races",
           key: "id",
         },
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
         validate: {
           isInt: {
-            msg: 'Team_id need to be integer!',
+            msg: 'Country_id need to be integer!',
           }
         }
       },
@@ -41,7 +40,7 @@ export default class TeamPicture extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Team, { foreignKey: 'team_id', as: 'team_picture'});
+    this.belongsTo(models.Race, { foreignKey: 'race_id', as: 'race_picture'});
   }
 }
 

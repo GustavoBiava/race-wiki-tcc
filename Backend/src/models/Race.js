@@ -122,6 +122,7 @@ export default class Race extends Model {
     this.hasOne(models.Qualifying, { foreignKey: 'race_id' });
     this.belongsTo(models.Driver, { foreignKey: 'pole_position', as: 'position_pole' });
     this.belongsTo(models.Driver, { foreignKey: 'race_winner', as: 'winner_driver'});
+    this.hasMany(models.RacePicture, { foreignKey: 'race_id', as: 'race_picture'});
   }
 
 }

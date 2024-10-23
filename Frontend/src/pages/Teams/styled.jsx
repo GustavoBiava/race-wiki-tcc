@@ -38,7 +38,7 @@ export const TitleHeader = styled.div`
         }
     }
 
-    `;
+`;
 
 export const AllTeams = styled.div`
     display: grid;
@@ -120,6 +120,10 @@ export const TeamHeader = styled.div`
 
 export const TeamTitle = styled.h2`  
     font-size: 2em;
+
+    @media (max-width: 515px) {
+        font-size: 1.3em;
+    }
 `;
 
 export const TeamCountry = styled.div`
@@ -135,10 +139,4 @@ export const TeamCountry = styled.div`
 export const TeamInfo = styled.div`
     display: flex;
     align-items: center;
-`;
-
-// No use
-export const Titles = styled.span`
-    color: ${props => props.color || '#757678'};
-    font-size: 1.1em;
 `;

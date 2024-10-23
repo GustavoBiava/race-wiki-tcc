@@ -30,6 +30,7 @@ import DriverPicture from "../models/Pictures/DriverPicture";
 import Country from "../models/Country";
 import CountryPicture from "../models/Pictures/CountryPicture";
 import TeamPicture from "../models/Pictures/TeamPicture";
+import RacePicture from "../models/Pictures/RacePicture";
 
 const connection = new Sequelize(databaseConfig);
 const models = [
@@ -59,6 +60,7 @@ const models = [
   Country,
   CountryPicture,
   TeamPicture,
+  RacePicture,
 ];
 
 models.forEach(model => model.init(connection));

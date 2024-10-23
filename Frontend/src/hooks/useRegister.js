@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
 
+import axios from '../services/axios';
+
 export const useRegister = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
@@ -13,16 +15,23 @@ export const useRegister = () => {
     const [password, setPassword] = useState('');
     const [checkbox, setCheckbox] = useState(false);
 
-    const handleButtonClick = (e) => {
+    const handleButtonClick = async (e) => {
         e.preventDefault();
         if (!validateForm()) return;
+
+        const emailValidation = await emailAlreadyUsed(email);
+        if (!emailValidation) return;
+
+        const nicknameValidation = await nicknameAlreadyUsed(nickname);
+        if (!nicknameValidation) return;
+
         return navigate('/equipe-favorita', { state: { name, surname, nickname, birthDate, email, password }});
     }
 
     const isValidBirthDate = (date) => new Date().getFullYear() - new Date(date).getFullYear() >= 10; 
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
 
-    const validateForm = () => {
+    function validateForm() {
         if (!name) {
             toast.error('Nome inválido!');
             return false;
@@ -83,6 +92,34 @@ export const useRegister = () => {
             return false;
         }
         return true;
+    }
+
+    async function emailAlreadyUsed (email) {
+        try {
+            const { status } = await axios.get(`/pages/register/validateEmail?email=${email}`);
+            if (status === 204) return true;
+            toast.error('O E-mail já foi cadastrado!');
+            return false;
+        }
+        catch (err) {
+            const errors = err.response.data.errors || ['FATAL ERROR!'];
+            errors.map(e => toast.error(e));
+            return false;
+        }
+    }
+
+    async function nicknameAlreadyUsed(nickname) {
+        try {
+            const { status } = await axios.get(`/pages/register/validateNickname?nickname=${nickname}`);
+            if (status === 204) return true;
+            toast.error('O nickname já está em uso!');
+            return false;
+        }
+        catch (err) {
+            const errors = err.response.data.errors || ['FATAL ERROR!'];
+            errors.map(e => toast.error(e));
+            return false;
+        }
     }
 
     return {

@@ -76,6 +76,7 @@ export default createGlobalStyle`
 
     .swiper-button-prev, .swiper-button-next {
         color: ${colors.lightText};
+        filter: opacity(0.7);
 
         &:hover {
             color: ${colors.mainRed};
@@ -88,17 +89,21 @@ export default createGlobalStyle`
 
     .swiper-pagination-bullet {
         background-color: ${colors.lightText};
-        opacity: 0.7;
+        filter: opacity(0.7);
 
         &:hover {
             background-color: ${colors.mainRed};
-            opacity: 0.7;
+            filter: opacity(0.7);
         }
     }
 
     .swiper-pagination-bullet-active {
         background-color: ${colors.mainRed};
-        opacity: 0.7;
+        filter: opacity(0.7);
+    }
+
+    .swiper-button-disabled {
+        filter: opacity(0.5);
     }
 `;
 

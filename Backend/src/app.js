@@ -38,6 +38,7 @@ import teamPageRoutes from './routes/Pages/teamsPageRoutes';
 import favoriteTeamPageRoutes from './routes/Pages/favoriteTeamPageRoutes';
 import favoriteDriverPageRoutes from './routes/Pages/favoriteDriverPageRoutes';
 import registerPageRoutes from './routes/Pages/registerPageRoutes';
+import homePageRoutes from './routes/Pages/homePageRoutes';
 
 
 class App {
@@ -90,6 +91,7 @@ class App {
     this.app.use('/pages/favoriteTeams', favoriteTeamPageRoutes);
     this.app.use('/pages/favoriteDrivers', favoriteDriverPageRoutes);
     this.app.use('/pages/register', registerPageRoutes);
+    this.app.use('/pages/home', homePageRoutes);
   }
 
 }

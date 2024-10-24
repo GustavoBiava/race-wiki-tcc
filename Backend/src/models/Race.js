@@ -1,4 +1,5 @@
 import Sequelize, { Model } from "sequelize";
+import slugify from 'slugify';
 
 export default class Race extends Model {
   static init(sequelize) {
@@ -108,8 +109,20 @@ export default class Race extends Model {
             msg: 'Winner_driver need to be a integer!',
           }
         }
-      }
+      },
+      slug: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: '',
+      },
     }, { sequelize });
+
+    this.addHook('beforeSave', async (race) => {
+      if (race.name) {
+        race.slug = slugify(race.name).toLowerCase();
+      }
+    });
+
     return this;
   }
 
@@ -123,6 +136,7 @@ export default class Race extends Model {
     this.belongsTo(models.Driver, { foreignKey: 'pole_position', as: 'position_pole' });
     this.belongsTo(models.Driver, { foreignKey: 'race_winner', as: 'winner_driver'});
     this.hasMany(models.RacePicture, { foreignKey: 'race_id', as: 'race_picture'});
+    this.belongsTo(models.Country, { foreignKey: 'race_place', as: 'place' });
   }
 
 }

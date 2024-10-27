@@ -44,9 +44,9 @@ function Nav() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="corridas">
+                        <Link to="comparar">
                             <NavItem>
-                                <h1>Corridas</h1>
+                                <h1>Comparar</h1>
                                 <IoIosArrowDown size={20}/>
                             </NavItem>
                         </Link>

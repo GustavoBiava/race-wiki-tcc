@@ -7,7 +7,7 @@ module.exports = {
       "seasons",
       [
         {
-          year: "2024-01-01",
+          year: 2024,
           begin_date: "2024-01-01",
           end_date: "2024-12-30",
           driver_id: 2,
@@ -16,7 +16,7 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          year: "2025-01-01",
+          year: 2025,
           begin_date: "2025-01-01",
           end_date: "2025-12-30",
           driver_id: 1,

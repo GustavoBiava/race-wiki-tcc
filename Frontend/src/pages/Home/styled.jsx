@@ -11,7 +11,7 @@ export const Content = styled.div`
 `;
 
 export const SwiperContainer = styled.div`
-    margin: 3em 0 0 0;;
+    margin: 5em 0 0em 0;;
     width: 100vw;
     color: ${colors.lightText};
 
@@ -22,7 +22,7 @@ export const TitleHeader = styled.div`
     align-items: start;
     flex-direction: column;
     width: 80vw;
-    margin: 4em 0 0 0;
+    margin: 7em 0 4em 0;
 
     hr {
         border: 2.5px solid ${colors.mainRed};
@@ -35,7 +35,9 @@ export const TitleHeader = styled.div`
     }
     
     @media (max-width: 890px) {
+        text-align: center;
         align-items: center;
+        margin: 5em 0 2em 0;
     }
     
     @media (max-width: 740px) {
@@ -87,7 +89,7 @@ export const RaceInfo = styled.div`
 `;
 
 export const SwiperImg = styled.img`
-    filter: blur(1px) brightness(50%);
+    filter: blur(1.2px) brightness(40%);
     object-fit: cover;
     width: 100%;
     height: 60vh;
@@ -103,3 +105,116 @@ export const Country = styled.img`
     width: 3em;
     margin: 0 0 0 0.5em
 `;
+
+export const Publications = styled.div`
+    min-width: 80vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    place-items: center;
+    gap: 4em 0em;
+
+    @media (max-width: 879px) {
+        grid-template-columns: 1fr;
+        gap: 2em 0em;
+    }
+`;
+
+export const Publication = styled.div`
+    background-color: ${props => props.theme.mode === 'dark' ? colors.mainGray : colors.mainWhite};
+    display: flex;
+    align-items: center;
+    max-width: 30vw;
+    border-radius: 0.2em;
+    z-index: 1;
+
+    @media (max-width: 1380px) {
+        h2 {
+            font-size: 1.2em;
+        }        
+
+        p {
+            font-size: 0.7em;
+        }
+    }
+
+    @media (max-width: 879px) {
+        max-width: 80vw;
+    }
+`;
+
+export const PublicationImg = styled.img`
+    object-fit: cover;
+    width: 30vw;
+    max-height: 30vh;
+    border-radius: 0.2em 0.2em 0 0;
+    z-index: 2;
+
+    @media (max-width: 879px) {
+        width: 80vw;
+    }
+
+    &:hover {
+        filter: brightness(85%);
+    }
+`;
+
+export const PublicationFooter = styled.div`
+    width: 100%;
+    padding: 0.5em 1em 1em 1em;
+    z-index: 2;
+
+    h2 {
+        color: ${props => props.theme.mode === 'dark' ? colors.lightBackground : colors.mainRed};
+    }
+`;
+
+export const PublicationDetails = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2em 0 0 0;
+    font-weight: 550;
+
+    p {
+        color: ${props => props.theme.mode === 'dark' ? colors.mainRed : colors.darkText};
+    }
+
+    span {
+        color: ${props => props.theme.mode === 'dark' ? colors.lightText : colors.mainRed};
+    }
+`;
+
+export const Tags = styled.div`
+    position: absolute;
+    display: flex;
+    width: 30vw;
+    justify-content: end;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0.5em;
+    gap: 0.5em;
+    z-index: 3;
+
+    @media (max-width: 879px) {
+        width: 80vw;
+    }
+
+`;
+
+export const Tag = styled.div`
+    background-color: ${colors.mainRed};
+    width: fit-content;
+    padding: 0.2em;
+    border-radius: 0.3em;
+
+    p {
+        font-size: 0.9em;
+        font-weight: 550;
+    }
+
+    @media (max-width: 879px) {
+        font-size: 0.8em;
+    }
+`;
+

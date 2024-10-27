@@ -23,6 +23,7 @@ export default class Publication extends Model{
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: '',
+        unique: true,
       },
       likes: {
         type: Sequelize.INTEGER,
@@ -61,10 +62,11 @@ export default class Publication extends Model{
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'author' });
+    this.belongsTo(models.User, { foreignKey: 'author', as: 'publication_author'});
     this.belongsToMany(models.User, { through: 'likes' });
     this.belongsToMany(models.User, { through: 'comments' });
     this.belongsToMany(models.Tag, { through: 'tags_publications' });
+    this.hasMany(models.PublicationPicture, { foreignKey: 'publication_id', as: 'publication_picture'});
   }
 
 }

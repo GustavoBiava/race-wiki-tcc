@@ -4,14 +4,13 @@ export default class Season extends Model {
   static init(sequelize) {
     super.init({
       year: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: Sequelize.NOW,
         unique: true,
         validate: {
-          is: {
-            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-            msg: 'Year is not a valid year (YYYY)',
+          isInt: {
+            msg: 'Year need to be a integer!',
           },
         }
       },

@@ -1,8 +1,22 @@
 import { Container } from "../../styles/GlobalStyles";
-import { TeamsContainer, TitleHeader, AllTeams, Team, TeamBackground, TeamHeader, TeamTitle, TeamCountry, TeamInfo, BackgroundImg, TeamImg, TeamPicture, ResponsiveImg } from './styled';
 import { Link } from 'react-router-dom';
 import { useTeams } from "../../hooks/useTeams";
 import Loading from '../../components/Loading';
+import { 
+    TeamsContainer,
+    TitleHeader,
+    AllTeams,
+    Team,
+    TeamBackground,
+    TeamHeader,
+    TeamTitle,
+    TeamCountry,
+    TeamInfo,
+    BackgroundImg,
+    TeamImg,
+    TeamPicture,
+    ResponsiveImg
+} from './styled';
 
 function Teams() {
 

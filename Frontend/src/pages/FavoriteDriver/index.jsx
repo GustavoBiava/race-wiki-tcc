@@ -1,7 +1,20 @@
 import { Container, Button } from '../../styles/GlobalStyles';
-import { TitleHeader, Content, Drivers, Driver, DriverCircle, BackgroundImg, DriverPicture, DriverImg, DriverName, Name, ButtonDiv, DriverContainer } from './styled';
 import { useFavoriteDrivers } from '../../hooks/useFavoriteDrivers';
 import Loading from '../../components/Loading';
+import { 
+    TitleHeader,
+    Content,
+    Drivers,
+    Driver,
+    DriverCircle,
+    BackgroundImg,
+    DriverPicture,
+    DriverImg,
+    DriverName,
+    Name,
+    ButtonDiv,
+    DriverContainer
+} from './styled';
 
 function FavoriteDriver() {
 

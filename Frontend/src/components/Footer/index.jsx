@@ -57,8 +57,8 @@ function Footer() {
                         <Link to="/equipes">
                             <li>Equipes</li>
                         </Link>
-                        <Link to="/corridas">
-                            <li>Corridas</li>
+                        <Link to="/comparar">
+                            <li>Comparar</li>
                         </Link>
                         <Link to="/termos-de-uso">
                             <li>Termos de Uso</li>

@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true,
       },
       year: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,
       },

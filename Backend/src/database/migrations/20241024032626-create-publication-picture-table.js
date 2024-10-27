@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable(
-      'publications',
+      "publication_pictures",
       {
         id: {
           type: Sequelize.INTEGER,
@@ -12,32 +12,24 @@ module.exports = {
           autoIncrement: true,
           primaryKey: true,
         },
-        title: {
+        original_name: {
           type: Sequelize.STRING,
           allowNull: false,
         },
-        body: {
-          type: Sequelize.TEXT,
-          allowNull: false,
-        },
-        slug: {
+        filename: {
           type: Sequelize.STRING,
           allowNull: false,
-          unique: true
         },
-        likes: {
+        publication_id: {
           type: Sequelize.INTEGER,
           allowNull: false,
-        },
-        author: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
+          unique: false,
           references: {
-            model: 'users',
-            key: 'id',
+            model: "publications",
+            key: "id",
           },
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE',
+          onDelete: "CASCADE",
+          onUpdate: "CASCADE",
         },
         created_at: {
           type: Sequelize.DATE,
@@ -47,8 +39,8 @@ module.exports = {
           type: Sequelize.DATE,
           allowNull: false,
         },
-      });
+    });
   },
 
-  async down() { }
+  async down() {},
 };

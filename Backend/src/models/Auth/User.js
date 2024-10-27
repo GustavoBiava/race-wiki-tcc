@@ -172,7 +172,7 @@ export default class User extends Model {
     this.belongsTo(models.Driver, { foreignKey: 'favorite_driver' });
     this.belongsTo(models.Team, { foreignKey: 'favorite_team' });
 
-    this.hasMany(models.Publication, { foreignKey: 'author' });
+    this.hasMany(models.Publication, { foreignKey: 'author', as: 'publication_author'});
     this.belongsToMany(models.Publication, { through: 'likes' });
     this.belongsToMany(models.Publication, { through: 'comments' });
     this.belongsToMany(models.Comment, { through: 'comments_comments' });

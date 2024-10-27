@@ -1,7 +1,20 @@
 import { Container, Button } from '../../styles/GlobalStyles';
 import { useFavoriteTeams } from '../../hooks/useFavoriteTeams';
-import { TitleHeader, Content, Teams, Team, TeamCircle, BackgroundImg, TeamPicture, TeamImg, TeamName, Name, ButtonDiv, TeamContainer } from './styled';
 import Loading from '../../components/Loading';
+import {
+    TitleHeader,
+    Content,
+    Teams,
+    Team,
+    TeamCircle,
+    BackgroundImg,
+    TeamPicture,
+    TeamImg,
+    TeamName,
+    Name,
+    ButtonDiv,
+    TeamContainer
+} from './styled';
 
 function FavoriteTeam() {
 

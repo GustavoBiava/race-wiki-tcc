@@ -6,11 +6,13 @@ import DriverPicture from "../../models/Pictures/DriverPicture";
 import CountryPicture from '../../models/Pictures/CountryPicture';
 import TeamPicture from '../../models/Pictures/TeamPicture';
 import RacePicture from '../../models/Pictures/RacePicture';
+import PublicationPicture from '../../models/Pictures/PublicationPicture';
 
 import Driver from "../../models/Driver";
 import Country from "../../models/Country";
 import Team from "../../models/Team";
 import Race from "../../models/Race";
+import Publication from "../../models/Social/Publication";
 
 const upload = multer(multerConfig).single('archive');
 const uploadFiles = multer(multerConfig).array('archives', 10);
@@ -123,6 +125,39 @@ class PicturesController {
         }));
 
         return res.status(200).json(racePictures);
+      }
+      catch (err) {
+        const errors = err.errors || [{ message: 'Fatal Error!'}];
+        return res.status(400).json({ errors: errors.map(e => e.message) });
+      }
+    });
+  }
+
+  storePublication(req, res) {
+    return uploadFiles(req, res, async (err) => {
+      if (err) return res.status(400).json({ errors: [err.code] });
+
+      try {
+        if (!req.files) return res.status(400).json({ errors: ['Picture(s) not found!'] });
+        if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
+
+        const { publication_id } = req.body;
+        if (!publication_id) return res.status(400).json({ errors: ['Invalid id!'] });
+
+        const publication = await Publication.findOne({ where: { id: publication_id } });
+        if (!publication) return res.status(400).json({ errors: ['Invalid Publication!'] });
+
+        const publicationPictures = [];
+
+        await Promise.all(req.files.map(async (file) => {
+          const { originalname, filename } = file;
+
+          const publicationPicture = await PublicationPicture.create({ original_name: originalname, filename, publication_id });
+
+          return publicationPictures.push(publicationPicture);
+        }));
+
+        return res.status(200).json(publicationPictures);
       }
       catch (err) {
         const errors = err.errors || [{ message: 'Fatal Error!'}];

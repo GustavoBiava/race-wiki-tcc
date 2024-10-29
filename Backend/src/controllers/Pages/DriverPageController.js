@@ -46,7 +46,7 @@ class DriverPageController {
       await Promise.all(drivers.map(async driver => {
         const driverContracts = await CareerContracts.findAll({
           where: { driver_id: driver.id, is_active: 1 },
-          order: [['created_at', 'ASC']],
+          order: [['created_at', 'DESC']],
         });
 
         const driverContract = driverContracts[0];

@@ -218,3 +218,146 @@ export const Tag = styled.div`
     }
 `;
 
+export const ClassificationLeaders = styled.div`
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    margin: 4em 0 0 0;
+
+    @media (max-width: 1148px) {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2em 0;
+    }
+
+    @media (max-width: 856px) {
+        margin: 1.5em 0 0 0;
+    }
+
+    @media (max-height: 600px) and (max-width: 1024px){
+        gap: 6em 1em;
+    }
+
+`;
+
+export const Leader = styled.div`
+    background-color: ${props => props.theme.mode === 'dark' ? colors.mainGray : colors.mainWhite};
+    width: fit-content;
+    border-radius: 0.2em;
+
+    @media (max-width: 1148px) {
+        width: 80vw;
+    }
+`;
+
+export const BackgroundImg = styled.img`
+    object-fit: cover;
+    width: 23vw;
+    height: 20vh;
+    z-index: 1;
+    opacity: 0.45;
+    border-radius: 0.2em 0.2em 0 0;
+
+    @media (max-width: 1148px) {
+        width: 80vw;
+    }
+`;
+
+export const DriverBackground = styled.div`
+    background-color: ${props => props.driverColor || '#1212ew'};
+    width: 23vw;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: end;
+    border-radius: 0.2em;
+
+    &:hover {
+        filter: brightness(85%);
+    }
+
+    @media (max-width: 1148px) {
+        width: 80vw;
+    }
+`;
+
+export const DriverImg = styled.img`
+    position: absolute;
+    z-index: 2;
+    max-width: 16em;
+    max-height: 18em;
+    
+    @media (max-width: 1148px) {
+        width: 20vw;
+    }
+    
+    @media (max-width: 856px) {
+        width: 30vw;
+    }
+    
+    @media (max-width: 475px) {
+        width: 45vw;
+    }
+`;
+
+export const LeaderDetails = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 0.7em;
+`;
+
+export const Name = styled.p`
+    font-weight: normal;
+    font-size: 1em;
+`;
+
+export const Surname = styled.h2`  
+    line-height: 0.9em;
+    font-size: 2em;
+`;
+
+export const NameCointainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: ${props => props.theme.mode === 'dark' ? colors.lightText : colors.darkText};
+
+    @media (max-width: 1480px) {
+        h2 {
+            font-size: 1.2em;
+        }        
+
+        p {
+            font-size: 0.7em;
+        }
+    }
+`;
+
+export const Number = styled.h2`
+    color: ${props => props.color || '#757678'};
+    font-size: 2.9em;
+    margin: 0 0.2em 0 0;
+`;
+
+export const PointsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+`;
+
+export const Points = styled.h2`
+    color: ${props => props.color || '#757678'};
+    font-size: 2.3em;
+    
+    @media (max-width: 1692px) {
+        font-size: 1.5em;
+    }
+`;
+
+export const DriversTable = styled.table`
+`;
+

@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 export const useHome = () => {
     const [races, setRaces] = useState([]);
     const [publications, setPublications] = useState([]);
+    const [driverClassificationLeaders, setDriverClassificationLeaders] = useState([]);
+    const [driverClassification, setDriverClassification] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -18,6 +20,16 @@ export const useHome = () => {
             (async function() {
                 const response = await axios.get('/pages/home/publications');
                 setPublications(response.data);
+            })();
+
+            (async function() {
+                const response = await axios.get('/pages/home/driverClassificationLeaders/2024');
+                setDriverClassificationLeaders(response.data);
+            })();
+
+            (async function() {
+                const response = await axios.get('/pages/home/driverClassification/2024');
+                setDriverClassification(response.data);
             })();
 
             return setIsLoading(false);
@@ -62,6 +74,8 @@ export const useHome = () => {
     return {
         races,
         publications,
+        driverClassificationLeaders,
+        driverClassification,
         isLoading,
         formatDate,
         getPublicationHour,

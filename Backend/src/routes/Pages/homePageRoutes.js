@@ -6,6 +6,7 @@ const route = Router();
 
 route.get('/races', HomePageController.getRaces);
 route.get('/publications', HomePageController.getPublications);
-route.get('/driverClassification', HomePageController.getDriverClassification);
+route.get('/driverClassificationLeaders/:year', HomePageController.getDriverClassificationLeaders);
+route.get('/driverClassification/:year', HomePageController.getDriverClassification);
 
 export default route;

@@ -7,6 +7,13 @@ import CountryPicture from "../../models/Pictures/CountryPicture";
 import RacePicture from "../../models/Pictures/RacePicture";
 import Publication from "../../models/Social/Publication";
 import PublicationPicture from "../../models/Pictures/PublicationPicture";
+import Season from "../../models/Season";
+import DriverClassification from '../../models/DriverClassification';
+import Driver from '../../models/Driver';
+import DriverStat from '../../models/DriverStat';
+import DriverPicture from "../../models/Pictures/DriverPicture";
+import CareerContracts from '../../models/CareerContracts';
+import Team from '../../models/Team';
 
 const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -115,12 +122,157 @@ class HomePageController {
     }
   }
 
-  async getDriverClassification(req, res) {
+  async getDriverClassificationLeaders(req, res) {
     try {
+      const { year } = req.params;
+      if (!year) return res.status(400).json({ message: ['Invalid year!'] });
 
+      const season = await Season.findOne({
+        where: { year },
+        attributes: ['id']
+      });
+      if (!season) return res.status(400).json({ message: ['This season does\'t exists!'] });
+
+      const driverLeaders = await DriverClassification.findAll({
+        where: { season_id: season.id },
+        attributes: ['points', 'driver_id'],
+        order: [['points', 'DESC']],
+        limit: 3,
+        include: [
+          {
+            model: Driver,
+            attributes: ['name', 'surname', 'short_name'],
+            include: [
+              {
+                model: Country,
+                as: 'country',
+                attributes: ['name'],
+                include: [
+                  {
+                    model: CountryPicture,
+                    as: 'country_picture',
+                    attributes: ['url', 'filename'],
+                  }
+                ]
+              },
+              {
+                model: DriverPicture,
+                as: 'driver_picture',
+                attributes: ['url', 'filename'],
+              }
+            ]
+          }
+        ]
+      });
+
+      let position = 1;
+
+      await Promise.all(driverLeaders.map(async driverLeader => {
+        driverLeader.setDataValue('position', position);
+        position++;
+        const driverContracts = await CareerContracts.findAll({
+          where: { driver_id: driverLeader.driver_id, is_active: 1 },
+          order: [['created_at', 'DESC']],
+        });
+
+        const driverContract = driverContracts[0];
+
+        if (!driverContract) return driverLeader.setDataValue('color', null);
+
+        if (!driverContract.is_active) return driverLeader.setDataValue('color', null);
+
+        const { main_color, short_name, name } = await Team.findOne({
+          where: { id: driverContract.team_id }
+        });
+
+        driverLeader.setDataValue('color', main_color);
+        return driverLeader.setDataValue('team', { short_name, name });
+      }
+      ));
+
+      return res.status(200).json(driverLeaders);
     }
     catch (err) {
-      
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
+    }
+  }
+
+  async getDriverClassification(req, res) {
+    try {
+      const { year } = req.params;
+      if (!year) return res.status(400).json({ message: ['Invalid year!'] });
+
+      const season = await Season.findOne({
+        where: { year },
+        attributes: ['id']
+      });
+      if (!season) return res.status(400).json({ message: ['This season does\'t exists!'] });
+
+      const driverClassifications = await DriverClassification.findAll({
+        where: { season_id: season.id },
+        attributes: ['points', 'driver_id'],
+        order: [['points', 'DESC']],
+        offset: 3,
+        include: [
+          {
+            model: Driver,
+            attributes: ['name', 'surname', 'short_name'],
+            include: [
+              {
+                model: Country,
+                as: 'country',
+                attributes: ['name'],
+                include: [
+                  {
+                    model: CountryPicture,
+                    as: 'country_picture',
+                    attributes: ['url', 'filename'],
+                  }
+                ]
+              },
+              {
+                model: DriverStat,
+                as: 'driver_stat',
+                attributes: ['number']
+              },
+            ]
+          }
+        ]
+      });
+
+      let position = 1;
+
+      await Promise.all(driverClassifications.map(async driverClassification => {
+        driverClassification.setDataValue('position', position);
+        position++;
+
+        const driverContracts = await CareerContracts.findAll({
+          where: { driver_id: driverClassification.driver_id, is_active: 1 },
+          order: [['created_at', 'DESC']],
+        });
+
+        const driverContract = driverContracts[0];
+
+        if (!driverContract) return driverClassification.setDataValue('color', null);
+
+        if (!driverContract.is_active) return driverClassification.setDataValue('color', null);
+
+        const { main_color, short_name, name } = await Team.findOne({
+          where: { id: driverContract.team_id }
+        });
+
+        driverClassification.setDataValue('color', main_color);
+        return driverClassification.setDataValue('team', { short_name, name });
+      }
+      ));
+
+      return res.status(200).json(driverClassifications);
+    }
+    catch (err) {
+      console.log(err)
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
 

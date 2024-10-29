@@ -21,7 +21,21 @@ import {
     PublicationFooter,
     PublicationDetails,
     Tags,
-    Tag
+    Tag,
+    ClassificationLeaders,
+    Leader,
+    BackgroundImg,
+    DriverBackground,
+    DriverImg,
+    LeaderDetails,
+    NameCointainer,
+    Name,
+    Surname,
+    Number,
+    PointsContainer,
+    Points,
+    DriversTable,
+
 } from './styled';
 
 function Home() {
@@ -30,6 +44,8 @@ function Home() {
         isLoading,
         races,
         publications,
+        driverClassificationLeaders,
+        driverClassification,
         formatDate,
         getPublicationHour,
     } = useHome();
@@ -134,6 +150,43 @@ function Home() {
                             <hr />
                     </TitleHeader>
 
+                    <ClassificationLeaders>
+                        { driverClassificationLeaders ? driverClassificationLeaders.map((leader, index) => (
+                            <Leader key={index}>
+                                <Link to={`/piloto/${leader.Driver.short_name}`}>
+                                    <DriverBackground driverColor={leader.color}>
+                                        
+                                        { leader.Driver.driver_picture
+                                            ? <DriverImg src={leader.Driver.driver_picture.url} alt='driver-picture'/>
+                                            : <DriverImg src='driver-default-picture.png' alt='driver-picture'/>
+                                        }
+
+                                        <BackgroundImg src='driver-background.jpg' alt='driver-background'/>
+                                    </DriverBackground>
+
+                                    <LeaderDetails>
+                                        <Number color={leader.color}>{leader.position}</Number>
+
+                                        <NameCointainer>
+                                            <Name>{leader.Driver.name}</Name>
+                                            <Surname>{leader.Driver.surname}</Surname>
+                                        </NameCointainer>
+
+                                        <PointsContainer>
+                                            <Points color={leader.color}>{leader.points} Pts</Points>
+                                        </PointsContainer>
+                                        
+                                    </LeaderDetails>
+                                </Link>
+                            </Leader>
+                        )) : ''}
+                    </ClassificationLeaders>
+                    
+                    <DriversTable>
+                        <th>Posição</th>
+                        <th>dasdsa</th>
+                        <th>adasdsa</th>
+                    </DriversTable>
 
 
                 </Content>

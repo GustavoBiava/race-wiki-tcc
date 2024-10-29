@@ -59,8 +59,10 @@ export const Driver = styled.div``;
 export const DriverBackground = styled.div`
     background-color: ${props => props.driverColor || '#1212ew'};
     width: 23vw;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: end;
     
     @media (max-width: 1165px) {
         width: 70vw;

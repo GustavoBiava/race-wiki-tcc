@@ -358,6 +358,94 @@ export const Points = styled.h2`
     }
 `;
 
-export const DriversTable = styled.table`
+export const ClassificationTable = styled.table`
+    width: 100%;
+    font-weight: bold;
+    background: ${props => props.theme.mode === 'dark' ? colors.mainGray : colors.mainWhite};
+    border-radius: 0.2em;
+    font-size: 1.1em;
+
+    tr {
+        height: 2.5em;
+        cursor: pointer;
+        
+        &:hover {
+            filter: brightness(85%);
+        }
+    }
+    
+    tr:nth-child(even) {
+        background: ${props => props.theme.mode === 'dark' ? colors.mainGrayLight : colors.mainWhiteDark};
+    }
 `;
 
+export const PosistionTd = styled.td`
+    width: 1.7em;
+    text-align: center;
+`;
+
+export const NameTd = styled.td`
+    text-align: left;
+`;
+
+export const NameTableDiv = styled.div`
+    display: flex;
+    align-items: center;
+
+    p, h3 {
+        font-size: 1em;
+    }
+
+    h3 {
+        margin: 0 0 0 0.3em;
+    }
+
+    img {
+        margin: 0 0 0 0.3em;
+        width: 1.3em;
+    }
+`;
+
+export const ColorDetail = styled.div`
+    background-color: ${props => props.color || '#757678'};
+    width: 0.21em;
+    height: 1.3em;
+    margin: 0 0.7em 0 0;
+`;
+
+export const PointsTd = styled.td`
+    width: 5em;    
+    text-align: center;
+
+    @media (max-width: 400px) {
+        font-size: 0.8em;
+    }
+
+`;
+
+export const DriverTableContainer = styled.div`
+    width: 70.7vw;
+    margin: 1em 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 1148px) {
+        width: 80vw;
+    }
+`;
+
+export const LeaderName = styled.div`
+    display: flex;
+    align-items: center;
+
+    img {
+        margin: 0 0 0 0.3em;
+        width: 1.2em;
+        
+        @media (max-width: 1480px) {
+            width: 1em;
+        }
+    }
+
+`;

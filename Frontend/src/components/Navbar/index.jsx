@@ -31,7 +31,7 @@ function Nav() {
                         <Link to="pilotos">
                             <NavItem>
                                 <h1>Pilotos</h1>
-                                <IoIosArrowDown size={20}/>
+                                {/* <IoIosArrowDown size={20}/> */}
                             </NavItem>
                         </Link>
                     </li>
@@ -39,7 +39,7 @@ function Nav() {
                         <Link to="equipes">
                             <NavItem>
                                 <h1>Equipes</h1>
-                                <IoIosArrowDown size={20}/>
+                                {/* <IoIosArrowDown size={20}/> */}
                             </NavItem>
                         </Link>
                     </li>
@@ -47,7 +47,7 @@ function Nav() {
                         <Link to="comparar">
                             <NavItem>
                                 <h1>Comparar</h1>
-                                <IoIosArrowDown size={20}/>
+                                {/* <IoIosArrowDown size={20}/> */}
                             </NavItem>
                         </Link>
                     </li>

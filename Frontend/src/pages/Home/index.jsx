@@ -34,7 +34,14 @@ import {
     Number,
     PointsContainer,
     Points,
-    DriversTable,
+    ClassificationTable,
+    DriverTableContainer,
+    PosistionTd,
+    NameTd,
+    PointsTd,
+    ColorDetail,
+    NameTableDiv,
+    LeaderName,
 
 } from './styled';
 
@@ -48,6 +55,7 @@ function Home() {
         driverClassification,
         formatDate,
         getPublicationHour,
+        goToDriverPage,
     } = useHome();
 
     return (
@@ -100,8 +108,8 @@ function Home() {
                     </SwiperContainer>
 
                     <TitleHeader>
-                            <h1>ÚLTIMAS NOTÍCIAS</h1>
-                            <hr />
+                        <h1>ÚLTIMAS NOTÍCIAS</h1>
+                        <hr />
                     </TitleHeader>
 
                     <Publications>
@@ -146,8 +154,8 @@ function Home() {
                     </Publications>
 
                     <TitleHeader>
-                            <h1>CLASSIFICAÇÃO PILOTOS</h1>
-                            <hr />
+                        <h1>CLASSIFICAÇÃO PILOTOS</h1>
+                        <hr />
                     </TitleHeader>
 
                     <ClassificationLeaders>
@@ -168,7 +176,10 @@ function Home() {
                                         <Number color={leader.color}>{leader.position}</Number>
 
                                         <NameCointainer>
-                                            <Name>{leader.Driver.name}</Name>
+                                            <LeaderName>
+                                                <Name>{leader.Driver.name}</Name>
+                                                <Country src={leader.Driver.country.country_picture.url} alt='driver-country'/>
+                                            </LeaderName>
                                             <Surname>{leader.Driver.surname}</Surname>
                                         </NameCointainer>
 
@@ -182,12 +193,32 @@ function Home() {
                         )) : ''}
                     </ClassificationLeaders>
                     
-                    <DriversTable>
-                        <th>Posição</th>
-                        <th>dasdsa</th>
-                        <th>adasdsa</th>
-                    </DriversTable>
+                    <DriverTableContainer>
+                        <ClassificationTable cellSpacing={0}>
+                            { driverClassification ? driverClassification.map((driver, index) => (
+                                <tr onClick={goToDriverPage} key={index} id={driver.Driver.short_name}>
+                                    <PosistionTd>{driver.position}</PosistionTd>
+                                    <NameTd>
+                                        <NameTableDiv>
+                                            <ColorDetail color={driver.color}/>
+                                            <Name>{driver.Driver.name}</Name>
+                                            <h3>{driver.Driver.surname}</h3>
+                                            <Country src={driver.Driver.country.country_picture.url} alt='driver-country'/>
+                                        </NameTableDiv>
+                                    </NameTd>
+                                    <PointsTd>{`${driver.points} Pts`}</PointsTd>
+                                </tr>
+                            )) : ''}
 
+                        </ClassificationTable>
+                    </DriverTableContainer>
+                    
+                    <TitleHeader>
+                        <h1>CLASSIFICAÇÃO EQUIPES</h1>
+                        <hr />
+                    </TitleHeader>
+
+                    
 
                 </Content>
             

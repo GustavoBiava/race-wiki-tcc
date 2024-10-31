@@ -181,12 +181,11 @@ class HomePageController {
 
         if (!driverContract.is_active) return driverLeader.setDataValue('color', null);
 
-        const { main_color, short_name, name } = await Team.findOne({
+        const { main_color } = await Team.findOne({
           where: { id: driverContract.team_id }
         });
 
-        driverLeader.setDataValue('color', main_color);
-        return driverLeader.setDataValue('team', { short_name, name });
+        return driverLeader.setDataValue('color', main_color);
       }
       ));
 
@@ -212,8 +211,8 @@ class HomePageController {
       const driverClassifications = await DriverClassification.findAll({
         where: { season_id: season.id },
         attributes: ['points', 'driver_id'],
-        order: [['points', 'DESC']],
         offset: 3,
+        order: [['points', 'DESC']],
         include: [
           {
             model: Driver,
@@ -231,17 +230,12 @@ class HomePageController {
                   }
                 ]
               },
-              {
-                model: DriverStat,
-                as: 'driver_stat',
-                attributes: ['number']
-              },
             ]
           }
         ]
       });
 
-      let position = 1;
+      let position = 4;
 
       await Promise.all(driverClassifications.map(async driverClassification => {
         driverClassification.setDataValue('position', position);

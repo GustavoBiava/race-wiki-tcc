@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "../services/axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const useHome = () => {
+    const navigate = useNavigate();
+
     const [races, setRaces] = useState([]);
     const [publications, setPublications] = useState([]);
     const [driverClassificationLeaders, setDriverClassificationLeaders] = useState([]);
@@ -71,6 +74,8 @@ export const useHome = () => {
         return 'menos de 1 minuto';
     }
 
+    const goToDriverPage = (e) => navigate(`/piloto/${e.currentTarget.id}`); 
+
     return {
         races,
         publications,
@@ -79,5 +84,6 @@ export const useHome = () => {
         isLoading,
         formatDate,
         getPublicationHour,
+        goToDriverPage,
     }
 }

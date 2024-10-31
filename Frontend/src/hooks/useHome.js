@@ -10,6 +10,8 @@ export const useHome = () => {
     const [publications, setPublications] = useState([]);
     const [driverClassificationLeaders, setDriverClassificationLeaders] = useState([]);
     const [driverClassification, setDriverClassification] = useState([]);
+    const [teamClassificationLeaders, setTeamClassificationLeaders] = useState([]);
+    const [teamClassification, setTeamClassification] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -33,6 +35,16 @@ export const useHome = () => {
             (async function() {
                 const response = await axios.get('/pages/home/driverClassification/2024');
                 setDriverClassification(response.data);
+            })();
+
+            (async function() {
+                const response = await axios.get('/pages/home/teamClassificationLeaders/2024');
+                setTeamClassificationLeaders(response.data);
+            })();
+
+            (async function() {
+                const response = await axios.get('/pages/home/teamClassification/2024');
+                setTeamClassification(response.data);
             })();
 
             return setIsLoading(false);
@@ -75,6 +87,7 @@ export const useHome = () => {
     }
 
     const goToDriverPage = (e) => navigate(`/piloto/${e.currentTarget.id}`); 
+    const goToTeamPage = (e) => navigate(`/equipe/${e.currentTarget.id}`); 
 
     return {
         races,
@@ -85,5 +98,8 @@ export const useHome = () => {
         formatDate,
         getPublicationHour,
         goToDriverPage,
+        goToTeamPage,
+        teamClassificationLeaders,
+        teamClassification
     }
 }

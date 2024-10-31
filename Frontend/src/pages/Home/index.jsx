@@ -26,7 +26,7 @@ import {
     Leader,
     BackgroundImg,
     DriverBackground,
-    DriverImg,
+    LeaderImg,
     LeaderDetails,
     NameCointainer,
     Name,
@@ -35,13 +35,16 @@ import {
     PointsContainer,
     Points,
     ClassificationTable,
-    DriverTableContainer,
+    TableContainer,
     PosistionTd,
     NameTd,
     PointsTd,
     ColorDetail,
     NameTableDiv,
     LeaderName,
+    TeamBackground,
+    TeamName,
+    TeamImg
 
 } from './styled';
 
@@ -56,6 +59,9 @@ function Home() {
         formatDate,
         getPublicationHour,
         goToDriverPage,
+        goToTeamPage,
+        teamClassificationLeaders,
+        teamClassification,
     } = useHome();
 
     return (
@@ -158,15 +164,15 @@ function Home() {
                         <hr />
                     </TitleHeader>
 
-                    <ClassificationLeaders>
+                    <ClassificationLeaders isTeam={false}>
                         { driverClassificationLeaders ? driverClassificationLeaders.map((leader, index) => (
                             <Leader key={index}>
                                 <Link to={`/piloto/${leader.Driver.short_name}`}>
                                     <DriverBackground driverColor={leader.color}>
                                         
                                         { leader.Driver.driver_picture
-                                            ? <DriverImg src={leader.Driver.driver_picture.url} alt='driver-picture'/>
-                                            : <DriverImg src='driver-default-picture.png' alt='driver-picture'/>
+                                            ? <LeaderImg src={leader.Driver.driver_picture.url} alt='driver-picture'/>
+                                            : <LeaderImg src='driver-default-picture.png' alt='driver-picture'/>
                                         }
 
                                         <BackgroundImg src='driver-background.jpg' alt='driver-background'/>
@@ -193,7 +199,7 @@ function Home() {
                         )) : ''}
                     </ClassificationLeaders>
                     
-                    <DriverTableContainer>
+                    <TableContainer>
                         <ClassificationTable cellSpacing={0}>
                             { driverClassification ? driverClassification.map((driver, index) => (
                                 <tr onClick={goToDriverPage} key={index} id={driver.Driver.short_name}>
@@ -211,14 +217,65 @@ function Home() {
                             )) : ''}
 
                         </ClassificationTable>
-                    </DriverTableContainer>
+                    </TableContainer>
                     
                     <TitleHeader>
                         <h1>CLASSIFICAÇÃO EQUIPES</h1>
                         <hr />
                     </TitleHeader>
 
-                    
+                    <ClassificationLeaders isTeam={true}>
+                        { teamClassificationLeaders ? teamClassificationLeaders.map((leader, index) => (
+                            <Leader key={index}>
+                                <Link to={`/equipe/${leader.Team.short_name}`}>
+                                    <TeamBackground teamColor={leader.Team.main_color}>
+                                        
+                                        { leader.Team.team_picture
+                                            ? <TeamImg src={leader.Team.team_picture.url} alt='team-picture'/>
+                                            : <TeamImg src='team-default-picture.png' alt='team-picture'/>
+                                        }
+
+                                        <BackgroundImg src='driver-background.jpg' alt='team-background'/>
+                                    </TeamBackground>
+
+                                    <LeaderDetails>
+                                        <Number color={leader.Team.main_color}>{leader.position}</Number>
+
+                                        <NameCointainer>
+                                            <LeaderName isTeam={true}>
+                                                <TeamName>{leader.Team.name}</TeamName>
+                                                <Country src={leader.Team.country.country_picture.url} alt='team-country'/>
+                                            </LeaderName>
+                                        </NameCointainer>
+
+                                        <PointsContainer>
+                                            <Points color={leader.Team.main_color}>{leader.points} Pts</Points>
+                                        </PointsContainer>
+                                        
+                                    </LeaderDetails>
+                                </Link>
+                            </Leader>
+                        )) : ''}
+                    </ClassificationLeaders>
+
+                    <TableContainer>
+                        <ClassificationTable cellSpacing={0}>
+                            { teamClassification ? teamClassification.map((team, index) => (
+                                <tr onClick={goToTeamPage} key={index} id={team.Team.short_name}>
+                                    <PosistionTd>{team.position}</PosistionTd>
+                                    <NameTd>
+                                        <NameTableDiv isTeam={true}>
+                                            <ColorDetail color={team.Team.main_color}/>
+                                            <h3>{team.Team.name}</h3>
+                                            <Country src={team.Team.country.country_picture.url} alt='team-country'/>
+                                        </NameTableDiv>
+                                    </NameTd>
+                                    <PointsTd>{`${team.points} Pts`}</PointsTd>
+                                </tr>
+                            )) : ''}
+
+                        </ClassificationTable>
+                    </TableContainer>
 
                 </Content>
             

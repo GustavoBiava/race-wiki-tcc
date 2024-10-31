@@ -96,11 +96,11 @@ export const ResponsiveImg = styled.img`
 
 export const TeamImg = styled.img`
     z-index: 2;
-    width: 20vw;
-    max-height: 35vh;
+    max-width: 20vw;
+    max-height: 17em;
 
     @media (max-width: 900px) {
-        width: 65vw;
+        max-width: 45vw;
     }
 
 `;

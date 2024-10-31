@@ -103,7 +103,7 @@ export const RacePlace = styled.div`
 
 export const Country = styled.img`
     width: 3em;
-    margin: 0 0 0 0.5em
+    margin: 0 0 0 0.5em;
 `;
 
 export const Publications = styled.div`
@@ -224,7 +224,7 @@ export const ClassificationLeaders = styled.div`
     align-items: center;
     justify-content: center;
     gap: 1em;
-    margin: 4em 0 0 0;
+    margin-top: ${props => props.isTeam ? '0' : '4em'};
 
     @media (max-width: 1148px) {
         display: grid;
@@ -254,8 +254,8 @@ export const Leader = styled.div`
 
 export const BackgroundImg = styled.img`
     object-fit: cover;
-    width: 23vw;
-    height: 20vh;
+    width: 100%;
+    height: 100%;
     z-index: 1;
     opacity: 0.45;
     border-radius: 0.2em 0.2em 0 0;
@@ -284,7 +284,7 @@ export const DriverBackground = styled.div`
     }
 `;
 
-export const DriverImg = styled.img`
+export const LeaderImg = styled.img`
     position: absolute;
     z-index: 2;
     max-width: 16em;
@@ -324,6 +324,7 @@ export const NameCointainer = styled.div`
     flex-direction: column;
     align-items: start;
     color: ${props => props.theme.mode === 'dark' ? colors.lightText : colors.darkText};
+    white-space: nowrap;
 
     @media (max-width: 1480px) {
         h2 {
@@ -395,15 +396,18 @@ export const NameTableDiv = styled.div`
     p, h3 {
         font-size: 1em;
     }
-
+    
     h3 {
-        margin: 0 0 0 0.3em;
+        margin: ${props => props.isTeam ? (`0`) : (`0 0 0 0.3em`)};
+        font-weight: ${props => props.isTeam ? (`500`) : (``)};
     }
-
+    
     img {
         margin: 0 0 0 0.3em;
         width: 1.3em;
     }
+    
+
 `;
 
 export const ColorDetail = styled.div`
@@ -423,7 +427,7 @@ export const PointsTd = styled.td`
 
 `;
 
-export const DriverTableContainer = styled.div`
+export const TableContainer = styled.div`
     width: 70.7vw;
     margin: 1em 0 0 0;
     display: flex;
@@ -440,12 +444,45 @@ export const LeaderName = styled.div`
     align-items: center;
 
     img {
-        margin: 0 0 0 0.3em;
-        width: 1.2em;
+        margin: ${props => props.isTeam ? '0 0 0 0.5em' : '0 0 0 0.3em'}; ;
+        width: ${props => props.isTeam ? '1.6em' : '1.2em'};
         
         @media (max-width: 1480px) {
-            width: 1em;
+            width: ${props => props.isTeam ? '1.6em' : '1em'}; ;
         }
     }
 
+`;
+
+export const TeamBackground = styled.div`
+    background-color: ${props => props.teamColor || '#1212ew'};
+    width: 23vw;
+    height: 29vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.2em;
+
+    &:hover {
+        filter: brightness(85%);
+    }
+
+    @media (max-width: 1148px) {
+        width: 80vw;
+    }
+`;
+
+export const TeamName = styled.h2`
+    font-size: 1.5em;
+`;
+
+export const TeamImg = styled.img`
+    position: absolute;
+    z-index: 2;
+    max-width: 16em;
+    max-height: 13em;
+    
+    @media (max-width: 1148px) {
+        width: 20em;
+    }
 `;

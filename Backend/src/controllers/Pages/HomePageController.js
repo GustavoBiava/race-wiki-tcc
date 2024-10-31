@@ -9,9 +9,10 @@ import Publication from "../../models/Social/Publication";
 import PublicationPicture from "../../models/Pictures/PublicationPicture";
 import Season from "../../models/Season";
 import DriverClassification from '../../models/DriverClassification';
+import TeamClassification from '../../models/TeamClassification';
 import Driver from '../../models/Driver';
-import DriverStat from '../../models/DriverStat';
 import DriverPicture from "../../models/Pictures/DriverPicture";
+import TeamPicture from "../../models/Pictures/TeamPicture";
 import CareerContracts from '../../models/CareerContracts';
 import Team from '../../models/Team';
 
@@ -262,6 +263,119 @@ class HomePageController {
       ));
 
       return res.status(200).json(driverClassifications);
+    }
+    catch (err) {
+      console.log(err)
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
+    }
+  }
+
+  async getTeamClassificationLeaders(req, res) {
+    try {
+      const { year } = req.params;
+      if (!year) return res.status(400).json({ message: ['Invalid year!'] });
+
+      const season = await Season.findOne({
+        where: { year },
+        attributes: ['id']
+      });
+      if (!season) return res.status(400).json({ message: ['This season does\'t exists!'] });
+
+      const teamLeaders = await TeamClassification.findAll({
+        where: { season_id: season.id },
+        attributes: ['points', 'team_id'],
+        order: [['points', 'DESC']],
+        limit: 3,
+        include: [
+          {
+            model: Team,
+            attributes: ['name', 'main_color', 'short_name'],
+            include: [
+              {
+                model: Country,
+                as: 'country',
+                attributes: ['name'],
+                include: [
+                  {
+                    model: CountryPicture,
+                    as: 'country_picture',
+                    attributes: ['url', 'filename'],
+                  }
+                ]
+              },
+              {
+                model: TeamPicture,
+                as: 'team_picture',
+                attributes: ['url', 'filename'],
+              }
+            ]
+          }
+        ]
+      });
+
+      let position = 1;
+
+      await Promise.all(teamLeaders.map(async teamLeader => {
+        teamLeader.setDataValue('position', position);
+        return position++;
+      }));
+
+      return res.status(200).json(teamLeaders);
+    }
+    catch (err) {
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
+    }
+  }
+
+  async getTeamClassification(req, res) {
+    try {
+      const { year } = req.params;
+      if (!year) return res.status(400).json({ message: ['Invalid year!'] });
+
+      const season = await Season.findOne({
+        where: { year },
+        attributes: ['id']
+      });
+      if (!season) return res.status(400).json({ message: ['This season does\'t exists!'] });
+
+      const teamClassifications = await TeamClassification.findAll({
+        where: { season_id: season.id },
+        attributes: ['points', 'team_id'],
+        offset: 3,
+        order: [['points', 'DESC']],
+        include: [
+          {
+            model: Team,
+            attributes: ['name', 'main_color', 'short_name'],
+            include: [
+              {
+                model: Country,
+                as: 'country',
+                attributes: ['name'],
+                include: [
+                  {
+                    model: CountryPicture,
+                    as: 'country_picture',
+                    attributes: ['url', 'filename'],
+                  }
+                ]
+              },
+            ]
+          }
+        ]
+      });
+
+      let position = 4;
+
+      await Promise.all(teamClassifications.map(async teamClassification => {
+        teamClassification.setDataValue('position', position);
+        return position++;
+      }
+      ));
+
+      return res.status(200).json(teamClassifications);
     }
     catch (err) {
       console.log(err)

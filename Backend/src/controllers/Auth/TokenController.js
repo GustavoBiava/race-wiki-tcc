@@ -11,15 +11,15 @@ class TokenController {
 
       const user = await User.findOne({
         where: { email },
-        attributes: ['id', 'email', 'nickname', 'type', 'status', 'race_level', 'race_points', 'password_hash'],
+        attributes: ['id', 'email', 'nickname', 'type', 'status', 'race_level', 'race_points', 'password_hash', 'favorite_driver'],
       });
       if (!user) return res.status(404).json({ errors: ['User doesn\'t exists!'] });
 
       if (!(await user.validatePassword(password))) return res.status(401).json({ errors: ['Incorrect password!'] });
 
-      const { id, nickname, type, status, race_level, race_points } = user;
+      const { id, nickname, type, status, race_level, race_points, favorite_driver } = user;
 
-      const token = jwt.sign({ id, email, nickname, type, status, race_level, race_points }, process.env.TOKEN_SECRET, {
+      const token = jwt.sign({ id, email, nickname, type, status, race_level, race_points, favorite_driver }, process.env.TOKEN_SECRET, {
         expiresIn: process.env.TOKEN_EXPIRATION,
       });
 
@@ -33,6 +33,7 @@ class TokenController {
             status,
             race_level,
             race_points,
+            favorite_driver,
           }
          });
     }

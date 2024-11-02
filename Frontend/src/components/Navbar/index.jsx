@@ -1,14 +1,31 @@
 import { IoLogIn } from "react-icons/io5";
 import { FiMenu } from "react-icons/fi";
-import { IoIosArrowDown } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
+// import { IoIosArrowDown } from "react-icons/io";
 
-import { Navbar, NavItem, NavGroup, NavLogo, LoginLink, MenuLink } from "./styled";
 import { useExpanded } from "../../hooks/useExpanded";
 
+import { 
+    Navbar,
+    NavItem,
+    NavGroup,
+    NavLogo,
+    LoginLink,
+    MenuLink,
+    UserProfile,
+    BackgroundImg,
+    DriverPicture,
+} from "./styled";
+
 function Nav() {
-    const {isExpanded, handleMenuClick } = useExpanded();
+    const {
+        isExpanded,
+        handleMenuClick,
+        isLogged,
+        userProfile,
+        userNickname
+    } = useExpanded();
 
     return (
         <Navbar>
@@ -52,12 +69,29 @@ function Nav() {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/entrar">
-                            <LoginLink className="Login">
-                                <h1>Entrar/Cadastrar</h1>
-                                <IoLogIn size={36}/>
-                            </LoginLink>
-                        </Link>
+                        { isLogged ? (
+                            <Link to="/meu-perfil">
+                                <LoginLink isProfile={true}>
+                                    <UserProfile color={userProfile.color}>
+                                        { userProfile.driver_picture
+                                            ? <DriverPicture src={userProfile.driver_picture.url} alt="driver-picture"/>
+                                            : <DriverPicture src='driver-default-picture.jpg' alt="driver-picture"/>
+                                        }
+                                        <BackgroundImg src="driver-background.jpg" alt="driver-background" />
+                                    </UserProfile>
+                                    
+                                    <h1>{userNickname}</h1>
+
+                                </LoginLink>
+                            </Link>
+                        ) : (
+                            <Link to="/entrar">
+                                <LoginLink className="Login">
+                                    <h1>Entrar/Cadastrar</h1>
+                                    <IoLogIn size={36}/>
+                                </LoginLink>
+                            </Link>
+                        )}
                     </li>
                 </ul>
 

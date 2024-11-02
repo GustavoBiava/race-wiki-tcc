@@ -160,7 +160,7 @@ function Home() {
                     </Publications>
 
                     <TitleHeader>
-                        <h1>CLASSIFICAÇÃO PILOTOS</h1>
+                        <h1>CLASSIFICAÇÃO PILOTOS - 2024</h1>
                         <hr />
                     </TitleHeader>
 
@@ -220,7 +220,7 @@ function Home() {
                     </TableContainer>
                     
                     <TitleHeader>
-                        <h1>CLASSIFICAÇÃO EQUIPES</h1>
+                        <h1>CLASSIFICAÇÃO EQUIPES - 2024</h1>
                         <hr />
                     </TitleHeader>
 

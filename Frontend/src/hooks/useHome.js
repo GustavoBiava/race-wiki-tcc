@@ -15,8 +15,8 @@ export const useHome = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
         try {
+            setIsLoading(true);
             (async function() {
                 const response = await axios.get('/pages/home/races');
                 setRaces(response.data);

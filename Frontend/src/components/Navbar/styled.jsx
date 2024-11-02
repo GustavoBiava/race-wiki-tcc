@@ -50,14 +50,13 @@ export const NavItem = styled.div`
     h1 {
         font-weight: 600;
     }
-
 `;
 
 export const LoginLink = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.2em;
+    gap: ${props => props.isProfile ? '0.8em' : '0.2em'};
     background-color: ${colors.mainGray};
     border-radius: 0.7em;
     padding: 0.6em;
@@ -71,7 +70,6 @@ export const LoginLink = styled.div`
     h1 {
         font-weight: 600;
     }
-
 `;
 
 export const MenuLink = styled.div`
@@ -99,3 +97,34 @@ export const NavGroup = styled.div`
     }
 
 `;
+
+export const UserProfile = styled.div`
+    background-color: ${props => props.color || '#1212ew'};
+    width: 3.5em;
+    height: 3.5em;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+`;
+
+export const BackgroundImg = styled.img`
+    opacity: 0.45;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    z-index: 1;
+`;
+
+
+export const DriverPicture = styled.img`
+    object-fit: cover;
+    position: absolute;
+    opacity: 1;
+    width: 3.8em;
+    height: 3.8em;
+    border-radius: 100%;
+    z-index: 2;
+    border: 2px solid ${colors.mainWhite};
+`;
+

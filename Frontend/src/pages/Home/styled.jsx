@@ -37,7 +37,7 @@ export const TitleHeader = styled.div`
     @media (max-width: 890px) {
         text-align: center;
         align-items: center;
-        margin: 5em 0 2em 0;
+        margin: 5em 0 1.5em 0;
     }
     
     @media (max-width: 740px) {
@@ -479,10 +479,10 @@ export const TeamName = styled.h2`
 export const TeamImg = styled.img`
     position: absolute;
     z-index: 2;
-    max-width: 16em;
-    max-height: 13em;
-    
+    max-width: 14em;
+    max-height: 10em;
+
     @media (max-width: 1148px) {
-        width: 20em;
+        max-width: 45vw;
     }
 `;

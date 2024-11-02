@@ -97,7 +97,7 @@ export const ResponsiveImg = styled.img`
 export const TeamImg = styled.img`
     z-index: 2;
     max-width: 20vw;
-    max-height: 17em;
+    max-height: 15em;
 
     @media (max-width: 900px) {
         max-width: 45vw;

@@ -107,18 +107,22 @@ export const TeamPicture = styled.div`
 `;
 
 export const TeamImg = styled.img`
-    width: 10em;
+    max-width: 10em;
+    max-height: 8em;
 
     @media (max-width: 1400px) {
-        width: 7.5em;
+        max-width: 7.5em;
+        max-height: 7em;
     }
 
     @media (max-width: 1038px) {
-        width: 6.5em;
+        max-width: 6.5em;
+        max-height: 6em;
     }
 
     @media (max-width: 980px) {
-        width: 7em;
+        max-width: 7em;
+        max-height: 6.5em;
     }
 `;
 

@@ -4,12 +4,10 @@ import { Form, FormHeader, FormBody, FormButton, RegisterDiv } from "./styled";
 import { Container, Button } from "../../../styles/GlobalStyles";
 import { useLogin } from '../../../hooks/useLogin';
 import Loading from '../../../components/Loading';
-import { useSelector } from 'react-redux';
 
 function Login() {
 
-   const { setEmail, setPassword, handleButtonClick } = useLogin();
-   const isLoading = useSelector(states => states.auth.isLoading);
+   const { setEmail, setPassword, handleButtonClick, isLoading } = useLogin();
 
     return (
         <>

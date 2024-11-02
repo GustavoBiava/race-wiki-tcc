@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
 
 import axios from '../services/axios';
+import { useSelector } from "react-redux";
 
 export const useRegister = () => {
     const navigate = useNavigate();
+
+    const isLogged = useSelector(states => states.auth.isLogged);
+
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [nickname, setNickname] = useState('');
@@ -121,6 +125,10 @@ export const useRegister = () => {
             return false;
         }
     }
+
+    useEffect(() => {
+        if (isLogged) return navigate('/');
+    }, [isLogged]);
 
     return {
         handleButtonClick,

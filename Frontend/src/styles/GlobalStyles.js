@@ -22,6 +22,7 @@ export default createGlobalStyle`
         color: ${props => props.theme.mode === 'dark' ? colors.lightBackground : colors.darkText};
         --swiper-navigation-color: ${colors.lightText};
         --swiper-pagination-color: ${colors.lightText};
+        
     }
 
     ::-webkit-scrollbar {

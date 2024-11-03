@@ -40,7 +40,7 @@ import favoriteDriverPageRoutes from './routes/Pages/favoriteDriverPageRoutes';
 import registerPageRoutes from './routes/Pages/registerPageRoutes';
 import homePageRoutes from './routes/Pages/homePageRoutes';
 import navbarRoutes from './routes/Pages/navbarRoutes';
-
+import publicationPageRoutes from './routes/Pages/publicationPageRoutes';
 
 class App {
 
@@ -94,6 +94,7 @@ class App {
     this.app.use('/pages/register', registerPageRoutes);
     this.app.use('/pages/home', homePageRoutes);
     this.app.use('/pages/navbar', navbarRoutes);
+    this.app.use('/pages/publication', publicationPageRoutes);
   }
 
 }

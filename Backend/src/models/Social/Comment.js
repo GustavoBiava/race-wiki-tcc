@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-export default class Comment extends Model{
+export default class Comment extends Model {
   static init(sequelize) {
     super.init({
       title: {
@@ -58,6 +58,7 @@ export default class Comment extends Model{
     this.belongsTo(models.User, { foreignKey: 'user_id' });
     this.belongsTo(models.Publication, { foreignKey: 'publication_id' });
     this.belongsToMany(models.User, { through: 'comments_comments' });
+    this.hasMany(models.CommentsComment, { foreignKey: 'comment_id', as: 'responses' });
   }
 
 }

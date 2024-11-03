@@ -10,6 +10,8 @@ import Teams from '../pages/Teams';
 import FavoriteTeam from '../pages/FavoriteTeam';
 import FavoriteDriver from '../pages/FavoriteDriver';
 
+import Publication from '../pages/Publication';
+
 function Router() {
     
     return (
@@ -23,6 +25,8 @@ function Router() {
 
                 <Route exact path='equipe-favorita' element={<FavoriteTeam />} />
                 <Route exact path='piloto-favorito' element={<FavoriteDriver />} />
+
+                <Route exact path='/noticias/:slug' element={<Publication />} />
             </Route>
         </Routes>
     );

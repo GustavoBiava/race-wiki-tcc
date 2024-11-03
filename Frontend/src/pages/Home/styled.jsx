@@ -11,7 +11,7 @@ export const Content = styled.div`
 `;
 
 export const SwiperContainer = styled.div`
-    margin: 5em 0 0em 0;;
+    margin: 5em 0 0em 0;
     width: 100vw;
     color: ${colors.lightText};
 

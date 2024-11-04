@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Pagination, EffectFade } from 'swiper/modules';
 
 import axios from "../../services/axios";
 import { Container, Button } from '../../styles/GlobalStyles';
+import Like from '../../components/Like';
+import Share from '../../components/Share';
 import { 
     Content,
     TitleHeader,
@@ -38,6 +40,8 @@ import {
     ResponseTextarea,
     CommentResponses,
     Response,
+    ActionsContainer,
+    ActionsDiv,
 } from './styled';
 
 function Publication() {
@@ -119,6 +123,13 @@ function Publication() {
                             <p>{ publication.body }</p>
                         </PublicationBody>
                     </PublicationBodyContainer>
+
+                    <ActionsContainer>
+                        <ActionsDiv>
+                            <Like number={publication.likes}/>
+                            <Share />
+                        </ActionsDiv>
+                    </ActionsContainer>
                     
                     <CommentsContainer>
                         <CommentsHeader>
@@ -205,20 +216,17 @@ function Publication() {
                                         </FooterDetails>
                                         ) : (
                                             <FooterDetails>
-                                                    <summary>Responder</summary>
-                                                    <ReponseSection>
-                                                        <ResponseTextarea placeholder='Deixe aqui sua resposta...' isReponse/>
+                                                <summary>Responder</summary>
+                                                <ReponseSection>
+                                                    <ResponseTextarea placeholder='Deixe aqui sua resposta...' isReponse/>
 
-                                                        <ButtonDiv>
-                                                            <Button>RESPONDER</Button>
-                                                        </ButtonDiv>
-
-                                                    </ReponseSection>
-                                                </FooterDetails>
+                                                    <ButtonDiv>
+                                                        <Button>RESPONDER</Button>
+                                                    </ButtonDiv>
+                                                </ReponseSection>
+                                            </FooterDetails>
                                         ) }
-
                                     </CommentFooter>
-
                                 </Comment>
                             )) : ''}
                         </PublicationComments>

@@ -121,11 +121,10 @@ export const PublicationBodyContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2em 0 3em 0;
+    margin: 2em 0 0 0;
 
     @media (max-width: 1015px) {
         margin: 1em 0;
-        
     }
 
 `;
@@ -186,7 +185,7 @@ export const CommentTextarea = styled.textarea`
     padding: 0.5em;
     text-align: justify;
     box-sizing: border-box;
-    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.7)' : 'rgba(120, 120, 135, 0.3)'};
+    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.6)' : 'rgba(120, 120, 135, 0.2)'};
 `;
 
 export const CommentTitle = styled.input`
@@ -199,7 +198,7 @@ export const CommentTitle = styled.input`
     padding: 0.5em;
     text-align: justify;
     box-sizing: border-box;
-    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.7)' : 'rgba(120, 120, 135, 0.3)'};
+    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.6)' : 'rgba(120, 120, 135, 0.2)'};
 `;
 
 export const WriteSection = styled.div`
@@ -331,11 +330,6 @@ export const CommentBody = styled.div`
         color: ${colors.mainRed};
         font-size: 1.2em;
         margin: 0 0 0.2em 0;
-        
-        @media (max-width: 1020px) {
-            text-align: center;
-        }
-
     }
 
     p {
@@ -390,7 +384,7 @@ export const ResponseTextarea = styled.textarea`
     padding: 0.5em;
     text-align: justify;
     box-sizing: border-box;
-    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.5)' : 'rgba(120, 120, 135, 0.3)'};
+    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.2)' : 'rgba(120, 120, 135, 0.2)'};
 `;
 
 export const CommentResponses = styled.div`
@@ -413,5 +407,26 @@ export const Response = styled.div`
     }
     
 `;
+
+export const ActionsContainer = styled.div`
+    width: 100%;
+    margin: 2em 0 1em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const ActionsDiv = styled.div`
+    width: 90%;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+
+    @media (max-width: 770px) {
+        flex-direction: column;
+    }
+
+`;
+
 
 

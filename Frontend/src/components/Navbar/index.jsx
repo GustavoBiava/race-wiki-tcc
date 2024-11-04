@@ -72,16 +72,16 @@ function Nav() {
                         { isLogged ? (
                             <Link to="/meu-perfil">
                                 <LoginLink isProfile={true}>
+
+                                    <h1>{userNickname}</h1>
+
                                     <UserProfile color={userProfile.color}>
                                         { userProfile.driver_picture
                                             ? <DriverPicture src={userProfile.driver_picture.url} alt="driver-picture"/>
                                             : <DriverPicture src='/driver-default-picture.jpg' alt="driver-picture"/>
                                         }
-                                        <BackgroundImg src="driver-background.jpg" alt="driver-background" />
+                                        <BackgroundImg src="/driver-background.jpg" alt="driver-background" />
                                     </UserProfile>
-                                    
-                                    <h1>{userNickname}</h1>
-
                                 </LoginLink>
                             </Link>
                         ) : (

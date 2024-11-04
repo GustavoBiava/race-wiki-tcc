@@ -15,7 +15,7 @@ function Footer() {
             <FooterContainer>
                 <FooterDiv>
                     <BrandLogo>
-                        <img src="race-wiki-brand-logo.svg" alt="race-wiki-brand-logo" />
+                        <img src="/race-wiki-brand-logo.svg" alt="race-wiki-brand-logo" />
                         <h5>A enciclopédia digital da Fórmula 1</h5>
                     </BrandLogo>
                     

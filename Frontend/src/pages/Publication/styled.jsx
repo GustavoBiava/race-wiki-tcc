@@ -186,6 +186,7 @@ export const CommentTextarea = styled.textarea`
     padding: 0.5em;
     text-align: justify;
     box-sizing: border-box;
+    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.7)' : 'rgba(120, 120, 135, 0.3)'};
 `;
 
 export const CommentTitle = styled.input`
@@ -198,6 +199,7 @@ export const CommentTitle = styled.input`
     padding: 0.5em;
     text-align: justify;
     box-sizing: border-box;
+    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.7)' : 'rgba(120, 120, 135, 0.3)'};
 `;
 
 export const WriteSection = styled.div`
@@ -254,6 +256,10 @@ export const ButtonDiv = styled.div`
 
 export const PublicationComments = styled.div`
     width: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5em 0;
 
 `;
 
@@ -262,6 +268,7 @@ export const Comment = styled.div`
     background-color: ${props => props.theme.mode === 'dark' ? colors.mainGrayLight : colors.mainWhiteDark};
     padding: 1em;
     border-radius: 0.3em;
+    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.6)' : 'rgba(120, 120, 135, 0.2)'};
 `;
 
 export const CommentHeader = styled.div`
@@ -269,17 +276,30 @@ export const CommentHeader = styled.div`
     align-items: center;
     width: 100%;
     gap: 0.7em;
+`;
+
+export const CommentInfo = styled.div`
+    display: flex;
+    align-items: start;
+    flex-direction: column;
     
     h2 {
         font-size: 1.1em;
-        font-weight: 560;
+        font-weight: 600;
     }
+
+    h3 {
+        font-size: 0.7em;
+        font-weight: 475;
+        color: ${colors.thirdGray};
+    }
+
 `;
 
 export const UserProfile = styled.div`
     background-color: ${props => props.color || '#1212ew'};
-    width: 2.3em;
-    height: 2.3em;
+    width: 3em;
+    height: 3em;
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -297,30 +317,32 @@ export const BackgroundImg = styled.img`
 export const DriverPicture = styled.img`
     object-fit: cover;
     position: absolute;
-    width: 2.5em;
-    height: 2.5em;
+    width: 3em;
+    height: 3em;
     border-radius: 100%;
     z-index: 2;
     border: 2px solid ${colors.mainRed};
 `;
 
 export const CommentBody = styled.div`
-    margin: 0.6em 0;
+    margin: ${props => props.isReponse ? '1em 0 0 0' : '1em 0' };
 
     h2 {
         color: ${colors.mainRed};
-
-        @media (max-width: 1015px) {
-            font-size: 1.3em;
+        font-size: 1.2em;
+        margin: 0 0 0.2em 0;
         
+        @media (max-width: 1020px) {
+            text-align: center;
         }
 
     }
 
     p {
         text-align: justify;
+        font-weight: 475;
         @media (max-width: 1015px) {
-            font-size: 0.8em;
+            font-size: 0.9em;
         
         }
     }
@@ -328,14 +350,68 @@ export const CommentBody = styled.div`
 `;
 
 export const CommentFooter = styled.div`
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 `;
 
-export const SeeReponses = styled.details`
+export const FooterDetails = styled.details`
+    width: 100%;
     summary {
         list-style: none;
+        color: ${colors.mainRed};
+        cursor: pointer;
+        font-weight: 600;
+        
+        &:hover {
+            color: ${colors.secondRed};
+        }
+        
     }
 `;
+
+export const ReponseSection = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em 0;
+    margin: 0.5em 0 0 0;
+
+`;
+
+export const ResponseTextarea = styled.textarea`
+    all: unset;
+    background-color: ${props => props.theme.mode === 'dark' ? colors.mainGray : colors.mainWhite};
+    width: 100%;
+    border-radius: 0.3em;
+    text-indent: 0.5em;
+    overflow-wrap: break-word;
+    height: 12em;
+    padding: 0.5em;
+    text-align: justify;
+    box-sizing: border-box;
+    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.5)' : 'rgba(120, 120, 135, 0.3)'};
+`;
+
+export const CommentResponses = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+`;
+
+export const Response = styled.div`
+    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.2)' : 'rgba(120, 120, 135, 0.2)'};
+    border-radius: 0.3em;
+    background-color: ${props => props.theme.mode === 'dark' ? colors.mainGray : colors.mainWhite};
+    padding: 1em;
+    width: 90%;
+    margin: 1em 0;
+    
+    @media (max-width: 446px) {
+        width: 100%;
+    }
+    
+`;
+
 

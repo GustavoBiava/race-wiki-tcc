@@ -31,7 +31,7 @@ function Nav() {
         <Navbar>
             <Link to="/">
                 <NavLogo>
-                        <img src="race-wiki-logo.svg" alt="race-wiki-logo" />
+                        <img src="/race-wiki-logo.svg" alt="race-wiki-logo" />
                 </NavLogo>
             </Link>
                 
@@ -75,7 +75,7 @@ function Nav() {
                                     <UserProfile color={userProfile.color}>
                                         { userProfile.driver_picture
                                             ? <DriverPicture src={userProfile.driver_picture.url} alt="driver-picture"/>
-                                            : <DriverPicture src='driver-default-picture.jpg' alt="driver-picture"/>
+                                            : <DriverPicture src='/driver-default-picture.jpg' alt="driver-picture"/>
                                         }
                                         <BackgroundImg src="driver-background.jpg" alt="driver-background" />
                                     </UserProfile>

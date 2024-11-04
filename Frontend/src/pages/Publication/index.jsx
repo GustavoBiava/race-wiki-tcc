@@ -32,7 +32,12 @@ import {
     UserProfile,
     BackgroundImg,
     DriverPicture,
-    SeeReponses,
+    FooterDetails,
+    CommentInfo,
+    ReponseSection,
+    ResponseTextarea,
+    CommentResponses,
+    Response,
 } from './styled';
 
 function Publication() {
@@ -148,7 +153,10 @@ function Publication() {
                                             }
                                             <BackgroundImg src="/driver-background.jpg" alt="driver-background" />
                                         </UserProfile>
-                                        <h2>{comment.User.nickname}</h2>
+                                        <CommentInfo>
+                                            <h2>{comment.User.nickname}</h2>
+                                            <h3>{formatDate(comment.created_at)}</h3>
+                                        </CommentInfo>
                                     </CommentHeader>
 
                                     <CommentBody>
@@ -157,8 +165,58 @@ function Publication() {
                                     </CommentBody>
 
                                     <CommentFooter>
-                                        <p>Responder</p>
-                                        
+                                        { comment.responses[0] ? (
+                                            <FooterDetails>
+                                                <summary>Ver respostas</summary>
+                                                <CommentResponses>
+                                                    { comment.responses.map((response, index) => (
+                                                        <Response key={index}>
+                                                            <CommentHeader>
+                                                                <UserProfile color={response.User.color}>
+                                                                    { response.User.Driver.driver_picture
+                                                                        ? <DriverPicture src={response.User.Driver.driver_picture.url} alt="driver-picture"/>
+                                                                        : <DriverPicture src='driver-default-picture.jpg' alt="driver-picture"/>
+                                                                    }
+                                                                    <BackgroundImg src="/driver-background.jpg" alt="driver-background" />
+                                                                </UserProfile>
+                                                                <CommentInfo>
+                                                                    <h2>{response.User.nickname}</h2>
+                                                                    <h3>{formatDate(response.created_at)}</h3>
+                                                                </CommentInfo>
+                                                            </CommentHeader>
+
+                                                            <CommentBody isReponse>
+                                                                    <p>{response.body}</p>
+                                                            </CommentBody>
+                                                        </Response>
+                                                    )) }
+                                                </CommentResponses>
+
+                                                <FooterDetails>
+                                                    <summary>Responder</summary>
+                                                    <ReponseSection>
+                                                        <ResponseTextarea placeholder='Deixe aqui sua resposta...' isReponse/>
+
+                                                        <ButtonDiv>
+                                                            <Button>RESPONDER</Button>
+                                                        </ButtonDiv>
+                                                    </ReponseSection>
+                                                </FooterDetails>
+                                        </FooterDetails>
+                                        ) : (
+                                            <FooterDetails>
+                                                    <summary>Responder</summary>
+                                                    <ReponseSection>
+                                                        <ResponseTextarea placeholder='Deixe aqui sua resposta...' isReponse/>
+
+                                                        <ButtonDiv>
+                                                            <Button>RESPONDER</Button>
+                                                        </ButtonDiv>
+
+                                                    </ReponseSection>
+                                                </FooterDetails>
+                                        ) }
+
                                     </CommentFooter>
 
                                 </Comment>

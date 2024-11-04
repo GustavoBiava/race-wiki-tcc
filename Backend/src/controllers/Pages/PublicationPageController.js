@@ -57,10 +57,11 @@ class PublicationPageController {
       const publicationComments = await Comment.findAll({
         where: { publication_id: publication.id },
         attributes: ['id', 'title', 'body', 'created_at'],
+        order: [['created_at', 'DESC']],
         include: [
           {
             model: User,
-            attributes: ['id', 'nickname'],
+            attributes: ['id', 'nickname', 'favorite_driver'],
             include: [
               {
                 model: Driver,
@@ -78,11 +79,12 @@ class PublicationPageController {
           {
             model: CommentsComment,
             as: 'responses',
-            attributes: ['body'],
+            attributes: ['body', 'created_at'],
+            order: [['created_at', 'DESC']],
             include: [
               {
                 model: User,
-                attributes: ['id', 'nickname'],
+                attributes: ['id', 'nickname', 'favorite_driver'],
                 include: [
                   {
                     model: Driver,
@@ -104,7 +106,7 @@ class PublicationPageController {
 
       await Promise.all(publicationComments.map(async (publicationComment) => {
         const driverContracts = await CareerContracts.findAll({
-          where: { driver_id: publicationComment.User.id, is_active: 1 },
+          where: { driver_id: publicationComment.User.favorite_driver, is_active: 1 },
           order: [['created_at', 'DESC']],
         });
 
@@ -120,6 +122,28 @@ class PublicationPageController {
 
         publicationComment.User.setDataValue('color', main_color);
 
+      }));
+
+      await Promise.all(publicationComments.map(async (publicationComment) => {
+        await Promise.all(publicationComment.responses.map(async (response) => {
+          const driverContracts = await CareerContracts.findAll({
+            where: { driver_id: response.User.favorite_driver, is_active: 1 },
+            order: [['created_at', 'DESC']],
+          });
+
+          const driverContract = driverContracts[0];
+
+          if (!driverContract) return response.User.setDataValue('color', null);
+
+          if (!driverContract.is_active) return response.User.setDataValue('color', null);
+
+          const { main_color } = await Team.findOne({
+            where: { id: driverContract.team_id }
+          });
+
+          response.User.setDataValue('color', main_color);
+
+        }));
       }));
 
       publication.setDataValue('comments', publicationComments);

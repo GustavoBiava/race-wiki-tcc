@@ -132,7 +132,7 @@ class HomePageController {
         where: { year },
         attributes: ['id']
       });
-      if (!season) return res.status(400).json({ message: ['This season does\'t exists!'] });
+      if (!season) return res.status(204).json({ message: ['This season does\'t exists!'] });
 
       const driverLeaders = await DriverClassification.findAll({
         where: { season_id: season.id },

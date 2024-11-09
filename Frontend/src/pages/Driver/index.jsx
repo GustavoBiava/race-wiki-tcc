@@ -29,6 +29,18 @@ import {
     TeamImg,
     TdTitle,
     TdContent,
+    SectionContainer,
+    TitleHeader,
+    DriverDescription,
+    TableContainer,
+    ResultsTable,
+    PosistionTd,
+    NameTd,
+    NameTableDiv,
+    PointsTd,
+    ColorDetail,
+    ResponsiveTd,
+    ResponsiveTh,
 } from './styled';
 
 function Driver() {
@@ -36,6 +48,7 @@ function Driver() {
     const { shortName } = useParams();
     const navigate = useNavigate();
     const [driver, setDriver] = useState({});
+    const [driverResults, setDriverResults] = useState({});
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -46,18 +59,25 @@ function Driver() {
         });
     }
 
+    const goToRacePage = (e) => navigate(`/corrida/${e.currentTarget.id}`); 
+
     useEffect(() => {
         if (!shortName) return navigate('/');
-        (async function() {
-            try {
+        try {
+            (async function() {
                 const response = await axios.get(`/pages/driver/${shortName}`);
                 return setDriver(response.data);
-            }
-            catch (err) {
-                const errors = get(err, 'response.data.errors', []);
-                return errors.map(e => toast.error(e));
-            }
-        })();
+            })();
+
+            (async function() {
+                const response = await axios.get(`/pages/driver/${shortName}/2024`);
+                return setDriverResults(response.data);
+            })();
+        }
+        catch (err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
     }, []);
 
     return (
@@ -169,12 +189,62 @@ function Driver() {
                                         </Link>
                                     </Team>
                                 ))
-                                :  ''  
+                                :  ''
                             }
                         </DriverTeams>
                 </DriverStats>
-
                 </DriverContainer>
+
+                <SectionContainer>
+                    <TitleHeader>
+                        <h1>DETALHES</h1>
+                        <hr />
+                    </TitleHeader>
+
+                    <DriverDescription>
+                        <p>{ driver.description }</p>
+                    </DriverDescription>
+                </SectionContainer>     
+
+                <SectionContainer>
+                    <TitleHeader>
+                        <h1>ÚLTIMOS RESULTADOS</h1>
+                        <hr />
+                    </TitleHeader>
+
+                    <TableContainer>
+                        <ResultsTable cellSpacing={0}>
+
+                            <tr>
+                                <th>POS</th>
+                                <th>CORRIDA</th>
+                                <ResponsiveTh>DATA</ResponsiveTh>
+                                <ResponsiveTh>VOLTAS</ResponsiveTh>
+                                <th>TEMPO TOTAL</th>
+                                <th>INTERVALO</th>
+                                <th>PONTOS</th>
+                            </tr>
+
+
+                            { get(driverResults, '[0]') ? driverResults.map((result, index) => (
+                                    <tr key={index} onClick={goToRacePage} id={result.Race.slug}>
+                                        <PosistionTd>{result.position}</PosistionTd>
+                                        <NameTd>
+                                            <NameTableDiv>
+                                                <ColorDetail color={driver.color}/>
+                                                <h3>{result.Race.name}</h3>
+                                            </NameTableDiv>
+                                        </NameTd>
+                                        <ResponsiveTd>{formatDate(result.Race.date)}</ResponsiveTd>
+                                        <ResponsiveTd>{result.laps}</ResponsiveTd>
+                                        <td>{result.total_race_duration}</td>
+                                        <td>+{result.interval_to_leader}</td>
+                                        <PointsTd>{`${result.points} Pts`}</PointsTd>
+                                    </tr>
+                                )) : ''}
+                        </ResultsTable>
+                    </TableContainer>
+                </SectionContainer>
             </Content>
         </Container>
     );

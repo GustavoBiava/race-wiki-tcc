@@ -102,10 +102,15 @@ export const DriverFooter = styled.div`
     h2 {
         font-weight: 600;
         line-height: 0.6em;
+
+        @media (max-width: 936px) {
+            line-height: 1em;
+        }
+
     }
 
     @media (max-width: 936px) {
-        padding: 0.5em 0.8em 0.7em;
+        padding: 0.5em 0.8em 0em;
     }
 
 `;
@@ -152,7 +157,7 @@ export const DriverStatsContainer = styled.div`
     }
 
     @media (max-width: 936px) {
-        padding: 0.5em 1.1em 0em;
+        padding: 0.7em 1.1em 0em;
     }
 
 `;
@@ -235,7 +240,7 @@ export const Team = styled.div`
 
 export const TeamCircle = styled.div`
     background-color: ${props => props.color || '#1212ew'};
-    filter: grayscale(${props => !props.isActive ? 0.8 : 0});
+    filter: grayscale(${props => !props.isActive ? 1 : 0});
     display: flex;
     align-items: center;
     justify-content: center;
@@ -290,6 +295,170 @@ export const TeamImg = styled.img`
     @media (max-width: 1060px) {
         max-width: 2em;
         max-height: 2em;
+    }
+
+`;
+
+export const SectionContainer = styled.div`
+    margin: 1em 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: ${props => props.theme.mode === 'dark' ? colors.mainGray : colors.mainWhite};
+    border-radius: 0.5em;
+    width: 100%;
+    height: 100%; 
+
+`;
+
+export const TitleHeader = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    margin: 2em 0 1em 0;
+    text-align: center;
+
+    hr {
+        border: 2.5px solid ${colors.mainRed};
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+    
+    @media (max-width: 740px) {
+
+        margin: 1.5em 0 1em 0;
+
+        h1 {
+            font-size: 1.7em;
+        }
+    }
+`;
+
+export const DriverDescription = styled.div`
+    width: 90%;
+    text-align: justify;
+    font-size: 1em;
+    font-weight: 540;
+    margin: 0 0 2em 0;
+    
+    @media (max-width: 936px) {
+        font-size: 0.9em;
+        
+    }
+`;
+
+export const ResultsTable = styled.table`
+    width: 100%;
+    font-weight: bold;
+    background: ${props => props.theme.mode === 'dark' ? colors.darkBackground : colors.lightBackground};
+    border-radius: 0.2em;
+    font-size: 1.1em;
+    text-align: center;
+    font-weight: 500;
+
+    th {
+        text-align: center;
+        padding: 0.5em;
+
+        @media (max-width: 1298px) {
+            font-size: 0.8em;
+        }
+
+    }
+
+    tr {
+        height: 2.5em;
+        cursor: pointer;
+
+        @media (max-width: 1298px) {
+            font-size: 0.8em;
+        }
+
+        @media (max-width: 499px) {
+            font-size: 0.7em;
+        }
+
+
+        
+        &:hover {
+            filter: brightness(85%);
+        }
+    }
+
+    td {
+        padding: 0.1em;
+    }
+    
+    tr:nth-child(even) {
+        background: ${props => props.theme.mode === 'dark' ? colors.mainGrayLight : colors.mainWhiteDark};
+    }
+`;
+
+export const PosistionTd = styled.td`
+    width: 3em;
+    text-align: center;
+`;
+
+export const NameTd = styled.td`
+    text-align: left;
+`;
+
+export const NameTableDiv = styled.div`
+    display: flex;
+    align-items: center;
+
+    h3 {
+        font-size: 1em;
+        font-weight: 500;
+    }
+    
+    h3 {
+        margin: 0 0 0 0.3em;
+    }
+
+`;
+
+export const ColorDetail = styled.div`
+    background-color: ${props => props.color || '#757678'};
+    width: 0.21em;
+    height: 1.3em;
+    margin: 0 0.2em 0 0;
+`;
+
+export const PointsTd = styled.td`
+    width: 5em;    
+    text-align: center;
+`;
+
+export const TableContainer = styled.div`
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5em 0 2em 0;
+
+    @media (max-width: 740px) {
+        margin: 0 0 1em 0;
+    }
+
+`;
+
+export const ResponsiveTd = styled.td`
+
+    @media (max-width: 738px) {
+        display: none;
+    }
+    
+`;
+
+export const ResponsiveTh = styled.th`
+
+    @media (max-width: 738px) {
+        display: none;
     }
 
 `;

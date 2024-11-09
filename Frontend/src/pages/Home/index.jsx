@@ -84,7 +84,7 @@ function Home() {
 
                                 {races ? races.map((race, index) => (
                                         <SwiperSlide key={index}>
-                                            <Link to={`/corridas/${race.slug}`}>
+                                            <Link to={`/corrida/${race.slug}`}>
                                                 <SwiperImgDiv>
 
                                                     <RaceInfo>

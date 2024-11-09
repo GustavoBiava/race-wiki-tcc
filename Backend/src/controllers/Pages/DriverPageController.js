@@ -6,6 +6,9 @@ import Team from '../../models/Team';
 import TeamPicture from '../../models/Pictures/TeamPicture';
 import Country from '../../models/Country';
 import CountryPicture from '../../models/Pictures/CountryPicture';
+import Season from '../../models/Season';
+import DriverRaceResult from '../../models/DriverRaceResult';
+import Race from '../../models/Race';
 
 class DriverPageController {
 
@@ -15,7 +18,7 @@ class DriverPageController {
       if (!short_name) return res.status(400).json({ message: ['Invalid short name'] });
 
       const driver = await Driver.findOne({
-        attributes: ['id', 'name', 'surname', 'short_name', 'height', 'birth_date', 'birth_place'],
+        attributes: ['id', 'name', 'surname', 'short_name', 'height', 'birth_date', 'birth_place', 'description'],
         where: { short_name },
         include: [
           {
@@ -91,6 +94,49 @@ class DriverPageController {
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }
   }
+
+  async getDriverResults(req, res) {
+    try {
+      const { short_name, year } = req.params;
+
+      if (!short_name) return res.status(400).json({ message: ['Invalid short name'] });
+      if (!year) return res.status(400).json({ message: ['Invalid season'] });
+
+      const season = await Season.findOne({
+        where: { year },
+        attributes: ['id']
+      });
+
+      if (!season) return res.status(204).json({ message: ['This season does\'t exists!'] });
+
+      const driver = await Driver.findOne({
+        attributes: ['id'],
+        where: { short_name },
+      });
+
+      if (!driver) return res.status(204).json({ message: ['This driver does\'t exists!'] });
+
+      const driverResults = await DriverRaceResult.findAll({
+        where: { driver_id: driver.id },
+        attributes: ['position', 'laps', 'points', 'total_race_duration', 'interval_to_leader'],
+        order: [['created_at', 'DESC']],
+        include: [
+          {
+            model: Race,
+            attributes: ['name', 'date', 'slug'],
+            where: { season_id: season.id }
+          }
+        ]
+      });
+
+      return res.status(200).json(driverResults);
+    }
+    catch (err) {
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
+    }
+  }
+
 }
 
 export default new DriverPageController();

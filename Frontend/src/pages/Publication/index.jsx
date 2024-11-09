@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Pagination, EffectFade } from 'swiper/modules';
 
-import axios from "../../services/axios";
 import { Container, Button } from '../../styles/GlobalStyles';
 import Like from '../../components/Like';
 import Share from '../../components/Share';
+import { usePublication } from '../../hooks/usePublication';
 import { 
     Content,
     TitleHeader,
@@ -46,34 +43,8 @@ import {
 
 function Publication() {
 
-    const [publication, setPublication] = useState({});
-    const { slug } = useParams();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!slug) return navigate('/');
-        try {
-            (async function() {
-                const response = await axios.get(`/pages/publication/${slug}`);
-                return setPublication(response.data);
-            })();
-        }
-        catch (err) {
-            const errors = err.response.data.errors || ['FATAL ERROR!'];
-            return errors.map(e => toast.error(e));
-        }
-    }, [slug]);
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('pt-br', {
-            weekday: 'long',
-            day: '2-digit',
-            month: 'long',
-            year: 'numeric'
-        });
-    }
-
+    const { publication, formatDate  } = usePublication();
+    
     return (
         <Container>
             <Content>
@@ -235,7 +206,6 @@ function Publication() {
             </Content>
         </Container>
     );
-
 }
 
 export default Publication;

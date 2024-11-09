@@ -30,7 +30,6 @@ function Like({ number = 0 }) {
             <h2>{likes} Curtidas</h2>
         </LikeContainer>
     );
-
 }
 
 Like.propTypes = {

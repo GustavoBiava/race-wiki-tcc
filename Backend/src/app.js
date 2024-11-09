@@ -33,7 +33,7 @@ import tagsPublicationRoutes from './routes/Social/tagsPublicationRoutes';
 
 import picturesRoutes from './routes/Pictures/picturesRoutes';
 
-import driverPageRoutes from './routes/Pages/driversPageRoutes';
+import driversPageRoutes from './routes/Pages/driversPageRoutes';
 import teamPageRoutes from './routes/Pages/teamsPageRoutes';
 import favoriteTeamPageRoutes from './routes/Pages/favoriteTeamPageRoutes';
 import favoriteDriverPageRoutes from './routes/Pages/favoriteDriverPageRoutes';
@@ -41,6 +41,7 @@ import registerPageRoutes from './routes/Pages/registerPageRoutes';
 import homePageRoutes from './routes/Pages/homePageRoutes';
 import navbarRoutes from './routes/Pages/navbarRoutes';
 import publicationPageRoutes from './routes/Pages/publicationPageRoutes';
+import driverPageRoutes from './routes/Pages/driverPageRoutes';
 
 class App {
 
@@ -87,7 +88,7 @@ class App {
 
     this.app.use('/pictures', picturesRoutes);
 
-    this.app.use('/pages/drivers', driverPageRoutes);
+    this.app.use('/pages/drivers', driversPageRoutes);
     this.app.use('/pages/teams', teamPageRoutes);
     this.app.use('/pages/favoriteTeams', favoriteTeamPageRoutes);
     this.app.use('/pages/favoriteDrivers', favoriteDriverPageRoutes);
@@ -95,6 +96,7 @@ class App {
     this.app.use('/pages/home', homePageRoutes);
     this.app.use('/pages/navbar', navbarRoutes);
     this.app.use('/pages/publication', publicationPageRoutes);
+    this.app.use('/pages/driver', driverPageRoutes);
   }
 
 }

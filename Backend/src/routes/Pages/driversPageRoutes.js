@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import DriverPageController from '../../controllers/Pages/DriverPageController';
+import DriversPageController from '../../controllers/Pages/DriversPageController';
 
 const route = Router();
 
-route.get('/', DriverPageController.getDrivers);
+route.get('/', DriversPageController.getDrivers);
 
 export default route;

@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import TeamPageController from '../../controllers/Pages/TeamPageController';
+import TeamsPageController from '../../controllers/Pages/TeamsPageController';
 
 const route = Router();
 
-route.get('/', TeamPageController.getTeams);
+route.get('/', TeamsPageController.getTeams);
 
 export default route;

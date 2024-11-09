@@ -420,6 +420,7 @@ export const ActionsDiv = styled.div`
     width: 90%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.6em;
 
     @media (max-width: 770px) {

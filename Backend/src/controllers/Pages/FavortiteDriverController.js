@@ -13,7 +13,7 @@ class FavoriteDriverController {
       if (!team) return res.status(404).json({ errors: ['Team doesn\'t exists!'] });
 
       const careerContracts = await CareerContracts.findAll({
-        where: { team_id: id },
+        where: { team_id: id, is_active: 1},
         attributes: ['is_active'],
         order: [['created_at', 'DESC']],
         include: [

@@ -3,7 +3,7 @@ import CountryPicture from "../../models/Pictures/CountryPicture";
 import Team from "../../models/Team";
 import TeamPicture from "../../models/Pictures/TeamPicture";
 
-class TeamPageController {
+class TeamsPageController {
 
   async getTeams(req, res) {
     try {
@@ -45,4 +45,4 @@ class TeamPageController {
 
 }
 
-export default new TeamPageController();
+export default new TeamsPageController();

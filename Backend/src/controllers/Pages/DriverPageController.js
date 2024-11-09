@@ -3,21 +3,25 @@ import Driver from '../../models/Driver';
 import DriverStat from '../../models/DriverStat';
 import DriverPicture from '../../models/Pictures/DriverPicture';
 import Team from '../../models/Team';
+import TeamPicture from '../../models/Pictures/TeamPicture';
 import Country from '../../models/Country';
 import CountryPicture from '../../models/Pictures/CountryPicture';
 
 class DriverPageController {
 
-  async getDrivers(req, res) {
+  async getDriver(req, res) {
     try {
-      const drivers = await Driver.findAll({
-        attributes: ['id', 'name', 'surname', 'short_name'],
-        order: [ ['name', 'ASC'] ],
+      const { short_name } = req.params;
+      if (!short_name) return res.status(400).json({ message: ['Invalid short name'] });
+
+      const driver = await Driver.findOne({
+        attributes: ['id', 'name', 'surname', 'short_name', 'height', 'birth_date', 'birth_place'],
+        where: { short_name },
         include: [
           {
             model: DriverStat,
             as: 'driver_stat',
-            attributes: ['number'],
+            attributes: { exclude: ['id', 'created_at', 'updated_at', 'driver_id'] },
           },
           {
             model: DriverPicture,
@@ -39,31 +43,47 @@ class DriverPageController {
         ],
       });
 
-      if (drivers.length < 1) {
-        return res.status(204).json({ message: ['There is no Drivers registered!'] });
+      if (!driver) {
+        return res.status(204).json({ message: ['There is no Driver registered!'] });
       }
 
-      await Promise.all(drivers.map(async driver => {
+      await (async function() {
         const driverContracts = await CareerContracts.findAll({
-          where: { driver_id: driver.id, is_active: 1 },
+          where: { driver_id: driver.id},
           order: [['created_at', 'DESC']],
+          attributes: ['id', 'is_active', 'team_id'],
+          include: [
+            {
+              model: Team,
+              attributes: ['short_name', 'main_color'],
+              include: [
+                {
+                  model: TeamPicture,
+                  as: 'team_picture',
+                  attributes: ['url', 'filename'],
+                }
+              ]
+            }
+          ]
         });
 
-        const driverContract = driverContracts[0];
+        if (driverContracts.length < 1) {
+          driver.setDataValue('color', null);
+          return driver.setDataValue('teams', null);
+        }
 
-        if (!driverContract) return driver.setDataValue('color', null);
+        driver.setDataValue('teams', driverContracts);
 
-        if (!driverContract.is_active) return driver.setDataValue('color', null);
+        const currentContract = driverContracts.find((driverContract => driverContract.is_active === true));
 
         const { main_color } = await Team.findOne({
-          where: { id: driverContract.team_id }
+          where: { id: currentContract.team_id }
         });
 
         return driver.setDataValue('color', main_color);
-      }
-      ));
+      })();
 
-      return res.status(200).json(drivers);
+      return res.status(200).json(driver);
 
     }
     catch (err) {

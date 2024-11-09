@@ -15,7 +15,7 @@ class DriverPageController {
   async getDriver(req, res) {
     try {
       const { short_name } = req.params;
-      if (!short_name) return res.status(400).json({ message: ['Invalid short name'] });
+      if (!short_name) return res.status(400).json({ message: ['Invalid Driver'] });
 
       const driver = await Driver.findOne({
         attributes: ['id', 'name', 'surname', 'short_name', 'height', 'birth_date', 'birth_place', 'description'],

@@ -22,9 +22,21 @@ class HomePageController {
 
   async getRaces(req, res) {
     try {
+
+      const { year } = req.params;
+      if (!year) return res.status(400).json({ message: ['Invalid season'] });
+
+      const season = await Season.findOne({
+        where: { year },
+        attributes: ['id']
+      });
+
+      if (!season) return res.status(204).json({ message: ['This season does\'t exists!'] });
+
       const races = await Race.findAll({
         attributes: ['name', 'date', 'slug'],
         order: [['date', 'ASC']],
+        where: { season_id: season.id },
         include: [
           {
             model: Country,

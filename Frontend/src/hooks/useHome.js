@@ -18,7 +18,7 @@ export const useHome = () => {
         try {
             setIsLoading(true);
             (async function() {
-                const response = await axios.get('/pages/home/races');
+                const response = await axios.get('/pages/home/races/2024');
                 setRaces(response.data);
             })();
 
@@ -77,11 +77,11 @@ export const useHome = () => {
         const hourDiff = actualDate.getHours() - date.getHours();
         const minuteDiff = actualDate.getMinutes() - date.getMinutes();
 
-        if (yearDiff > 0) return `${yearDiff} ano(s)`;
-        if (monthDiff > 0) return `${monthDiff} mês(es)`;
-        if (dayDiff > 0) return `${dayDiff} dia(s)`;
-        if (hourDiff > 0) return `${hourDiff} hora(s)`;
         if (minuteDiff > 0) return `${minuteDiff} minuto(s)`;
+        if (hourDiff > 0) return `${hourDiff} hora(s)`;
+        if (dayDiff > 0) return `${dayDiff} dia(s)`;
+        if (monthDiff > 0) return `${monthDiff} mês(es)`;
+        if (yearDiff > 0) return `${yearDiff} ano(s)`;
 
         return 'menos de 1 minuto';
     }

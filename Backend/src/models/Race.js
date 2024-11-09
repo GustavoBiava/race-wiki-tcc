@@ -11,7 +11,7 @@ export default class Race extends Model {
         validate: {
           len: {
             args: [3, 50],
-            msg: 'Nmae invalid length (Min: 3, Max: 50)'
+            msg: 'Name invalid length (Min: 3, Max: 50)'
           }
         }
       },

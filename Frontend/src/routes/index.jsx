@@ -12,6 +12,7 @@ import FavoriteDriver from '../pages/FavoriteDriver';
 
 import Publication from '../pages/Publication';
 import Driver from '../pages/Driver';
+import Race from '../pages/Race';
 
 function Router() {
     
@@ -29,6 +30,7 @@ function Router() {
 
                 <Route exact path='/noticias/:slug' element={<Publication />} />
                 <Route exact path='/piloto/:shortName' element={<Driver />} />
+                <Route exact path='/corrida/:slug' element={<Race />} />
             </Route>
         </Routes>
     );

@@ -44,6 +44,7 @@ import publicationPageRoutes from './routes/Pages/publicationPageRoutes';
 import driverPageRoutes from './routes/Pages/driverPageRoutes';
 import teamPageRoutes from './routes/Pages/teamPageRoutes';
 import racePageRoutes from './routes/Pages/racePageRoutes';
+import profilePageRoutes from './routes/Pages/profilePageRoutes';
 
 class App {
 
@@ -101,6 +102,7 @@ class App {
     this.app.use('/pages/driver', driverPageRoutes);
     this.app.use('/pages/team', teamPageRoutes);
     this.app.use('/pages/race', racePageRoutes);
+    this.app.use('/pages/profile', profilePageRoutes);
   }
 
 }

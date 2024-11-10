@@ -15,6 +15,8 @@ import Driver from '../pages/Driver';
 import Team from '../pages/Team';
 import Race from '../pages/Race';
 
+import UserProfile from '../pages/Auth/UserProfile';
+
 function Router() {
     
     return (
@@ -33,6 +35,9 @@ function Router() {
                 <Route exact path='/piloto/:shortName' element={<Driver />} />
                 <Route exact path='/equipe/:shortName' element={<Team />} />
                 <Route exact path='/corrida/:slug' element={<Race />} />
+
+                <Route exact path='/meu-perfil' element={<UserProfile/>}/>
+
             </Route>
         </Routes>
     );

@@ -24,6 +24,25 @@ export const useFavoriteDrivers = () => {
     const handleButtonClick = (e) => {
         e.preventDefault();
         if (!selectedDriver) return toast.error('Você deve escolher um piloto para continuar!');
+
+        if (userData.id) {
+            (async function() {
+                try {
+                    await axios.put(`/users`, {
+                        favorite_driver: selectedDriver,
+                        favorite_team: userData.favoriteTeam,
+                    });
+                    toast.success('Você alterou seu piloto favorito com sucesso! Por favor, faça login novamente.');
+                    return dispatch(actions.loginFailure());
+                }
+                catch (err) {
+                    const errors = get(err, 'response.data.errors', []);
+                    return errors.map(e => toast.error(e));
+                }
+            })();
+            return navigate('/entrar');
+        }
+
         dispatch(actions.registerRequest({ ...userData, favoriteDriver: selectedDriver }));
         return navigate('/entrar');
     }

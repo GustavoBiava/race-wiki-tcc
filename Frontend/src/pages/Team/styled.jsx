@@ -293,7 +293,7 @@ export const SectionContainer = styled.div`
 
 export const TitleHeader = styled.div`
     display: flex;
-    align-items: center;
+    align-items: start;
     flex-direction: column;
     width: 90%;
     margin: 2em 0 1em 0;
@@ -309,12 +309,15 @@ export const TitleHeader = styled.div`
     }
     
     @media (max-width: 740px) {
-
         margin: 1.5em 0 1em 0;
 
         h1 {
             font-size: 1.7em;
         }
+    }
+
+    @media (max-width: 936px) {
+        align-items: center;
     }
 `;
 

@@ -30,6 +30,7 @@ class RegisterPageController {
           where: { nickname },
           attributes: ['nickname'],
         });
+        
         if (!user) return res.status(204).json();
 
         return res.status(200).json({ message: ['O Nickname já está em uso!'] });

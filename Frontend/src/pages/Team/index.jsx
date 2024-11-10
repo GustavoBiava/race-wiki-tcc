@@ -26,7 +26,6 @@ import {
     NameTd,
     NameTableDiv,
     PointsTd,
-    ColorDetail,
     TeamFooter,
     TeamInfo,
     TeamCountry,

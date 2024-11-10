@@ -11,15 +11,15 @@ class TokenController {
 
       const user = await User.findOne({
         where: { email },
-        attributes: ['id', 'email', 'nickname', 'type', 'status', 'race_level', 'race_points', 'password_hash', 'favorite_driver'],
+        attributes: ['id', 'name', 'surname', 'email', 'nickname', 'type', 'status', 'race_level', 'race_points', 'password_hash', 'favorite_driver', 'birth_date'],
       });
       if (!user) return res.status(404).json({ errors: ['User doesn\'t exists!'] });
 
       if (!(await user.validatePassword(password))) return res.status(401).json({ errors: ['Incorrect password!'] });
 
-      const { id, nickname, type, status, race_level, race_points, favorite_driver } = user;
+      const { id, nickname, name, surname, type, status, race_level, race_points, favorite_driver, birth_date } = user;
 
-      const token = jwt.sign({ id, email, nickname, type, status, race_level, race_points, favorite_driver }, process.env.TOKEN_SECRET, {
+      const token = jwt.sign({ id, email, nickname, type, status, race_level, race_points, favorite_driver, birth_date }, process.env.TOKEN_SECRET, {
         expiresIn: process.env.TOKEN_EXPIRATION,
       });
 
@@ -28,7 +28,11 @@ class TokenController {
           token,
           user: {
             id,
+            name,
+            surname,
             nickname,
+            birth_date,
+            email,
             type,
             status,
             race_level,
@@ -38,7 +42,6 @@ class TokenController {
          });
     }
     catch (err) {
-      console.log(err)
       const errors = err.errors || [{ message: 'Fatal Error!'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }

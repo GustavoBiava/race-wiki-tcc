@@ -12,7 +12,7 @@ export const Content = styled.div`
 
 `;
 
-export const DriverContainer = styled.div`
+export const TeamContainer = styled.div`
     display: flex;
     flex-direction: row;
     background-color: ${props => props.theme.mode === 'dark' ? colors.mainGray : colors.mainWhite};
@@ -26,21 +26,21 @@ export const DriverContainer = styled.div`
 
 `;
 
-export const DriverDiv = styled.div`
+export const TeamDiv = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
     width: fit-content;
 `;
 
-export const DriverBackground = styled.div`
-    background-color: ${props => props.driverColor || '#1212ew'};
+export const TeamBackground = styled.div`
+    background-color: ${props => props.teamColor || '#1212ew'};
     width: 40vw;
     max-height: 55vh;
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     border-radius: 0.5em 0 0 0;
 
     &:hover {
@@ -68,36 +68,37 @@ export const BackgroundImg = styled.img`
     }
 `;
 
-export const DriverImg = styled.img`
+export const TeamImg = styled.img`
     object-fit: cover;
     z-index: 2;
     width: 100%;
     max-width: 27vw;
-    max-height: 55vh;
+    max-height: 40vh;
 
     @media (max-width: 1227px) {
         max-width: 36vw;
     }
 
     @media (max-width: 936px) {
-        max-width: 90vw;
+        max-width: 70vw;
     }
 
 `;
 
-export const DriverPicture = styled.div`
+export const TeamPicture = styled.div`
     position: absolute;
     display: grid;
     place-items: end;
 `;
 
-export const DriverFooter = styled.div`
+export const TeamFooter = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: start;
     width: 100%;
-    padding: 0.5em 0.8em 1em;
+    padding: 1em 0.8em 1em;
     font-size: 1.6em;
+    gap: 0.5em;
 
     h2 {
         font-weight: 600;
@@ -115,7 +116,7 @@ export const DriverFooter = styled.div`
 
 `;
 
-export const DriverCountry = styled.div`
+export const TeamCountry = styled.div`
     display: flex;
     align-items: center;
 
@@ -137,32 +138,24 @@ export const DriverCountry = styled.div`
     }
 `;
 
-export const DriverStats = styled.div`
+export const TeamStats = styled.div`
     display: flex;
     flex: 1;
     flex-direction: column;
+    padding: 0.3em 0.7em 1em 0.7em;
 `;
 
-export const DriverStatsContainer = styled.div`
+export const TeamStatsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: 1em 2.3em;
-
-    @media (max-width: 1497px) {
-        padding: 1em 1.1em;
-    }
-
-    @media (max-width: 936px) {
-        padding: 0.7em 1.1em;
-    }
 
 `;
 
-export const DriverStatTable = styled.table`
+export const TeamStatTable = styled.table`
     width: 100%;
     height: 100%;
     font-size: 1.1em;
@@ -199,17 +192,11 @@ export const TdContent = styled.h3`
     font-weight: 600;
 `;
 
-export const DriverInfo = styled.div`
+export const TeamInfo = styled.div`
     display: flex;
     align-items: center;
     justify-content: start;
     gap: 0 0.4em;
-`;
-
-export const Number = styled.h3`
-    color: ${props => props.color || '#757678'};
-    font-size: 1.6em;
-    font-weight: 600;
 `;
 
 export const DriverTeams = styled.div`
@@ -218,16 +205,15 @@ export const DriverTeams = styled.div`
     align-items: center;
     justify-content: end;
     gap: 0 1em;
-    padding: 0.5em 0.8em 1em;
+    margin: 0.5em 0 0 0;
 
     @media (max-width: 936px) {
         justify-content: center;
-        padding: 0 1.1em 1em;
     }
 
 `;
 
-export const Team = styled.div`
+export const Driver = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -238,25 +224,19 @@ export const Team = styled.div`
 
 `;
 
-export const TeamCircle = styled.div`
+export const DriverCircle = styled.div`
     background-color: ${props => props.color || '#1212ew'};
-    filter: grayscale(${props => !props.isActive ? 1 : 0});
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4em;
-    height: 4em;
+    width: 4.3em;
+    height: 4.3em;
     border-radius: 100%;
     z-index: 1;
 
     @media (max-width: 1385px) {
         width: 3em;
         height: 3em;
-    }
-
-    @media (max-width: 1060px) {
-        width: 2.5em;
-        height: 2.5em;
     }
 
     @media (max-width: 936px) {
@@ -274,7 +254,7 @@ export const TeamBackgroundImg = styled.img`
     z-index: 1;
 `;
 
-export const TeamPicture = styled.div`
+export const DriverPicture = styled.div`
     position: absolute;
     display: flex;
     align-items: center;
@@ -282,29 +262,19 @@ export const TeamPicture = styled.div`
     z-index: 2;
 `;
 
-export const TeamImg = styled.img`
-    filter: grayscale(${props => !props.isActive ? 1 : 0});
-    max-width: 3.5em;
-    max-height: 2.5em;
+export const DriverImg = styled.img`
+    border-radius: 100%;
+    max-width: 4.3em;
+    max-height: 4.3em;
 
     @media (max-width: 1385px) {
-        max-width: 2.3em;
-        max-height: 2.5em;
-    }
-
-    @media (max-width: 1200px) {
-        max-width: 2em;
-        max-height: 2.5em;
-    }
-
-    @media (max-width: 1060px) {
-        max-width: 2em;
-        max-height: 2em;
+        max-width: 3em;
+        max-height: 3em;
     }
 
     @media (max-width: 936px) {
-        max-width: 3.3em;
-        max-height: 3em;
+        max-width: 4em;
+        max-height: 4em;
     }
 
 `;
@@ -401,6 +371,7 @@ export const ResultsTable = styled.table`
 
     td {
         padding: 0.1em;
+        width: fit-content;
     }
     
     tr:nth-child(even) {
@@ -408,17 +379,13 @@ export const ResultsTable = styled.table`
     }
 `;
 
-export const PosistionTd = styled.td`
-    width: 3em;
-    text-align: center;
-`;
-
 export const NameTd = styled.td`
-    text-align: left;
+    text-align: center;
 `;
 
 export const NameTableDiv = styled.div`
     display: flex;
+    justify-content: center;
     align-items: center;
 
     h3 {

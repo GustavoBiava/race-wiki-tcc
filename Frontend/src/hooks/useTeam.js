@@ -5,11 +5,11 @@ import { toast } from 'react-toastify';
 import axios from '../services/axios';
 import { get } from "lodash";
 
-export const useDriver = () => {
+export const useTeam = () => {
     const { shortName } = useParams();
     const navigate = useNavigate();
-    const [driver, setDriver] = useState({});
-    const [driverResults, setDriverResults] = useState({});
+    const [team, setTeam] = useState({});
+    const [teamRaceResult, setTeamRaceResult] = useState({});
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -26,14 +26,15 @@ export const useDriver = () => {
         if (!shortName) return navigate('/');
         try {
             (async function() {
-                const response = await axios.get(`/pages/driver/${shortName}`);
-                return setDriver(response.data);
+                const response = await axios.get(`/pages/team/${shortName}`);
+                return setTeam(response.data);
             })();
 
             (async function() {
-                const response = await axios.get(`/pages/driver/${shortName}/2024`);
-                return setDriverResults(response.data);
+                const response = await axios.get(`/pages/team/${shortName}/2024`);
+                return setTeamRaceResult(response.data);
             })();
+
         }
         catch (err) {
             const errors = get(err, 'response.data.errors', []);
@@ -42,8 +43,8 @@ export const useDriver = () => {
     }, []);
 
     return {
-        driver,
-        driverResults,
+        team,
+        teamRaceResult,
         goToRacePage,
         formatDate,
     }

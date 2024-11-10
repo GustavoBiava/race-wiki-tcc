@@ -2,7 +2,7 @@ import { get } from 'lodash';
 import { Link } from 'react-router-dom';
 
 import { Container } from '../../styles/GlobalStyles';
-import { UseDriver } from '../../hooks/useDriver';
+import { useDriver } from '../../hooks/useDriver';
 import { 
     Content,
     BackgroundImg,
@@ -42,7 +42,7 @@ import {
 
 function Driver() {
 
-    const { driver, driverResults, formatDate, goToRacePage } = UseDriver();
+    const { driver, driverResults, formatDate, goToRacePage } = useDriver();
     
     return (
         <Container>

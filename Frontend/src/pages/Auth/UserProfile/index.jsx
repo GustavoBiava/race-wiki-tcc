@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { isEmail } from 'validator';
@@ -8,6 +8,7 @@ import { isEmail } from 'validator';
 import { Button, Container } from '../../../styles/GlobalStyles';
 import axios from '../../../services/axios';
 import * as actions from '../../../store/modules/auth/actions';
+import { ThemeContext } from '../../../contexts/ThemeContext';
 import { 
     Content,
     Form,
@@ -31,6 +32,7 @@ function UserProfile() {
 
     const { isLogged, user } = useSelector(states => states.auth);
     const { favorite_driver } = user;
+    const { handleThemeChange } = useContext(ThemeContext);
 
     const [userProfile, setUserProfile] = useState({});
 
@@ -47,24 +49,54 @@ function UserProfile() {
         return navigate('/entrar');
     }
 
+    const emailValidate = async (email) => {
+        if (email === user.email) return true;
+        const emailValidation = await emailAlreadyUsed(email);
+        return emailValidation;
+    }
+
+    const nicknameValidate = async (nickname) => {
+        if (nickname === user.nickname) return true;
+        const nicknameValidation = await nicknameAlreadyUsed(nickname);
+        return nicknameValidation; 
+    }
+
+    const passwordValidate = (user) => {
+        if (!password) return true;
+
+        if (!passwordRegex.test(password)) {
+            toast.error('Senha deve conter: Letras maiúsculas e minúsculas, caracteres especiais e números!');
+            return false;
+        }
+
+        user.password = password;
+        return true;
+    }
+
     const handleButtonClick = async (e) => {
         e.preventDefault();
+
         if (!validateForm()) return;
+        if (!emailValidate(email)) return toast.error('O E-mail já foi cadastrado!');
+        if (!nicknameValidate(nickname)) return toast.error('O nickname já está em uso!');
 
-        const emailValidation = await emailAlreadyUsed(email);
-        if (!emailValidation) return;
-
-        const nicknameValidation = await nicknameAlreadyUsed(nickname);
-        if (!nicknameValidation) return;
-
-        return await axios.put('/users', {
+        const updatedUser = {
             name,
             surname,
             nickname,
-            birthDate,
+            birth_date: birthDate,
             email,
-            password,
-        });
+        }
+
+        if (!passwordValidate(updatedUser)) return;
+        
+        try {
+            await axios.put('/users', updatedUser);
+            dispatch(actions.loginFailure());
+            toast.success('Dados alterados com sucesso! Por favor, faça login novamente.');
+            return navigate('/entrar');
+        }
+        catch { return false;}
     }
 
     const handleFavoriteDriverButton = () => navigate('/equipe-favorita', { state: user });
@@ -117,16 +149,6 @@ function UserProfile() {
             toast.error('E-mail inválido!');
             return false;
         }
-
-        if (!password) {
-            toast.error('Senha inválida!');
-            return false;
-        }
-
-        if (!passwordRegex.test(password)) {
-            toast.error('Senha deve conter: Letras maiúsculas e minúsculas, caracteres especiais e números!');
-            return false;
-        }
         return true;
     }
 
@@ -152,9 +174,9 @@ function UserProfile() {
             return errors.map(e => toast.error(e));
         }
 
-    }, []);
+    }, [favorite_driver, isLogged, navigate, user]);
 
-    async function emailAlreadyUsed (email) {
+    async function emailAlreadyUsed(email) {
         try {
             const { status } = await axios.get(`/pages/register/validateEmail?email=${email}`);
             if (status === 204) return true;
@@ -204,7 +226,8 @@ function UserProfile() {
 
                     <ButtonsContainer>
                         <Button onClick={handleFavoriteDriverButton}>TROCAR PILOTO</Button>
-                        { user.type === 'ADMIN' ? <Button>ADMIN</Button> : ''}
+                        <Button onClick={handleThemeChange}>TROCAR TEMA</Button>
+                        { user.type === 'ADMIN' ? <Button>ADMINISTRADOR</Button> : ''}
                         <Button onClick={handleLogoutClick}>SAIR</Button>
                     </ButtonsContainer>
 

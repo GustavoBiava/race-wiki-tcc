@@ -9,6 +9,11 @@ export const Content = styled.div`
     flex-direction: column;
     gap: 1em 0;
     margin: 7em 0;
+
+    @media (max-width: 1273px) {
+        width: 95vw; 
+    }
+
 `;
 
 export const ProfileContainer = styled.div`
@@ -20,6 +25,11 @@ export const ProfileContainer = styled.div`
     width: 100%;
     height: 100%; 
     padding: 3em;
+
+    @media (max-width: 948px) {
+        padding: 1.8em;
+    }
+
 `;
 
 export const UserContainer = styled.div`
@@ -31,6 +41,12 @@ export const UserContainer = styled.div`
     width: 100%;
     height: 100%; 
     padding: 1em;
+
+    @media (max-width: 948px) {
+        flex-direction: column;
+        padding: 1.6em;
+    }
+
 `;
 
 export const Form = styled.form`
@@ -64,6 +80,11 @@ export const FormHeader = styled.div`
         font-size: 2em;
         text-align: start;
         width: 100%;
+
+        @media (max-width: 948px) {
+            text-align: center;
+        }
+
     }
 
     @media (max-width: 890px) {
@@ -85,6 +106,10 @@ export const FormButton = styled.div`
     justify-content: center;
     align-items: center;
     margin: 1em 0;
+    
+    @media (max-width: 948px) {
+        margin: 0.4em 0;
+    }
 `;
 
 export const ProfileCircle = styled.div`
@@ -95,6 +120,12 @@ export const ProfileCircle = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;    
+
+    @media (max-width: 948px) {
+        width: 8.5em;
+        height: 8.5em;
+    }
+
 `;
 
 export const BackgroundImg = styled.img`
@@ -113,6 +144,11 @@ export const DriverPicture = styled.img`
     border-radius: 100%;
     z-index: 2;
     border: 2px solid ${colors.mainRed};
+
+    @media (max-width: 948px) {
+        width: 8.5em;
+        height: 8.5em;
+    }
 `;
 
 export const ButtonsContainer = styled.div`
@@ -126,6 +162,18 @@ export const ButtonsContainer = styled.div`
         height: fit-content;
         padding: 0.7em;
     }
+    
+    @media (max-width: 948px) {
+        flex-direction: column;
+        gap: 0.5em 0;
+        margin: 1.2em 0 0 0;
+        width: 95%;
+
+        button {
+            min-width: 100%;
+            padding: 0.6em;
+        }
+    }
 
 `;
 
@@ -133,6 +181,12 @@ export const ProfileDiv = styled.div`
     display: flex;
     align-items: center;
     gap: 1em;
+
+    @media (max-width: 948px) {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.2em 0;
+    }
 `;
 
 export const UserInfo = styled.div`

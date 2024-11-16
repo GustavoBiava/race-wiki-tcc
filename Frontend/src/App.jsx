@@ -3,15 +3,17 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { useContext } from "react";
 
 import store, { persistor } from './store';
 import GlobalStyles from "./styles/GlobalStyles";
 import Nav from './components/Navbar';
-import { useTheme } from "./hooks/useTheme";
 import Routes from "./routes/index"; 
+import { ThemeContext} from "./contexts/ThemeContext";
 
 function App() {
-  const { theme, handleThemeChange } = useTheme();
+  
+  const { theme } = useContext(ThemeContext);
 
   return (
     <>
@@ -19,11 +21,10 @@ function App() {
         <Provider store={store}>
           <PersistGate persistor={persistor}>
             <ThemeProvider theme={theme}>
-              <Nav />
-              <Routes />
-              <button onClick={handleThemeChange}>Trocar tema</button>
-              <GlobalStyles />
-              <ToastContainer theme='dark' pauseOnHover draggable/>
+                <Nav />
+                <Routes />
+                <GlobalStyles />
+                <ToastContainer theme='dark' draggable/>
             </ThemeProvider>
           </PersistGate>
         </Provider>
@@ -33,4 +34,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

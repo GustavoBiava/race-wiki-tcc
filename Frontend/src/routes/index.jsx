@@ -16,6 +16,7 @@ import Team from '../pages/Team';
 import Race from '../pages/Race';
 
 import UserProfile from '../pages/Auth/UserProfile';
+import Comparation from '../pages/Comparation';
 
 function Router() {
     
@@ -37,6 +38,8 @@ function Router() {
                 <Route exact path='/corrida/:slug' element={<Race />} />
 
                 <Route exact path='/meu-perfil' element={<UserProfile/>}/>
+
+                <Route exact path='/comparar' element={<Comparation/>}/>
 
             </Route>
         </Routes>

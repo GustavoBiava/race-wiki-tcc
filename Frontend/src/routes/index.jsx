@@ -40,7 +40,6 @@ function Router() {
                 <Route exact path='/meu-perfil' element={<UserProfile/>}/>
 
                 <Route exact path='/comparar' element={<Comparation/>}/>
-
             </Route>
         </Routes>
     );

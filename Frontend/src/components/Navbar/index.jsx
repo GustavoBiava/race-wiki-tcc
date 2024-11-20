@@ -16,6 +16,10 @@ import {
     UserProfile,
     BackgroundImg,
     DriverPicture,
+    AdminNavbar,
+    AdminNavLogo,
+    AdminNavGroup,
+    AdminNavItem,
 } from "./styled";
 
 function Nav() {
@@ -24,8 +28,114 @@ function Nav() {
         handleMenuClick,
         isLogged,
         userProfile,
-        userNickname
+        userNickname,
+        mode,
+        userType        
     } = useExpanded();
+
+    if (mode === 'admin' && userType === 'ADMIN') {
+        return (
+            <AdminNavbar>
+                <Link to="/">
+                    <AdminNavLogo>
+                            <img src="/race-wiki-brand-logo.svg" alt="race-wiki-logo" />
+                            <h4>Adminstrador</h4>
+                    </AdminNavLogo>
+                </Link>
+                    
+                <AdminNavGroup>
+                    <ul className="NavItems">
+                        <li>
+                            <Link to="/" >
+                                <AdminNavItem>
+                                    <h1>Circuitos</h1>
+                                </AdminNavItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="pilotos">
+                                <AdminNavItem>
+                                    <h1>Contratos</h1>
+                                    {/* <IoIosArrowDown size={20}/> */}
+                                </AdminNavItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="equipes">
+                                <AdminNavItem>
+                                    <h1>Corridas</h1>
+                                    {/* <IoIosArrowDown size={20}/> */}
+                                </AdminNavItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="comparar">
+                                <AdminNavItem>
+                                    <h1>Equipes</h1>
+                                    {/* <IoIosArrowDown size={20}/> */}
+                                </AdminNavItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="comparar">
+                                <AdminNavItem>
+                                    <h1>Países</h1>
+                                    {/* <IoIosArrowDown size={20}/> */}
+                                </AdminNavItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="comparar">
+                                <AdminNavItem>
+                                    <h1>Pilotos</h1>
+                                    {/* <IoIosArrowDown size={20}/> */}
+                                </AdminNavItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="comparar">
+                                <AdminNavItem>
+                                    <h1>Publicações</h1>
+                                    {/* <IoIosArrowDown size={20}/> */}
+                                </AdminNavItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="comparar">
+                                <AdminNavItem>
+                                    <h1>Tags</h1>
+                                    {/* <IoIosArrowDown size={20}/> */}
+                                </AdminNavItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="comparar">
+                                <AdminNavItem>
+                                    <h1>Temporadas</h1>
+                                    {/* <IoIosArrowDown size={20}/> */}
+                                </AdminNavItem>
+                            </Link>
+                        </li>
+                    </ul>
+                </AdminNavGroup>
+    
+                <Link to="/meu-perfil">
+                    <LoginLink isProfile={true}>
+    
+                        <h1>{userNickname}</h1>
+    
+                        <UserProfile color={userProfile.color}>
+                            { userProfile.driver_picture
+                                ? <DriverPicture src={userProfile.driver_picture.url} alt="driver-picture"/>
+                                : <DriverPicture src='/driver-default-picture.jpg' alt="driver-picture"/>
+                            }
+                            <BackgroundImg src="/driver-background.jpg" alt="driver-background" />
+                        </UserProfile>
+                    </LoginLink>
+                </Link>
+            </AdminNavbar>
+        );
+    }
 
     return (
         <Navbar>
@@ -103,7 +213,6 @@ function Nav() {
                : <FiMenu size={48}/> 
                }
             </MenuLink>
-
         </Navbar>
     );
 }

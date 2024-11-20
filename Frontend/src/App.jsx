@@ -9,7 +9,7 @@ import store, { persistor } from './store';
 import GlobalStyles from "./styles/GlobalStyles";
 import Nav from './components/Navbar';
 import Routes from "./routes/index"; 
-import { ThemeContext} from "./contexts/ThemeContext";
+import { ThemeContext } from "./contexts/ThemeContext";
 
 function App() {
   

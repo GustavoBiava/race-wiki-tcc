@@ -25,12 +25,40 @@ export const Navbar = styled.nav`
 
 `;
 
+export const AdminNavbar = styled.nav`
+    position: fixed;
+    top: 0;
+    min-width: 10%;
+    height: 100%;
+    background-color: ${colors.mainRed};
+    color: ${colors.lightText};
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.8em;
+    z-index: 100;
+    padding: 1em 0;
+`;
+
 export const NavLogo = styled.div`
     margin: 0 1.2em;
 
     img {
         width: 6.5em; 
         height: 6.5em;
+    }
+`;
+
+export const AdminNavLogo = styled.div`
+    padding: 1.5em 0 0 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.6em;
+
+    img {
+        max-width: 18em; 
     }
 `;
 
@@ -41,6 +69,23 @@ export const NavItem = styled.div`
     gap: 0.2em;
     height: 6.9em;
     padding: 0 0.5em;
+
+    &:hover {
+        background-color: ${props => props.theme.mode === 'dark' ? colors.lightText : colors.mainGray};
+        color: ${props => props.theme.mode === 'dark' ? colors.mainRed : colors.lightText};
+    }
+
+    h1 {
+        font-weight: 600;
+    }
+`;
+
+export const AdminNavItem = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6em;
+    font-size: 0.9em;
 
     &:hover {
         background-color: ${props => props.theme.mode === 'dark' ? colors.lightText : colors.mainGray};
@@ -96,6 +141,24 @@ export const NavGroup = styled.div`
         }
     }
 
+`;
+
+export const AdminNavGroup = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .NavItems {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        & > li {
+            width: 100%;
+        }
+    }
 `;
 
 export const UserProfile = styled.div`

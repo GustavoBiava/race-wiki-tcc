@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 
 import axios from '../services/axios';
+import { AdminContext } from "../contexts/AdminContext";
 
 export const useExpanded = () => {
 
     const isLogged = useSelector(state => state.auth.isLogged);
     const favoriteDriver = useSelector(state => state.auth.user.favorite_driver);
     const userNickname = useSelector(state => state.auth.user.nickname);
+    const userType = useSelector(state => state.auth.user.type);
+    const { mode } = useContext(AdminContext);
 
     const [isExpanded, setIsExpanded] = React.useState(false);
     const [userProfile, setUserProfile] = useState({});
@@ -49,5 +52,7 @@ export const useExpanded = () => {
         userProfile,
         isLogged,
         userNickname,
+        mode,
+        userType
     }
 }

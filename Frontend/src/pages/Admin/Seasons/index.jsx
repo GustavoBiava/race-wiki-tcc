@@ -16,11 +16,24 @@ import {
     Content,
 } from './styled';
 
-
 function Seasons() {
     const [seasons, setSeasons] = useState([]);
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
+
+    const handleDeleteClick = (e) => {
+        const id = e.currentTarget.parentNode.parentNode.id;
+        try {
+            (async function() {
+                await axios.delete(`/seasons/${id}`);
+            })();
+            return toast.success('Temporada deletada com sucesso!'); 
+        }
+        catch(err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
+    }
 
     useEffect(() => {
         if (!isLogged) return navigate('/');
@@ -35,7 +48,7 @@ function Seasons() {
             const errors = get(err, 'response.data.errors', []);
             return errors.map(e => toast.error(e));
         }
-    }, []);
+    }, [seasons]);
 
     return (
         <AdminContainer>
@@ -57,7 +70,7 @@ function Seasons() {
                         </tr>
                         { seasons ? (
                             seasons.map((season, index) => (
-                                <tr key={index}>
+                                <tr key={index} id={season.id}>
                                     <td>{season.id}</td>
                                     <td>{season.year}</td>
                                     <td>{season.created_at}</td>
@@ -70,7 +83,7 @@ function Seasons() {
                                         </ButtonDiv>
                                     </td>
                                     <td>
-                                        <ButtonDiv>
+                                        <ButtonDiv onClick={handleDeleteClick}>
                                             <Button>
                                                 <FaTrashAlt size={16}/>
                                             </Button>

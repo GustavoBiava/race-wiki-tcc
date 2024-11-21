@@ -22,6 +22,19 @@ function Publications() {
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
 
+    const handleDeleteClick = (e) => {
+        const id = e.currentTarget.parentNode.parentNode.id;
+        try {
+            (async function() {
+                await axios.delete(`/publications/${id}`);
+            })();
+            return toast.success('Publicação deletada com sucesso!'); 
+        }
+        catch(err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
+    }
 
     useEffect(() => {
         if (!isLogged) return navigate('/');
@@ -36,7 +49,7 @@ function Publications() {
             const errors = get(err, 'response.data.errors', []);
             return errors.map(e => toast.error(e));
         }
-    }, []);
+    }, [publications]);
 
     return (
         <AdminContainer>
@@ -59,7 +72,7 @@ function Publications() {
                         </tr>
                         { publications ? (
                             publications.map((publication, index) => (
-                                <tr key={index}>
+                                <tr key={index} id={publication.id}>
                                     <td>{publication.id}</td>
                                     <td>{publication.title}</td>
                                     <td>{publication.likes}</td>
@@ -74,7 +87,7 @@ function Publications() {
                                         </ButtonDiv>
                                     </td>
                                     <td>
-                                        <ButtonDiv>
+                                        <ButtonDiv onClick={handleDeleteClick}>
                                             <Button>
                                                 <FaTrashAlt size={16}/>
                                             </Button>

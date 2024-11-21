@@ -21,6 +21,20 @@ function Races() {
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
 
+    const handleDeleteClick = (e) => {
+        const id = e.currentTarget.parentNode.parentNode.id;
+        try {
+            (async function() {
+                await axios.delete(`/races/${id}`);
+            })();
+            return toast.success('Corrida deletada com sucesso!'); 
+        }
+        catch(err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
+    }
+
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
@@ -34,7 +48,7 @@ function Races() {
             const errors = get(err, 'response.data.errors', []);
             return errors.map(e => toast.error(e));
         }
-    }, []);
+    }, [races]);
 
     return (
         <AdminContainer>
@@ -60,7 +74,7 @@ function Races() {
                         </tr>
                         { races ? (
                             races.map((race, index) => (
-                                <tr key={index}>
+                                <tr key={index} id={race.id}>
                                     <td>{race.id}</td>
                                     <td>{race.name}</td>
                                     <td>{get(race, 'place.name')}</td>
@@ -77,7 +91,7 @@ function Races() {
                                         </ButtonDiv>
                                     </td>
                                     <td>
-                                        <ButtonDiv>
+                                        <ButtonDiv onClick={handleDeleteClick}>
                                             <Button>
                                                 <FaTrashAlt size={16}/>
                                             </Button>

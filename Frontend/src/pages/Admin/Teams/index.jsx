@@ -22,6 +22,20 @@ function Teams() {
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
 
+    const handleDeleteClick = (e) => {
+        const id = e.currentTarget.parentNode.parentNode.id;
+        try {
+            (async function() {
+                await axios.delete(`/teams/${id}`);
+            })();
+            return toast.success('Equipe deletada com sucesso!'); 
+        }
+        catch(err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
+    }
+
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
@@ -35,7 +49,7 @@ function Teams() {
             const errors = get(err, 'response.data.errors', []);
             return errors.map(e => toast.error(e));
         }
-    }, []);
+    }, [teams]);
 
     return (
         <AdminContainer>
@@ -60,7 +74,7 @@ function Teams() {
                         </tr>
                         { teams ? (
                             teams.map((team, index) => (
-                                <tr key={index}>
+                                <tr key={index} id={team.id}>
                                     <td>{team.id}</td>
                                     <td>{team.name}</td>
                                     <td>{team.constructors_championships}</td>
@@ -76,7 +90,7 @@ function Teams() {
                                         </ButtonDiv>
                                     </td>
                                     <td>
-                                        <ButtonDiv>
+                                        <ButtonDiv onClick={handleDeleteClick}>
                                             <Button>
                                                 <FaTrashAlt size={16}/>
                                             </Button>

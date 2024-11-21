@@ -22,6 +22,20 @@ function Tags() {
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
 
+    const handleDeleteClick = (e) => {
+        const id = e.currentTarget.parentNode.parentNode.id;
+        try {
+            (async function() {
+                await axios.delete(`/tags/${id}`);
+            })();
+            return toast.success('Tag deletada com sucesso!'); 
+        }
+        catch(err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
+    }
+
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
@@ -35,7 +49,7 @@ function Tags() {
             const errors = get(err, 'response.data.errors', []);
             return errors.map(e => toast.error(e));
         }
-    }, []);
+    }, [tags]);
 
     return (
         <AdminContainer>
@@ -58,7 +72,7 @@ function Tags() {
                         </tr>
                         { tags ? (
                             tags.map((tag, index) => (
-                                <tr key={index}>
+                                <tr key={index} id={tag.id}>
                                     <td>{tag.id}</td>
                                     <td>{tag.tag_name}</td>
                                     <td>{tag.type}</td>
@@ -72,7 +86,7 @@ function Tags() {
                                         </ButtonDiv>
                                     </td>
                                     <td>
-                                        <ButtonDiv>
+                                        <ButtonDiv onClick={handleDeleteClick}>
                                             <Button>
                                                 <FaTrashAlt size={16}/>
                                             </Button>

@@ -23,6 +23,20 @@ function Drivers() {
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
 
+    const handleDeleteClick = (e) => {
+        const id = e.currentTarget.parentNode.parentNode.id;
+        try {
+            (async function() {
+                await axios.delete(`/drivers/${id}`);
+            })();
+            return toast.success('Piloto deletado com sucesso!'); 
+        }
+        catch(err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
+    }
+
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
@@ -36,7 +50,7 @@ function Drivers() {
             const errors = get(err, 'response.data.errors', []);
             return errors.map(e => toast.error(e));
         }
-    }, []);
+    }, [drivers]);
 
     return (
         <AdminContainer>
@@ -61,7 +75,7 @@ function Drivers() {
                         </tr>
                         { drivers ? (
                             drivers.map((driver, index) => (
-                                <tr key={index}>
+                                <tr key={index} id={driver.id}>
                                     <td>{driver.id}</td>
                                     <td>{driver.name}</td>
                                     <td>{driver.surname}</td>
@@ -77,7 +91,7 @@ function Drivers() {
                                         </ButtonDiv>
                                     </td>
                                     <td>
-                                        <ButtonDiv>
+                                        <ButtonDiv onClick={handleDeleteClick}>
                                             <Button>
                                                 <FaTrashAlt size={16}/>
                                             </Button>

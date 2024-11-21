@@ -12,12 +12,12 @@ class DriversPageController {
     try {
       const drivers = await Driver.findAll({
         attributes: ['id', 'name', 'surname', 'short_name'],
-        order: [ ['name', 'ASC'] ],
         include: [
           {
             model: DriverStat,
             as: 'driver_stat',
             attributes: ['number'],
+            order: [['drivers_championships', 'DESC']]
           },
           {
             model: DriverPicture,

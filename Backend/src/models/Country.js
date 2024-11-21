@@ -6,12 +6,6 @@ export default class Country extends Model {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-          is: {
-            args: /\d/,
-            msg: 'Name can\'t use numbers!',
-          }
-        }
       },
       iso3: {
         type: Sequelize.STRING,

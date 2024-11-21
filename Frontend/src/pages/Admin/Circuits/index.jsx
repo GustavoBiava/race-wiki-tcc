@@ -22,6 +22,20 @@ function Circuits() {
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
 
+    const handleDeleteClick = (e) => {
+        const id = e.currentTarget.parentNode.parentNode.id;
+        try {
+            (async function() {
+                await axios.delete(`/circuits/${id}`);
+            })();
+            return toast.success('Circuito deletado com sucesso!'); 
+        }
+        catch(err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
+    }
+
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
@@ -35,7 +49,7 @@ function Circuits() {
             const errors = get(err, 'response.data.errors', []);
             return errors.map(e => toast.error(e));
         }
-    }, []);
+    }, [circuits]);
 
     return (
         <AdminContainer>
@@ -59,7 +73,7 @@ function Circuits() {
                         </tr>
                         { circuits ? (
                             circuits.map((circuit, index) => (
-                                <tr key={index}>
+                                <tr key={index} id={circuit.id}>
                                     <td>{circuit.id}</td>
                                     <td>{circuit.name}</td>
                                     <td>{circuit.first_apparition}</td>
@@ -74,7 +88,7 @@ function Circuits() {
                                         </ButtonDiv>
                                     </td>
                                     <td>
-                                        <ButtonDiv>
+                                        <ButtonDiv onClick={handleDeleteClick}>
                                             <Button>
                                                 <FaTrashAlt size={16}/>
                                             </Button>

@@ -23,6 +23,20 @@ function Countries() {
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
 
+    const handleDeleteClick = (e) => {
+        const id = e.currentTarget.parentNode.parentNode.id;
+        try {
+            (async function() {
+                await axios.delete(`/countries/${id}`);
+            })();
+            return toast.success('País deletado com sucesso!'); 
+        }
+        catch(err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
+    }
+
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
@@ -36,7 +50,7 @@ function Countries() {
             const errors = get(err, 'response.data.errors', []);
             return errors.map(e => toast.error(e));
         }
-    }, []);
+    }, [countries]);
 
     return (
         <AdminContainer>
@@ -59,7 +73,7 @@ function Countries() {
                         </tr>
                         { countries ? (
                             countries.map((country, index) => (
-                                <tr key={index}>
+                                <tr key={index} id={country.id}>
                                     <td>{country.id}</td>
                                     <td>{country.name}</td>
                                     <td>{country.iso3}</td>
@@ -73,7 +87,7 @@ function Countries() {
                                         </ButtonDiv>
                                     </td>
                                     <td>
-                                        <ButtonDiv>
+                                        <ButtonDiv onClick={handleDeleteClick}>
                                             <Button>
                                                 <FaTrashAlt size={16}/>
                                             </Button>

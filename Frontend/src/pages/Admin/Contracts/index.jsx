@@ -22,6 +22,20 @@ function Contracts() {
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
 
+    const handleDeleteClick = (e) => {
+        const id = e.currentTarget.parentNode.parentNode.id;
+        try {
+            (async function() {
+                await axios.delete(`/careerContracts/${id}`);
+            })();
+            return toast.success('Contrato deletado com sucesso!'); 
+        }
+        catch(err) {
+            const errors = get(err, 'response.data.errors', []);
+            return errors.map(e => toast.error(e));
+        }
+    }
+
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
@@ -35,7 +49,7 @@ function Contracts() {
             const errors = get(err, 'response.data.errors', []);
             return errors.map(e => toast.error(e));
         }
-    }, []);
+    }, [contracts]);
 
     return (
         <AdminContainer>
@@ -59,7 +73,7 @@ function Contracts() {
                         </tr>
                         { contracts ? (
                             contracts.map((contract, index) => (
-                                <tr key={index}>
+                                <tr key={index} id={contract.id}>
                                     <td>{contract.id}</td>
                                     <td>{get(contract, 'Driver.name')} {get(contract, 'Driver.surname')}</td>
                                     <td>{get(contract, 'Team.name')}</td>
@@ -74,7 +88,7 @@ function Contracts() {
                                         </ButtonDiv>
                                     </td>
                                     <td>
-                                        <ButtonDiv>
+                                        <ButtonDiv onClick={handleDeleteClick}>
                                             <Button>
                                                 <FaTrashAlt size={16}/>
                                             </Button>

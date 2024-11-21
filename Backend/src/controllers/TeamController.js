@@ -1,12 +1,19 @@
 import Team from "../models/Team";
+import Country from "../models/Country";
 
 class TeamController {
 
   async index(req, res) {
     try {
       const teams = await Team.findAll({
-        attributes: { exclude: ['created_at', 'updated_at']},
-        order: [ ['created_at', 'DESC'] ],
+        order: [ ['id', 'ASC'] ],
+        include: [
+          {
+            model: Country,
+            as: 'country',
+            attributes: ['name'],
+          }
+        ]
       });
 
       if (teams.length < 0) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { get } from 'lodash';
@@ -6,10 +6,12 @@ import { useDispatch } from "react-redux";
 
 import axios from "../services/axios";
 import * as actions from '../store/modules/auth/actions';
+import { AdminContext } from "../contexts/AdminContext";
 
 export const useFavoriteDrivers = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { mode, unsetAdmin } = useContext(AdminContext);
     
     const { state: userData } = useLocation();
     const [drivers, setDrivers] = useState([]);
@@ -70,6 +72,7 @@ export const useFavoriteDrivers = () => {
 
     React.useEffect(() => {
         if (!userData) return navigate('/');
+        if (mode === 'admin') unsetAdmin();
         setIsLoading(true);
         try {
             (async function() {

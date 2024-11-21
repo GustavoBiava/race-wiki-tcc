@@ -5,8 +5,7 @@ class TagController {
   async index(req, res) {
     try {
       const tags = await Tag.findAll({
-        attributes: { exclude: ['created_at', 'updated_at'] },
-        order: [ ['created_at', 'DESC'] ],
+        order: [ ['id', 'ASC'] ],
       });
 
       if (tags.length < 0) {

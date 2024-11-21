@@ -1,12 +1,15 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { toast } from "react-toastify";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import axios from "../services/axios";
+import { AdminContext } from "../contexts/AdminContext";
 
 export const useFavoriteTeams = () => {
 
     const navigate = useNavigate();
+    const { mode, unsetAdmin } = useContext(AdminContext);
+
     const { state: userData } = useLocation();
     const [teams, setTeams] = useState([]);
     const [selectedTeam, setSelectedTeam] = useState(0);
@@ -41,6 +44,7 @@ export const useFavoriteTeams = () => {
  
     React.useEffect(() => {
         if (!userData) return navigate('/');
+        if (mode === 'admin') unsetAdmin();
         setIsLoading(true);
         (async function() {
             try {

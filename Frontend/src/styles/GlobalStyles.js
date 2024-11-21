@@ -163,12 +163,11 @@ export const Table = styled.table`
     }
     
     tr {
-
         height: 1em;
     }
     
     td {
-
+        padding: 0.23em;
         font-weight: 500;
     }
 

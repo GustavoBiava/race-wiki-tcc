@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import isEmail from "validator/lib/isEmail";
+import { useSelector } from "react-redux";
 
 import axios from '../services/axios';
-import { useSelector } from "react-redux";
+import { AdminContext } from "../contexts/AdminContext";
 
 export const useRegister = () => {
     const navigate = useNavigate();
+    const { mode, unsetAdmin } = useContext(AdminContext);
 
     const isLogged = useSelector(states => states.auth.isLogged);
 
@@ -128,6 +130,7 @@ export const useRegister = () => {
 
     useEffect(() => {
         if (isLogged) return navigate('/');
+        if (mode === 'admin') unsetAdmin();
     }, [isLogged]);
 
     return {

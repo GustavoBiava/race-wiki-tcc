@@ -5,8 +5,7 @@ class CountryController {
   async index(req, res) {
     try {
       const countries = await Country.findAll({
-        attributes: { exclude: ['created_at', 'updated_at'] },
-        order: [ ['created_at', 'DESC'] ],
+        order: [ ['id', 'ASC'] ],
       });
 
       if (countries.length < 0) {

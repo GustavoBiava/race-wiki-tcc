@@ -6,8 +6,14 @@ class PublicationController {
   async index(req, res) {
     try {
       const publications = await Publication.findAll({
-        attributes: { exclude: ['created_at', 'updated_at'] },
-        order: [ ['created_at', 'DESC'] ],
+        order: [ ['id', 'ASC'] ],
+        include: [
+          {
+            model: User,
+            as: 'publication_author',
+            attributes: ['nickname']
+          }
+        ]
       });
 
       if (publications.length < 0) {

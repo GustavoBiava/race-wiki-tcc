@@ -7,10 +7,11 @@ function AdminProvider({ children }) {
 
     const [mode, setMode] = React.useState('admin');
     
-    const handleModeChange = () => setMode(mode === 'normal' ? 'admin' : 'normal' );
+    const setAdmin = () => setMode('admin');
+    const unsetAdmin = () => setMode('normal');
 
     return(
-        <AdminContext.Provider value={{ mode, handleModeChange  }}>
+        <AdminContext.Provider value={{ mode, setAdmin, unsetAdmin  }}>
             { children }
         </AdminContext.Provider>
     );

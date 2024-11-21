@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "../services/axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { AdminContext } from "../contexts/AdminContext";
 
 export const useHome = () => {
     const navigate = useNavigate();
+    const { mode, unsetAdmin } = useContext(AdminContext);
 
     const [races, setRaces] = useState([]);
     const [publications, setPublications] = useState([]);
@@ -15,6 +17,7 @@ export const useHome = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if (mode === 'admin') unsetAdmin();
         try {
             setIsLoading(true);
             (async function() {

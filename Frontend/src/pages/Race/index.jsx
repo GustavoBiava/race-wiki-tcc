@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Pagination, EffectFade } from 'swiper/modules';
+import { useRace } from '../../hooks/useRace';
 
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container } from '../../styles/GlobalStyles';
-import axios from '../../services/axios';
 import { 
     Content,
     RaceContainer,
@@ -49,34 +47,7 @@ import {
 
 function Race() {
 
-    const navigate = useNavigate();
-    const { slug } = useParams();
-    const [race, setRace] = useState({});
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('pt-br', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
-    }
-
-    const goToDriverPage = (e) => navigate(`/piloto/${e.currentTarget.id}`); 
-
-    useEffect(() => {
-        if (!slug) return navigate('/');
-        try {
-            (async function() {
-                const response = await axios.get(`/pages/race/${slug}`);
-                setRace(response.data);
-            })();
-        }
-        catch (err) {
-            const errors = err.response.data.errors || ['FATAL ERROR!'];
-            return errors.map(e => toast.error(e));
-        }
-    }, []);
+    const { formatDate, goToDriverPage, race } = useRace();
 
     return (
         <Container>

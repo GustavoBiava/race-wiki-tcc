@@ -7,7 +7,7 @@ class CareerContractsController {
   async index(req, res) {
     try {
       const careerContracts = await CareerContracts.findAll({
-        order: [ ['created_at', 'DESC'] ],
+        order: [ ['id', 'ASC'] ],
         include: [
           {
             model: Driver,
@@ -27,7 +27,6 @@ class CareerContractsController {
       return res.status(200).json(careerContracts);
     }
     catch (err) {
-      console.log(err)
       const errors = err.errors || [{ message: 'Fatal Error!'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }

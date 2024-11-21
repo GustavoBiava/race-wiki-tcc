@@ -1,11 +1,17 @@
 import { Chart } from 'chart.js/auto';
 import * as colors from '../config/colors';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { AdminContext } from '../contexts/AdminContext';
 
 export const useComparation = () => {
 
   const { theme } = useContext(ThemeContext);
+  const { mode, unsetAdmin } = useContext(AdminContext);
+
+  useEffect(() => {
+    if (mode === 'admin') unsetAdmin();
+  }, []);
 
   Chart.defaults.font = {
     family: 'Poppins',

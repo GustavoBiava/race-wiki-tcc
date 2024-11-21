@@ -2,14 +2,31 @@ import Race from '../models/Race';
 import Circuit from '../models/Circuit';
 import Season from '../models/Season';
 import Driver from '../models/Driver';
+import Country from '../models/Country';
 
 class RaceController {
 
   async index(req, res) {
     try {
       const races = await Race.findAll({
-        attributes: { exclude: ['created_at', 'updated_at']},
-        order: [ ['created_at', 'DESC'] ],
+        order: [ ['id', 'ASC'] ],
+        include: [
+          {
+            model: Circuit,
+            as: 'circuit',
+            attributes: ['name']
+          },
+          {
+            model: Season,
+            as: 'season',
+            attributes: ['year']
+          },
+          {
+            model: Country,
+            as: 'place',
+            attributes: ['name'],
+          }
+        ]
       });
 
       if (races.length < 0) {

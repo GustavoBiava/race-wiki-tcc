@@ -20,6 +20,13 @@ import Comparation from '../pages/Comparation';
 
 import Circuits from '../pages/Admin/Circuits';
 import Contracts from '../pages/Admin/Contracts';
+import Races from '../pages/Admin/Races';
+import AdminTeams from '../pages/Admin/Teams';
+import Countries from '../pages/Admin/Countries';
+import AdminDrivers from '../pages/Admin/Drivers';
+import Publications from '../pages/Admin/Publications';
+import Tags from '../pages/Admin/Tags';
+import Seasons from '../pages/Admin/Seasons';
 
 function Router() {
     
@@ -49,7 +56,19 @@ function Router() {
 
             <Route exact path='/admin/contratos' element={<Contracts />} />
 
+            <Route exact path='/admin/corridas' element={<Races />} />
 
+            <Route exact path='/admin/equipes' element={<AdminTeams />} />
+
+            <Route exact path='/admin/paises' element={<Countries />} />
+
+            <Route exact path='/admin/pilotos' element={<AdminDrivers />} />
+
+            <Route exact path='/admin/publicacoes' element={<Publications />} />
+
+            <Route exact path='/admin/tags' element={<Tags />} />
+
+            <Route exact path='/admin/temporadas' element={<Seasons />} />
         </Routes>
     );
 }

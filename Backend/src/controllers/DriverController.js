@@ -1,13 +1,20 @@
 import Driver from "../models/Driver";
 import DriverStat from "../models/DriverStat";
+import Country from "../models/Country";
 
 class DriverController {
 
   async index(req, res) {
     try {
       const drivers = await Driver.findAll({
-        attributes: { exclude: ['created_at', 'updated_at']},
-        order: [ ['created_at', 'DESC'] ],
+        order: [ ['id', 'ASC'] ],
+        include: [
+          {
+            model: Country,
+            as: 'country',
+            attributes: ['name']
+          }
+        ]
       });
 
       if (drivers.length < 0) {

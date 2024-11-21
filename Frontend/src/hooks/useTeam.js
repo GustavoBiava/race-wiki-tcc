@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 import axios from '../services/axios';
 import { get } from "lodash";
+import { AdminContext } from "../contexts/AdminContext";
 
 export const useTeam = () => {
     const { shortName } = useParams();
+    const { mode, unsetAdmin } = useContext(AdminContext);
     const navigate = useNavigate();
     const [team, setTeam] = useState({});
     const [teamRaceResult, setTeamRaceResult] = useState({});
@@ -24,6 +26,7 @@ export const useTeam = () => {
 
     useEffect(() => {
         if (!shortName) return navigate('/');
+        if (mode === 'admin') unsetAdmin();
         try {
             (async function() {
                 const response = await axios.get(`/pages/team/${shortName}`);

@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 import axios from '../services/axios';
 import { get } from "lodash";
+import { AdminContext } from "../contexts/AdminContext";
 
 export const useDriver = () => {
     const { shortName } = useParams();
     const navigate = useNavigate();
+    const { mode, unsetAdmin } = useContext(AdminContext);
+
     const [driver, setDriver] = useState({});
     const [driverResults, setDriverResults] = useState({});
 
@@ -24,6 +27,8 @@ export const useDriver = () => {
 
     useEffect(() => {
         if (!shortName) return navigate('/');
+        if (mode === 'admin') unsetAdmin();
+        
         try {
             (async function() {
                 const response = await axios.get(`/pages/driver/${shortName}`);

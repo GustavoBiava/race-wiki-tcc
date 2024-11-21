@@ -7,8 +7,7 @@ class SeasonController {
   async index(req, res) {
     try {
       const seasons = await Season.findAll({
-        attributes: { exclude: ['created_at', 'updated_at'] },
-        order: [ ['created_at', 'DESC'] ],
+        order: [ ['id', 'ASC'] ],
       });
 
       if (seasons.length < 0) {

@@ -8,10 +8,12 @@ import axios from "../services/axios";
 import { ToastContainer, toast } from "react-toastify";
 import { get } from "lodash";
 import { isEmail } from "validator";
+import { AdminContext } from "../contexts/AdminContext";
 
 export const useUserProfile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { mode, unsetAdmin, setAdmin } = useContext(AdminContext);
 
     const { isLogged, user } = useSelector(states => states.auth);
     const { favorite_driver } = user;
@@ -30,6 +32,11 @@ export const useUserProfile = () => {
         dispatch(actions.loginFailure());
         toast.success('Você saiu com sucesso!');
         return navigate('/entrar');
+    }
+
+    const handleAdminClick = () => {
+        if (mode === 'normal') setAdmin();
+        return navigate('/admin/circuitos');
     }
 
     const emailValidate = async (email) => {
@@ -138,6 +145,7 @@ export const useUserProfile = () => {
     useEffect(() => {
         if (!isLogged) return navigate('/entrar');
         if (!user) return navigate('/entrar');
+        if (mode === 'admin') unsetAdmin();
 
         setName(user.name);
         setSurname(user.surname);
@@ -206,5 +214,6 @@ export const useUserProfile = () => {
         birthDate,
         password,
         setPassword,
+        handleAdminClick
     }
 }

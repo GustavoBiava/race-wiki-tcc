@@ -61,7 +61,7 @@ function Nav() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="equipes">
+                            <Link to="/admin/corridas">
                                 <AdminNavItem>
                                     <h1>Corridas</h1>
                                     {/* <IoIosArrowDown size={20}/> */}
@@ -69,7 +69,7 @@ function Nav() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="comparar">
+                            <Link to="/admin/equipes">
                                 <AdminNavItem>
                                     <h1>Equipes</h1>
                                     {/* <IoIosArrowDown size={20}/> */}
@@ -77,7 +77,7 @@ function Nav() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="comparar">
+                            <Link to="/admin/paises">
                                 <AdminNavItem>
                                     <h1>Países</h1>
                                     {/* <IoIosArrowDown size={20}/> */}
@@ -85,7 +85,7 @@ function Nav() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="comparar">
+                            <Link to="/admin/pilotos">
                                 <AdminNavItem>
                                     <h1>Pilotos</h1>
                                     {/* <IoIosArrowDown size={20}/> */}
@@ -93,7 +93,7 @@ function Nav() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="comparar">
+                            <Link to="/admin/publicacoes">
                                 <AdminNavItem>
                                     <h1>Publicações</h1>
                                     {/* <IoIosArrowDown size={20}/> */}
@@ -101,7 +101,7 @@ function Nav() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="comparar">
+                            <Link to="/admin/tags">
                                 <AdminNavItem>
                                     <h1>Tags</h1>
                                     {/* <IoIosArrowDown size={20}/> */}
@@ -109,7 +109,7 @@ function Nav() {
                             </Link>
                         </li>
                         <li>
-                            <Link to="comparar">
+                            <Link to="/admin/temporadas">
                                 <AdminNavItem>
                                     <h1>Temporadas</h1>
                                     {/* <IoIosArrowDown size={20}/> */}

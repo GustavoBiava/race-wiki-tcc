@@ -38,6 +38,7 @@ function UserProfile() {
         setBirthDate,
         setNickname,
         setPassword,
+        handleAdminClick
     } = useUserProfile();
 
     return (
@@ -63,7 +64,10 @@ function UserProfile() {
                     <ButtonsContainer>
                         <Button onClick={handleFavoriteDriverButton}>TROCAR PILOTO</Button>
                         <Button onClick={handleThemeChange}>TROCAR TEMA</Button>
-                        { user.type === 'ADMIN' ? <Button>ADMINISTRADOR</Button> : ''}
+                        { user.type === 'ADMIN' 
+                            ? (
+                                <Button onClick={handleAdminClick}>ADMINISTRADOR</Button>
+                            ): ''}
                         <Button onClick={handleLogoutClick}>SAIR</Button>
                     </ButtonsContainer>
 

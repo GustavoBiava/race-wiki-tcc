@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { isEmail } from 'validator';
-
-import * as actions from '../store/modules/auth/actions';
 import { useNavigate } from 'react-router-dom';
+
+import { AdminContext } from '../contexts/AdminContext';
+import * as actions from '../store/modules/auth/actions';
 
 export const useLogin = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { mode, unsetAdmin } = useContext(AdminContext);
 
     const isLoading = useSelector(states => states.auth.isLoading);
     const isLogged = useSelector(states => states.auth.isLogged);
@@ -38,6 +40,7 @@ export const useLogin = () => {
 
     useEffect(() => {
         if (isLogged) return navigate('/');
+        if (mode === 'admin') unsetAdmin();
     }, [isLogged]);
 
     return {

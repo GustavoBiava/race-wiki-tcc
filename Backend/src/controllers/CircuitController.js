@@ -5,7 +5,6 @@ class CircuitController {
   async index(req, res) {
     try {
       const circuits = await Circuit.findAll({
-        attributes: { exclude: ['created_at', 'updated_at'] },
         order: [ ['created_at', 'DESC'] ],
       });
 

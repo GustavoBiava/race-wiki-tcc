@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { AdminContainer, Table, Button } from '../../../styles/GlobalStyles';
 import axios from '../../../services/axios';
@@ -14,11 +16,16 @@ import {
     Content,
 } from './styled';
 
+
 function Countries() {
 
     const [countries, setCountries] = useState([]);
+    const navigate = useNavigate();
+    const { isLogged, user } = useSelector(states => states.auth);
 
     useEffect(() => {
+        if (!isLogged) return navigate('/');
+        if (user.type !== 'ADMIN') return navigate('/');
         try {
             (async function() {
                 const response = await axios.get('/countries');

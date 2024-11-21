@@ -13,12 +13,18 @@ import {
     ButtonContainer,
     Content,
 } from './styled';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Teams() {
 
     const [teams, setTeams] = useState([]);
+    const navigate = useNavigate();
+    const { isLogged, user } = useSelector(states => states.auth);
 
     useEffect(() => {
+        if (!isLogged) return navigate('/');
+        if (user.type !== 'ADMIN') return navigate('/');
         try {
             (async function() {
                 const response = await axios.get('/teams');

@@ -13,12 +13,18 @@ import {
     ButtonContainer,
     Content,
 } from './styled';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function Tags() {
 
     const [tags, setTags] = useState([]);
+    const navigate = useNavigate();
+    const { isLogged, user } = useSelector(states => states.auth);
 
     useEffect(() => {
+        if (!isLogged) return navigate('/');
+        if (user.type !== 'ADMIN') return navigate('/');
         try {
             (async function() {
                 const response = await axios.get('/tags');

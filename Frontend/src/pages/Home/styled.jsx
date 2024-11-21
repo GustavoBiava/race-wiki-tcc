@@ -376,7 +376,7 @@ export const ClassificationTable = styled.table`
     }
     
     tr:nth-child(even) {
-        background: ${props => props.theme.mode === 'dark' ? colors.mainGrayLight : colors.mainWhiteDark};
+        background-color: ${props => props.theme.mode === 'dark' ? colors.mainGrayLight : colors.mainWhiteDark};
     }
 `;
 

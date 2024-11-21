@@ -18,6 +18,9 @@ import Race from '../pages/Race';
 import UserProfile from '../pages/Auth/UserProfile';
 import Comparation from '../pages/Comparation';
 
+import Circuits from '../pages/Admin/Circuits';
+import Contracts from '../pages/Admin/Contracts';
+
 function Router() {
     
     return (
@@ -41,6 +44,12 @@ function Router() {
 
                 <Route exact path='/comparar' element={<Comparation/>}/>
             </Route>
+
+            <Route exact path='/admin/circuitos' element={<Circuits />} />
+
+            <Route exact path='/admin/contratos' element={<Contracts />} />
+
+
         </Routes>
     );
 }

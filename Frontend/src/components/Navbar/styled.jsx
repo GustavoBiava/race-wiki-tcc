@@ -28,7 +28,7 @@ export const Navbar = styled.nav`
 export const AdminNavbar = styled.nav`
     position: fixed;
     top: 0;
-    min-width: 10%;
+    min-width: 15%;
     height: 100%;
     background-color: ${colors.mainRed};
     color: ${colors.lightText};
@@ -38,7 +38,7 @@ export const AdminNavbar = styled.nav`
     justify-content: space-between;
     font-size: 0.8em;
     z-index: 100;
-    padding: 1em 0;
+    padding: 1.5em 0;
 `;
 
 export const NavLogo = styled.div`
@@ -51,14 +51,14 @@ export const NavLogo = styled.div`
 `;
 
 export const AdminNavLogo = styled.div`
-    padding: 1.5em 0 0 0;
+    padding: 1.5em 0 0;
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 0.6em;
 
     img {
-        max-width: 18em; 
+        max-width: 17em; 
     }
 `;
 

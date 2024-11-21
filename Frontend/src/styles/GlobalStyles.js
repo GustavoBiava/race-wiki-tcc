@@ -116,8 +116,22 @@ export const Container = styled.div`
     justify-content: center;
 `;
 
+export const AdminContainer = styled.div`
+    position: absolute;
+    width: 85vw;
+    min-height: 100vh;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`;
+
 export const Button = styled.button`
     all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: ${colors.mainRed};
     text-align: center;
     border-radius: 0.3em;
@@ -131,4 +145,35 @@ export const Button = styled.button`
     &:hover {
         background-color: ${colors.secondRed};
     }
+`;
+
+export const Table = styled.table`
+    width: 100%;
+    border-radius: 0.5em;
+    border-collapse: collapse;
+    background: ${props => props.theme.mode === 'dark' ? colors.mainGray : colors.mainWhite};
+    text-align: center;
+
+    th {
+        height: 3.5em;
+        font-weight: 650;
+        padding: 1em;
+        font-size: 1.1em;
+        border-radius: 1em;
+    }
+    
+    tr {
+
+        height: 1em;
+    }
+    
+    td {
+
+        font-weight: 500;
+    }
+
+    tr:nth-child(even) {
+        background-color: ${props => props.theme.mode === 'dark' ? colors.mainGrayLight : colors.mainWhiteDark};
+    }
+
 `;

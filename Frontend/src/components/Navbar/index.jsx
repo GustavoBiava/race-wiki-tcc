@@ -46,14 +46,14 @@ function Nav() {
                 <AdminNavGroup>
                     <ul className="NavItems">
                         <li>
-                            <Link to="/" >
+                            <Link to="/admin/circuitos" >
                                 <AdminNavItem>
                                     <h1>Circuitos</h1>
                                 </AdminNavItem>
                             </Link>
                         </li>
                         <li>
-                            <Link to="pilotos">
+                            <Link to="/admin/contratos">
                                 <AdminNavItem>
                                     <h1>Contratos</h1>
                                     {/* <IoIosArrowDown size={20}/> */}

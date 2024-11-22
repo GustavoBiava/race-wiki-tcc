@@ -1,4 +1,5 @@
 import Country from "../models/Country";
+import CountryPicture from "../models/Pictures/CountryPicture";
 
 class CountryController {
 
@@ -39,8 +40,16 @@ class CountryController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const country = await Country.findByPk(id);
-      if (!country) return res.status(404).json({ errors: ['Country doesn\'t exists!'] });
+      const country = await Country.findByPk(id, {
+        include: [
+          {
+            model: CountryPicture,
+            as: 'country_picture',
+            attributes: ['url', 'filename'],
+          }
+        ]
+      });
+      if (!country) return res.status(204).json({ errors: ['Country doesn\'t exists!'] });
 
       return res.status(200).json(country);
     }

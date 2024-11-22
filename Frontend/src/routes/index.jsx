@@ -24,7 +24,10 @@ import Circuit from '../pages/Admin/Circuit';
 import Contracts from '../pages/Admin/Contracts';
 import Races from '../pages/Admin/Races';
 import AdminTeams from '../pages/Admin/Teams';
+
 import Countries from '../pages/Admin/Countries';
+import Country from '../pages/Admin/Country';
+
 import AdminDrivers from '../pages/Admin/Drivers';
 import Publications from '../pages/Admin/Publications';
 
@@ -68,6 +71,7 @@ function Router() {
             <Route exact path='/admin/equipes' element={<AdminTeams />} />
 
             <Route exact path='/admin/paises' element={<Countries />} />
+            <Route exact path='/admin/pais/:id?' element={<Country />} />
 
             <Route exact path='/admin/pilotos' element={<AdminDrivers />} />
 

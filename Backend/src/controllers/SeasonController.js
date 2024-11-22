@@ -30,6 +30,7 @@ class SeasonController {
       return res.status(201).json(season);
     }
     catch (err) {
+      console.log(err)
       const errors = err.errors || [{ message: 'Fatal Error! Try check the Foreign Key.'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }
@@ -48,7 +49,7 @@ class SeasonController {
         attributes: { exclude: ['team_id', 'driver_id'] }
       });
 
-      if (!season) return res.status(404).json({ errors: ['Season doesn\'t exists!'] });
+      if (!season) return res.status(204).json({ errors: ['Season doesn\'t exists!'] });
 
       return res.status(200).json(season);
     }

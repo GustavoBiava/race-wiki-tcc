@@ -24,7 +24,7 @@ function App() {
                 <Nav />
                 <Routes />
                 <GlobalStyles />
-                <ToastContainer theme='dark' draggable/>
+                <ToastContainer theme='dark' draggable limit={3}/>
             </ThemeProvider>
           </PersistGate>
         </Provider>

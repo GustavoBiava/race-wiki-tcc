@@ -47,6 +47,7 @@ import {
     TeamImg
 
 } from './styled';
+import { get } from 'lodash';
 
 function Home() {
 
@@ -184,7 +185,10 @@ function Home() {
                                         <NameCointainer>
                                             <LeaderName>
                                                 <Name>{leader.Driver.name}</Name>
-                                                <Country src={leader.Driver.country.country_picture.url} alt='driver-country'/>
+                                                { get(leader, 'Driver.country.country_picture.url') 
+                                                    ? <Country src={leader.Driver.country.country_picture.url} alt='driver-country'/> 
+                                                    : <Country src='country-default-picture.png' alt='driver-country'/> 
+                                                }
                                             </LeaderName>
                                             <Surname>{leader.Driver.surname}</Surname>
                                         </NameCointainer>
@@ -244,7 +248,10 @@ function Home() {
                                         <NameCointainer>
                                             <LeaderName isTeam={true}>
                                                 <TeamName>{leader.Team.name}</TeamName>
-                                                <Country src={leader.Team.country.country_picture.url} alt='team-country'/>
+                                                { get(leader, 'Team.country.country_picture.url') 
+                                                    ? <Country src={leader.Driver.country.country_picture.url} alt='driver-country'/> 
+                                                    : <Country src='country-default-picture.png' alt='driver-country'/> 
+                                                }
                                             </LeaderName>
                                         </NameCointainer>
 

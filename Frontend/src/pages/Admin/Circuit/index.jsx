@@ -95,7 +95,7 @@ function Circuit() {
             return false;
         }
 
-        if (!isFloat(length)) {
+        if (!isFloat(String(length))) {
             toast.error('Tamanho do circuito deve ser um número de ponto flutuante!');
             return false;
         }

@@ -28,7 +28,9 @@ import Countries from '../pages/Admin/Countries';
 import AdminDrivers from '../pages/Admin/Drivers';
 import Publications from '../pages/Admin/Publications';
 import Tags from '../pages/Admin/Tags';
+
 import Seasons from '../pages/Admin/Seasons';
+import Season from '../pages/Admin/Season';
 
 function Router() {
     
@@ -72,6 +74,7 @@ function Router() {
             <Route exact path='/admin/tags' element={<Tags />} />
 
             <Route exact path='/admin/temporadas' element={<Seasons />} />
+            <Route exact path='/admin/temporada/:id?' element={<Season />} />
         </Routes>
     );
 }

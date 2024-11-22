@@ -49,7 +49,7 @@ function UserProfile() {
                         <ProfileCircle color={userProfile.color}>
                             { userProfile.driver_picture
                                 ? <DriverPicture src={userProfile.driver_picture.url} alt="driver-picture"/>
-                                : <DriverPicture src='driver-default-picture.jpg' alt="driver-picture"/>
+                                : <DriverPicture src='/driver-default-picture.png' alt="driver-picture"/>
                             }
                             <BackgroundImg src="/driver-background.jpg" alt="driver-background" />
                         </ProfileCircle>

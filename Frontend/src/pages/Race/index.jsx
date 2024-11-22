@@ -82,7 +82,7 @@ function Race() {
                                 <CountryDiv>
                                     { get(race, 'place.country_picture.url')
                                         ? <Country src={race.place.country_picture.url} alt='race-place'/>
-                                        : <Country src='country-default-picture.png' alt='race-place'/>
+                                        : <Country src='/country-default-picture.png' alt='race-place'/>
                                     }
                                 </CountryDiv>
                         </RaceFooter>
@@ -172,7 +172,7 @@ function Race() {
                                         
                                         { leader.Driver.driver_picture
                                             ? <LeaderImg src={leader.Driver.driver_picture.url} alt='driver-picture'/>
-                                            : <LeaderImg src='driver-default-picture.png' alt='driver-picture'/>
+                                            : <LeaderImg src='/driver-default-picture.png' alt='driver-picture'/>
                                         }
 
                                         <BackgroundImg src='/driver-background.jpg' alt='driver-background'/>
@@ -184,7 +184,10 @@ function Race() {
                                         <NameCointainer>
                                             <LeaderName>
                                                 <Name>{leader.Driver.name}</Name>
-                                                <Country src={leader.Driver.country.country_picture.url} alt='driver-country'/>
+                                                { get(leader, 'Driver.country.country_picture.url') 
+                                                    ? <Country src={leader.Driver.country.country_picture.url} alt='driver-country'/> 
+                                                    : <Country src='/country-default-picture.png' alt='driver-country'/> 
+                                                }
                                             </LeaderName>
                                             <Surname>{leader.Driver.surname}</Surname>
                                         </NameCointainer>

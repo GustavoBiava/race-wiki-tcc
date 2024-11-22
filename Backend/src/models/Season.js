@@ -16,25 +16,25 @@ export default class Season extends Model {
       },
       begin_date: {
         type: Sequelize.DATEONLY,
-        allowNull: false,
+        allowNull: true,
         defaultValue: Sequelize.NOW,
-        validate: {
-          is: {
-            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-            msg: 'Begin_date is not a valid Date (YYYY:MM:DD)',
-          },
-        }
+        // validate: {
+        //   is: {
+        //     args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+        //     msg: 'Begin_date is not a valid Date (YYYY:MM:DD)',
+        //   },
+        // }
       },
       end_date: {
         type: Sequelize.DATEONLY,
-        allowNull: false,
+        allowNull: true,
         defaultValue: Sequelize.NOW,
-        validate: {
-          is: {
-            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-            msg: 'End_date is not a valid Date (YYYY:MM:DD)',
-          },
-        }
+        // validate: {
+        //   is: {
+        //     args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+        //     msg: 'End_date is not a valid Date (YYYY:MM:DD)',
+        //   },
+        // }
       },
       driver_id: {
         type: Sequelize.INTEGER,

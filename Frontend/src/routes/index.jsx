@@ -27,7 +27,9 @@ import AdminTeams from '../pages/Admin/Teams';
 import Countries from '../pages/Admin/Countries';
 import AdminDrivers from '../pages/Admin/Drivers';
 import Publications from '../pages/Admin/Publications';
+
 import Tags from '../pages/Admin/Tags';
+import Tag from '../pages/Admin/Tag';
 
 import Seasons from '../pages/Admin/Seasons';
 import Season from '../pages/Admin/Season';
@@ -72,6 +74,7 @@ function Router() {
             <Route exact path='/admin/publicacoes' element={<Publications />} />
 
             <Route exact path='/admin/tags' element={<Tags />} />
+            <Route exact path='/admin/tag/:id?' element={<Tag />} />
 
             <Route exact path='/admin/temporadas' element={<Seasons />} />
             <Route exact path='/admin/temporada/:id?' element={<Season />} />

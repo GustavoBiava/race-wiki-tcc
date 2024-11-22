@@ -42,7 +42,7 @@ class TagController {
         attributes: { exclude: ['user_id', 'publication_id'] }
       });
 
-      if (!tag) return res.status(404).json({ errors: ['Tag doesn\'t exists!'] });
+      if (!tag) return res.status(204).json({ errors: ['Tag doesn\'t exists!'] });
 
       return res.status(200).json(tag);
     }

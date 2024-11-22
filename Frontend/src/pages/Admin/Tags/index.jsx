@@ -14,7 +14,7 @@ import {
     Content,
 } from './styled';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Tags() {
 
@@ -75,14 +75,16 @@ function Tags() {
                                 <tr key={index} id={tag.id}>
                                     <td>{tag.id}</td>
                                     <td>{tag.tag_name}</td>
-                                    <td>{tag.type}</td>
+                                    <td>{tag.type === 'DRIVER' ? 'Piloto' : 'Equipe'}</td>
                                     <td>{tag.created_at}</td>
                                     <td>{tag.updated_at}</td>
                                     <td>
                                         <ButtonDiv>
-                                            <Button>
-                                                <MdEditSquare size={20}/>
-                                            </Button>
+                                            <Link to={`/admin/tag/${tag.id}`}>
+                                                <Button>
+                                                    <MdEditSquare size={20}/>
+                                                </Button>
+                                            </Link>
                                         </ButtonDiv>
                                     </td>
                                     <td>
@@ -97,7 +99,9 @@ function Tags() {
                         ) : ''}
                     </Table>
                     <ButtonContainer>
-                        <Button>ADICIONAR NOVO</Button>
+                        <Link to={`/admin/tag`}>
+                            <Button>ADICIONAR NOVO</Button>
+                        </Link>
                     </ButtonContainer>
                 </Container>
             </Content>

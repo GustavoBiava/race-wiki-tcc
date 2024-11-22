@@ -127,7 +127,7 @@ export const useUserProfile = () => {
 
         if (!birthDate) {
             toast.error('Data de nascimento inválida!');
-            return true;
+            return false;
         }
 
         if (!isValidBirthDate(birthDate)) {

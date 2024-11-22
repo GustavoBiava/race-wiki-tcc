@@ -38,6 +38,7 @@ export default class Circuit extends Model {
       fastest_lap_record: {
         type: Sequelize.TIME,
         allowNull: true,
+        defaultValue: '00:00:00',
         validate: {
           is: {
             args: /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/,

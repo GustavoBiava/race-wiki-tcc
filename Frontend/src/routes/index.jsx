@@ -19,6 +19,8 @@ import UserProfile from '../pages/Auth/UserProfile';
 import Comparation from '../pages/Comparation';
 
 import Circuits from '../pages/Admin/Circuits';
+import Circuit from '../pages/Admin/Circuit';
+
 import Contracts from '../pages/Admin/Contracts';
 import Races from '../pages/Admin/Races';
 import AdminTeams from '../pages/Admin/Teams';
@@ -53,6 +55,7 @@ function Router() {
             </Route>
 
             <Route exact path='/admin/circuitos' element={<Circuits />} />
+            <Route exact path='/admin/circuito/:id?' element={<Circuit />} />
 
             <Route exact path='/admin/contratos' element={<Contracts />} />
 

@@ -28,6 +28,7 @@ class CircuitController {
       return res.status(201).json(circuit);
     }
     catch (err) {
+      console.log(err)
       const errors = err.errors || [{ message: 'Fatal Error!'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }
@@ -39,7 +40,7 @@ class CircuitController {
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
       const circuit = await Circuit.findByPk(id);
-      if (!circuit) return res.status(404).json({ errors: ['Circuit doesn\'t exists!'] });
+      if (!circuit) return res.status(204).json({ errors: ['Circuit doesn\'t exists!'] });
 
       return res.status(200).json(circuit);
     }

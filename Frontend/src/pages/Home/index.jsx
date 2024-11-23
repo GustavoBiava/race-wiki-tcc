@@ -249,7 +249,7 @@ function Home() {
                                             <LeaderName isTeam={true}>
                                                 <TeamName>{leader.Team.name}</TeamName>
                                                 { get(leader, 'Team.country.country_picture.url') 
-                                                    ? <Country src={leader.Driver.country.country_picture.url} alt='driver-country'/> 
+                                                    ? <Country src={leader.Team.country.country_picture.url} alt='driver-country'/> 
                                                     : <Country src='country-default-picture.png' alt='driver-country'/> 
                                                 }
                                             </LeaderName>

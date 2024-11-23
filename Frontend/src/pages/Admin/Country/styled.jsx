@@ -78,6 +78,11 @@ export const ImageInput = styled.label`
     &:hover {
         background-color: ${props => props.theme.mode === 'dark' ? colors.mainGrayLight : colors.mainWhiteDark};
     }
+
+    img {
+        max-height: 15em;
+        max-width: 20em;
+    }
 `;
 
 export const SelectImage = styled.label`

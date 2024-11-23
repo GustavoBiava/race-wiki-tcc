@@ -73,6 +73,33 @@ class PicturesController {
     });
   }
 
+  updateCountry(req, res) {
+    return upload(req, res, async (err) => {
+      if (err) return res.status(400).json({ errors: [err.code] });
+
+      try {
+        if (!req.file) return res.status(400).json({ errors: ['Picture not found!'] });
+        if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
+
+        const { originalname, filename } = req.file;
+
+        const { country_id } = req.body;
+        if (!country_id) return res.status(400).json({ errors: ['Invalid id!'] });
+
+        const countryPicture = await CountryPicture.findOne({ where: { country_id } });
+
+        if (!countryPicture) return res.status(400).json({ errors: ['Invalid Country Picture!'] });
+
+        const updatedCountryPicture = await countryPicture.update({ original_name: originalname, filename, country_id });
+        return res.status(200).json(updatedCountryPicture);
+      }
+      catch (err) {
+        const errors = err.errors || [{ message: 'Fatal Error!'}];
+        return res.status(400).json({ errors: errors.map(e => e.message) });
+      }
+    });
+  }
+
   storeTeam(req, res) {
     return upload(req, res, async (err) => {
       if (err) return res.status(400).json({ errors: [err.code] });

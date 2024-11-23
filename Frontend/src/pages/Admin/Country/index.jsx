@@ -36,20 +36,22 @@ function Country() {
             if (!id) {
                 (async function() {
                     await axios.post(`/countries`, { 
-                        
+                        name,
+                        iso3: shortName
                     });
                 })();
                 navigate('/admin/paises');
-                return toast.success('Tag criada com sucesso!'); 
+                return toast.success('País criado com sucesso!'); 
             }
 
             (async function() {
                 await axios.put(`/countries/${id}`, {
-                    
+                    name,
+                    iso3: shortName
                 });
             })();
             navigate('/admin/paises');
-            return toast.success('Tag atualizada com sucesso!'); 
+            return toast.success('País atualizado com sucesso!'); 
         }
         catch(err) {
             const errors = get(err, 'response.data.errors', []);
@@ -60,7 +62,6 @@ function Country() {
     const handleInputChange = async (e) => {
         const file = e.target.files[0];
         const fileURL = URL.createObjectURL(file);
-        console.log(fileURL)
     
         setImage(fileURL);
     
@@ -68,16 +69,30 @@ function Country() {
         formData.append('country_id', id);
         formData.append('archive', file);
     
-        try {
-          await axios.post('/pictures/countries', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
+        if (!image) {
+            try {
+                await axios.post('/pictures/countries', formData, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                  }
+                });
+                return toast.success('Foto enviada com sucesso!');
             }
-          });
-          return toast.success('Foto enviada com sucesso!');
+            catch {
+                return toast.error('Foto enviada sem sucesso!');
+            }
+        }
+
+        try {
+            await axios.put('/pictures/countries', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              }
+            });
+            return toast.success('Foto enviada com sucesso!');
         }
         catch {
-            return toast.success('Foto enviada sem sucesso!');
+            return toast.error('Foto enviada sem sucesso!');
         }
       };
 
@@ -142,20 +157,25 @@ function Country() {
                         <label htmlFor="short_name">Nome curto do país:</label>
                         <input type="text" placeholder='Digite aqui o nome curto do pais...' value={shortName} onChange={(e) => setShortName(e.target.value)}/>
 
-                        <label>Imagem do país:</label>
-                        <ImageInput htmlFor='image'>
-                            { image ? (
-                                <ImageDiv>
-                                    <img src={image} alt="country-image" />
-                                </ImageDiv>
-                            ) : (
-                                <SelectImage>
-                                    <FaFileUpload size={16} />
-                                    <p>Selecionar Imagem...</p>
-                                </SelectImage>
-                            )}
-                            <input type="file" id='image' onChange={handleInputChange}/>
-                        </ImageInput>
+                        
+                        { id ? (
+                            <>
+                                <label>Imagem do país:</label>
+                                <ImageInput htmlFor='image'>
+                                { image ? (
+                                    <ImageDiv>
+                                        <img src={image} alt="country-image" />
+                                    </ImageDiv>
+                                ) : (
+                                    <SelectImage>
+                                        <FaFileUpload size={16} />
+                                        <p>Selecionar Imagem...</p>
+                                    </SelectImage>
+                                )}
+                                <input type="file" id='image' onChange={handleInputChange}/>
+                                </ImageInput>
+                            </>
+                        ) : ''}
                     </FormBody>
 
                     <FormButton>

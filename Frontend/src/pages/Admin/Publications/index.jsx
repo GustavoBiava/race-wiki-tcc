@@ -13,7 +13,7 @@ import {
     ButtonContainer,
     Content,
 } from './styled';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function Publications() {
@@ -66,6 +66,7 @@ function Publications() {
                             <th>Título</th>
                             <th>Curtidas</th>
                             <th>Autor</th>
+                            <th>Criado em</th>
                             <th>Editado em</th>
                             <th>Editar</th>
                             <th>Excluir</th>
@@ -81,9 +82,11 @@ function Publications() {
                                     <td>{publication.updated_at}</td>
                                     <td>
                                         <ButtonDiv>
-                                            <Button>
-                                                <MdEditSquare size={20}/>
-                                            </Button>
+                                            <Link to={`/admin/publicacao/${publication.id}`}>
+                                                <Button>
+                                                    <MdEditSquare size={20}/>
+                                                </Button>
+                                            </Link>
                                         </ButtonDiv>
                                     </td>
                                     <td>
@@ -98,13 +101,14 @@ function Publications() {
                         ) : ''}
                     </Table>
                     <ButtonContainer>
-                        <Button>ADICIONAR NOVO</Button>
+                        <Link to='/admin/publicacao'>
+                            <Button>ADICIONAR NOVO</Button>
+                        </Link>
                     </ButtonContainer>
                 </Container>
             </Content>
         </AdminContainer>
     );
-
 }
 
 export default Publications;

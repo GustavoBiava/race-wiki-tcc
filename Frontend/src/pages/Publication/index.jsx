@@ -40,6 +40,7 @@ import {
     ActionsContainer,
     ActionsDiv,
 } from './styled';
+import { get } from 'lodash';
 
 function Publication() {
 
@@ -78,14 +79,19 @@ function Publication() {
                             modules={[Navigation, Autoplay, Pagination, EffectFade]
                             }>
 
-                            { publication.publication_picture ? publication.publication_picture.map((picture, index) => (
+                            { get(publication, 'publication_picture', []).length > 0 ? publication.publication_picture.map((picture, index) => (
                                 <SwiperSlide key={index}>
                                     <SwiperImgDiv>
-                                        <SwiperImg src={picture.url} alt='default-race-default-picture.jpg'/>
+                                        <SwiperImg src={picture.url} alt='/race-default-picture.jpg'/>
                                     </SwiperImgDiv>
-
                                 </SwiperSlide>
-                            )) : ''}
+                            )) : (
+                                <SwiperSlide>
+                                    <SwiperImgDiv>
+                                        <SwiperImg src='/race-default-picture.jpg' alt='race-picture'/>
+                                    </SwiperImgDiv>
+                                </SwiperSlide>
+                            )}
                         </Swiper>
                     </SwiperContainer>
 
@@ -131,7 +137,7 @@ function Publication() {
                                         <UserProfile color={comment.User.color}>
                                             { comment.User.Driver.driver_picture
                                                 ? <DriverPicture src={comment.User.Driver.driver_picture.url} alt="driver-picture"/>
-                                                : <DriverPicture src='driver-default-picture.jpg' alt="driver-picture"/>
+                                                : <DriverPicture src='/driver-default-picture.png' alt="driver-picture"/>
                                             }
                                             <BackgroundImg src="/driver-background.jpg" alt="driver-background" />
                                         </UserProfile>

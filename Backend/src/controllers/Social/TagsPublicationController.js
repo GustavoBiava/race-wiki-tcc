@@ -55,6 +55,27 @@ class TagsPublicationController {
     }
   }
 
+  async showByTag(req, res) {
+    try {
+      const { id } = req.params;
+      if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
+
+      const tagsPublication = await TagsPublication.findOne({
+        where: { tag_id: id },
+        include: [Tag, Publication ],
+        attributes: { exclude: ['tag_id', 'publication_id'] }
+      });
+
+      if (!tagsPublication) return res.status(404).json({ errors: ['TagsPublication doesn\'t exists!'] });
+
+      return res.status(200).json(tagsPublication);
+    }
+    catch (err) {
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
+    }
+  }
+
   async update(req, res) {
     try {
       const { id } = req.params;

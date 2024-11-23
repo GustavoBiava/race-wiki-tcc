@@ -74,7 +74,13 @@ function Race() {
                                                     }
                                                 </SwiperImgDiv>
                                         </SwiperSlide>
-                                )) : ''}
+                                )) : (
+                                    <SwiperSlide>
+                                        <SwiperImgDiv>
+                                            <SwiperImg src='/race-default-picture.jpg' alt="race-picture" />
+                                        </SwiperImgDiv>
+                                    </SwiperSlide>
+                                )}
                         </Swiper>
 
                         <RaceFooter>

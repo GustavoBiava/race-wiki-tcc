@@ -1,4 +1,5 @@
 import User from "../../models/Auth/User";
+import PublicationPicture from "../../models/Pictures/PublicationPicture";
 import Publication from "../../models/Social/Publication";
 
 class PublicationController {
@@ -47,8 +48,18 @@ class PublicationController {
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
       const publication = await Publication.findByPk(id, {
-        include: [User ],
-        attributes: { exclude: ['author'] }
+        attributes: { exclude: ['author'] },
+        include: [
+          {
+            model: User,
+            as: 'publication_author'
+          },
+          {
+            model: PublicationPicture,
+            as: 'publication_picture',
+            attributes: ['url', 'filename']
+          }
+        ],
       });
 
       if (!publication) return res.status(404).json({ errors: ['Publication doesn\'t exists!'] });

@@ -29,7 +29,9 @@ import Countries from '../pages/Admin/Countries';
 import Country from '../pages/Admin/Country';
 
 import AdminDrivers from '../pages/Admin/Drivers';
+
 import Publications from '../pages/Admin/Publications';
+import AdminPublication from '../pages/Admin/Publication';
 
 import Tags from '../pages/Admin/Tags';
 import Tag from '../pages/Admin/Tag';
@@ -76,6 +78,7 @@ function Router() {
             <Route exact path='/admin/pilotos' element={<AdminDrivers />} />
 
             <Route exact path='/admin/publicacoes' element={<Publications />} />
+            <Route exact path='/admin/publicacao/:id?' element={<AdminPublication />} />
 
             <Route exact path='/admin/tags' element={<Tags />} />
             <Route exact path='/admin/tag/:id?' element={<Tag />} />

@@ -7,6 +7,7 @@ export const Content = styled.div`
     justify-content: center;
     flex-direction: column;
     width: 90%;
+    margin: 5em 0 3em 0;
 `;
 
 export const TitleHeader = styled.div`
@@ -55,6 +56,6 @@ export const FormButton = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1em 0;
+    margin: 2em 0;
 
 `;

@@ -130,8 +130,9 @@ export const PublicationBodyContainer = styled.div`
 `;
 
 export const PublicationBody = styled.div`
-    width: 90%;
+    max-width: 90%;
     text-align: justify;
+    word-wrap: break-word;
     font-size: 1em;
     font-weight: 540;
     

@@ -7,6 +7,7 @@ export const Content = styled.div`
     justify-content: center;
     flex-direction: column;
     width: 90%;
+    margin: 5em 0 3em 0;
 `;
 
 export const TitleHeader = styled.div`

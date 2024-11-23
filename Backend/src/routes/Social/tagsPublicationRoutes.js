@@ -7,6 +7,7 @@ const route = Router();
 route.get('/', TagsPublicationController.index);
 route.post('/', TagsPublicationController.store);
 route.get('/:id', TagsPublicationController.show);
+route.get('/tag/:id', TagsPublicationController.showByTag);
 route.put('/:id', TagsPublicationController.update);
 route.delete('/:id', TagsPublicationController.delete);
 

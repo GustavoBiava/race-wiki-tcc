@@ -68,12 +68,6 @@ export default class Driver extends Model {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: '',
-        validate: {
-          len: {
-            args: [3, 50],
-            msg: 'Birth_place invalid length (Min: 3, Max: 50)'
-          }
-        }
       },
       short_name: {
         type: Sequelize.STRING,

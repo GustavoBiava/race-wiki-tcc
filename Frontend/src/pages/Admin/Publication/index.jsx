@@ -123,7 +123,7 @@ function Country() {
             (async function() {
                 const {data, status} = await axios.get(`/publications/${id}`);
                 if (status === 204) {
-                    navigate('/admin/paises');
+                    navigate('/admin/publicacoes');
                     return toast.error('Essa publicação não existe!');
                 }
                 setTitle(get(data, 'title'));
@@ -189,7 +189,7 @@ function Country() {
                                 <input type="file" id='image' onChange={handleInputChange} multiple />
                                 </ImageInput>
 
-                                <label htmlFor="tags">Tag da publicação:</label>
+                                <label htmlFor="tags">Adicionar tags na publicação:</label>
                                 <Select selected={selected} setSelected={setSelected} options={tags.map((tag) => tag.name)}/>
 
                             </>

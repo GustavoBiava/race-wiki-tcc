@@ -62,7 +62,7 @@ class PublicationController {
         ],
       });
 
-      if (!publication) return res.status(404).json({ errors: ['Publication doesn\'t exists!'] });
+      if (!publication) return res.status(204).json({ errors: ['Publication doesn\'t exists!'] });
 
       return res.status(200).json(publication);
     }

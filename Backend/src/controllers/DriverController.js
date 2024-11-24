@@ -1,6 +1,7 @@
 import Driver from "../models/Driver";
 import DriverStat from "../models/DriverStat";
 import Country from "../models/Country";
+import DriverPicture from "../models/Pictures/DriverPicture";
 
 class DriverController {
 
@@ -48,14 +49,21 @@ class DriverController {
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
       const driver = await Driver.findByPk(id, {
-        include: {
-          model: DriverStat,
-          as: 'driver_stat',
-        },
+        include: [
+          {
+            model: DriverStat,
+            as: 'driver_stat',
+          },
+          {
+            model: DriverPicture,
+            as: 'driver_picture',
+            attributes: ['url', 'filename']
+          }
+        ],
         attributes: { exclude: ['driver_stat_id'] }
       });
 
-      if (!driver) return res.status(404).json({ errors: ['Driver doesn\'t exists!'] });
+      if (!driver) return res.status(204).json({ errors: ['Driver doesn\'t exists!'] });
 
       return res.status(200).json(driver);
     }

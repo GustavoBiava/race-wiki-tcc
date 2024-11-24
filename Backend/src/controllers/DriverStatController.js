@@ -40,7 +40,25 @@ class DriverStatController {
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
       const driverStat = await DriverStat.findByPk(id);
-      if (!driverStat) return res.status(404).json({ errors: ['Driver Stat doesn\'t exists!'] });
+      if (!driverStat) return res.status(204).json({ errors: ['Driver Stat doesn\'t exists!'] });
+
+      return res.status(200).json(driverStat);
+    }
+    catch (err) {
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
+    }
+  }
+
+  async showByDriver(req, res) {
+    try {
+      const { id } = req.params;
+      if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
+
+      const driverStat = await DriverStat.findOne({
+        where: { driver_id: id }
+      });
+      if (!driverStat) return res.status(204).json({ errors: ['Driver Stat doesn\'t exists!'] });
 
       return res.status(200).json(driverStat);
     }

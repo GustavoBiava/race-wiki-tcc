@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { AdminContainer, Table, Button } from '../../../styles/GlobalStyles';
@@ -85,9 +85,11 @@ function Drivers() {
                                     <td>{driver.updated_at}</td>
                                     <td>
                                         <ButtonDiv>
-                                            <Button>
-                                                <MdEditSquare size={20}/>
-                                            </Button>
+                                            <Link to={`/admin/piloto/${driver.id}`}>
+                                                <Button>
+                                                    <MdEditSquare size={20}/>
+                                                </Button>
+                                            </Link>
                                         </ButtonDiv>
                                     </td>
                                     <td>
@@ -102,7 +104,9 @@ function Drivers() {
                         ) : ''}
                     </Table>
                     <ButtonContainer>
-                        <Button>ADICIONAR NOVO</Button>
+                        <Link to='/admin/piloto'>
+                            <Button>ADICIONAR NOVO</Button>
+                        </Link>
                     </ButtonContainer>
                 </Container>
             </Content>

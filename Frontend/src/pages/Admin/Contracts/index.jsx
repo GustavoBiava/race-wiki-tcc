@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AdminContainer, Table, Button } from '../../../styles/GlobalStyles';
 import axios from '../../../services/axios';
@@ -82,9 +82,11 @@ function Contracts() {
                                     <td>{contract.updated_at}</td>
                                     <td>
                                         <ButtonDiv>
-                                            <Button>
-                                                <MdEditSquare size={20}/>
-                                            </Button>
+                                            <Link to={`/admin/contrato/${contract.id}`}>
+                                                <Button>
+                                                    <MdEditSquare size={20}/>
+                                                </Button>
+                                            </Link>
                                         </ButtonDiv>
                                     </td>
                                     <td>
@@ -99,7 +101,9 @@ function Contracts() {
                         ) : ''}
                     </Table>
                     <ButtonContainer>
-                        <Button>ADICIONAR NOVO</Button>
+                        <Link to='/admin/contrato'>
+                            <Button>ADICIONAR NOVO</Button>
+                        </Link>
                     </ButtonContainer>
                 </Container>
             </Content>

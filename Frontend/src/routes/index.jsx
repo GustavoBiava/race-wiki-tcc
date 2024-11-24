@@ -22,6 +22,8 @@ import Circuits from '../pages/Admin/Circuits';
 import Circuit from '../pages/Admin/Circuit';
 
 import Contracts from '../pages/Admin/Contracts';
+import Contract from '../pages/Admin/Contract';
+
 import Races from '../pages/Admin/Races';
 
 import AdminTeams from '../pages/Admin/Teams';
@@ -70,6 +72,7 @@ function Router() {
             <Route exact path='/admin/circuito/:id?' element={<Circuit />} />
 
             <Route exact path='/admin/contratos' element={<Contracts />} />
+            <Route exact path='/admin/contrato/:id?' element={<Contract />} />
 
             <Route exact path='/admin/corridas' element={<Races />} />
 

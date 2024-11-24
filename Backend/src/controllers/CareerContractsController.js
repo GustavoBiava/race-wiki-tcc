@@ -50,12 +50,9 @@ class CareerContractsController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const careerContract = await CareerContracts.findByPk(id, {
-        include: [Driver, Team ],
-        attributes: { exclude: ['team_id', 'driver_id'] }
-      });
+      const careerContract = await CareerContracts.findByPk(id);
 
-      if (!careerContract) return res.status(404).json({ errors: ['CareerContract doesn\'t exists!'] });
+      if (!careerContract) return res.status(204).json({ errors: ['CareerContract doesn\'t exists!'] });
 
       return res.status(200).json(careerContract);
     }

@@ -53,7 +53,7 @@ class DriverPageController {
       await (async function() {
         const driverContracts = await CareerContracts.findAll({
           where: { driver_id: driver.id},
-          order: [['created_at', 'DESC']],
+          order: [['is_active', 'DESC']],
           attributes: ['id', 'is_active', 'team_id'],
           include: [
             {
@@ -70,14 +70,15 @@ class DriverPageController {
           ]
         });
 
+        driver.setDataValue('teams', driverContracts);
+
         if (driverContracts.length < 1) {
           driver.setDataValue('color', null);
           return driver.setDataValue('teams', null);
         }
 
-        driver.setDataValue('teams', driverContracts);
-
         const currentContract = driverContracts.find((driverContract => driverContract.is_active === true));
+        if (!currentContract) return driver.setDataValue('color', null);
 
         const { main_color } = await Team.findOne({
           where: { id: currentContract.team_id }

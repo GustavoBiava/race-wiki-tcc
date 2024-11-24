@@ -35,23 +35,25 @@ export default class CareerContracts extends Model {
       },
       begin_date: {
         type: Sequelize.DATEONLY,
-        allowNull: false,
-        validate: {
-          is: {
-            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-            msg: 'Begin_date is not a valid Date (YYYY:MM:DD)',
-          },
-        }
+        allowNull: true,
+        defaultValue: Date.now()
+        // validate: {
+        //   is: {
+        //     args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+        //     msg: 'Begin_date is not a valid Date (YYYY:MM:DD)',
+        //   },
+        // }
       },
       end_date: {
         type: Sequelize.DATEONLY,
-        allowNull: false,
-        validate: {
-          is: {
-            args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
-            msg: 'Begin_date is not a valid Date (YYYY:MM:DD)',
-          },
-        }
+        allowNull: true,
+        defaultValue: Date.now()
+        // validate: {
+        //   is: {
+        //     args: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/,
+        //     msg: 'Begin_date is not a valid Date (YYYY:MM:DD)',
+        //   },
+        // }
       },
       is_active: {
         type: Sequelize.BOOLEAN,

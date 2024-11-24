@@ -11,6 +11,8 @@ route.post('/countries', PicturesController.storeCountry);
 route.put('/countries', PicturesController.updateCountry);
 
 route.post('/teams', PicturesController.storeTeam);
+route.put('/teams', PicturesController.updateTeam);
+
 route.post('/races', PicturesController.storeRace);
 route.post('/publications', PicturesController.storePublication);
 

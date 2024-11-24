@@ -62,7 +62,7 @@ function Driver() {
 
                             <DriverFooter>
                                     <DriverInfo>
-                                        <Number color={driver.color}>{get(driver, 'driver_stat.number')}</Number>
+                                        <Number color={driver.color}>{get(driver, 'driver_stat.number', '00')}</Number>
                                         <DriverCountry>
                                             { get(driver, 'country.country_picture')
                                                 ? <img src={driver.country.country_picture.url} alt="driver-country-flag" />
@@ -100,37 +100,37 @@ function Driver() {
 
                             <tr>
                                 <td><TdTitle>Títulos de Piloto: </TdTitle></td>
-                                <td><TdContent>{get(driver, 'driver_stat.drivers_championships')}</TdContent></td>
+                                <td><TdContent>{get(driver, 'driver_stat.drivers_championships', '00')}</TdContent></td>
                             </tr>
 
                             <tr>
                                 <td><TdTitle>Corridas Disputadas: </TdTitle></td>
-                                <td><TdContent>{get(driver, 'driver_stat.races_entered')}</TdContent></td>
+                                <td><TdContent>{get(driver, 'driver_stat.races_entered', '00')}</TdContent></td>
                             </tr>
 
                             <tr>
                                 <td><TdTitle>Vitórias: </TdTitle></td>
-                                <td><TdContent>{get(driver, 'driver_stat.victories')}</TdContent></td>
+                                <td><TdContent>{get(driver, 'driver_stat.victories', '00')}</TdContent></td>
                             </tr>
 
                             <tr>
                                 <td><TdTitle>Pódios: </TdTitle></td>
-                                <td><TdContent>{get(driver, 'driver_stat.podiums')}</TdContent></td>
+                                <td><TdContent>{get(driver, 'driver_stat.podiums', '00')}</TdContent></td>
                             </tr>
 
                             <tr>
                                 <td><TdTitle>Pontos na Carreira: </TdTitle></td>
-                                <td><TdContent>{get(driver, 'driver_stat.career_points')}</TdContent></td>
+                                <td><TdContent>{get(driver, 'driver_stat.career_points', '00')}</TdContent></td>
                             </tr>
 
                             <tr>
                                 <td><TdTitle>Melhor Posição de Largada: </TdTitle></td>
-                                <td><TdContent>{get(driver, 'driver_stat.highest_grid_position')}</TdContent></td>
+                                <td><TdContent>{get(driver, 'driver_stat.highest_grid_position', '00')}</TdContent></td>
                             </tr>
 
                             <tr>
                                 <td><TdTitle>Melhor Posição de Chegada: </TdTitle></td>
-                                <td><TdContent>{get(driver, 'driver_stat.highest_race_finish')} ({get(driver, 'driver_stat.times_highest_finish')}x)</TdContent></td>
+                                <td><TdContent>{get(driver, 'driver_stat.highest_race_finish', '00')} ({get(driver, 'driver_stat.times_highest_finish', '0')}x)</TdContent></td>
                             </tr>
                         </DriverStatTable>
                     </DriverStatsContainer>

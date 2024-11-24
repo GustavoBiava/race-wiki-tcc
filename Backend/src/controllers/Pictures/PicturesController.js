@@ -154,6 +154,33 @@ class PicturesController {
     });
   }
 
+  updateTeam(req, res) {
+    return upload(req, res, async (err) => {
+      if (err) return res.status(400).json({ errors: [err.code] });
+
+      try {
+        if (!req.file) return res.status(400).json({ errors: ['Picture not found!'] });
+        if (!req.body) return res.status(400).json({ errors: ['Request body can\'t be null'] });
+
+        const { originalname, filename } = req.file;
+
+        const { team_id } = req.body;
+        if (!team_id) return res.status(400).json({ errors: ['Invalid id!'] });
+
+        const teamPicture = await TeamPicture.findOne({ where: { team_id } });
+
+        if (!teamPicture) return res.status(400).json({ errors: ['Invalid Team Picture!'] });
+
+        const updatedTeamPicture = await teamPicture.update({ original_name: originalname, filename, team_id });
+        return res.status(200).json(updatedTeamPicture);
+      }
+      catch (err) {
+        const errors = err.errors || [{ message: 'Fatal Error!'}];
+        return res.status(400).json({ errors: errors.map(e => e.message) });
+      }
+    });
+  }
+
   storeRace(req, res) {
     return uploadFiles(req, res, async (err) => {
       if (err) return res.status(400).json({ errors: [err.code] });

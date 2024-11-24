@@ -13,7 +13,7 @@ import {
     ButtonContainer,
     Content,
 } from './styled';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function Teams() {
@@ -84,9 +84,11 @@ function Teams() {
                                     <td>{team.updated_at}</td>
                                     <td>
                                         <ButtonDiv>
-                                            <Button>
-                                                <MdEditSquare size={20}/>
-                                            </Button>
+                                            <Link to={`/admin/equipe/${team.id}`}>
+                                                <Button>
+                                                    <MdEditSquare size={20}/>
+                                                </Button>
+                                            </Link>
                                         </ButtonDiv>
                                     </td>
                                     <td>
@@ -101,7 +103,9 @@ function Teams() {
                         ) : ''}
                     </Table>
                     <ButtonContainer>
-                        <Button>ADICIONAR NOVO</Button>
+                        <Link to='/admin/equipe'>
+                            <Button>ADICIONAR NOVO</Button>
+                        </Link>
                     </ButtonContainer>
                 </Container>
             </Content>

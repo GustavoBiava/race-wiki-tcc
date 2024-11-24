@@ -23,12 +23,6 @@ export default class Team extends Model {
         type: Sequelize.DATEONLY,
         allowNull: false,
         defaultValue: Sequelize.NOW,
-        validate: {
-          is: {
-            args: /^\d{4}(-\d{2}(-\d{2})?)?$/,
-            msg: 'first_participation is not a valid Date (YYYY-MM-DD)',
-          },
-        }
       },
       team_chief: {
         type: Sequelize.STRING,
@@ -117,12 +111,6 @@ export default class Team extends Model {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: '',
-        validate: {
-          len: {
-            args: [4, 20],
-            msg: 'Secondary_color invalid length (Min: 4, Max: 20)'
-          }
-        }
       },
       power_unit: {
         type: Sequelize.STRING,
@@ -139,12 +127,6 @@ export default class Team extends Model {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: '',
-        validate: {
-          len: {
-            args: [3, 50],
-            msg: 'Base invalid length (Min: 3, Max: 50)'
-          }
-        }
       },
       nationality: {
         type: Sequelize.INTEGER,

@@ -1,5 +1,6 @@
 import Team from "../models/Team";
 import Country from "../models/Country";
+import TeamPicture from "../models/Pictures/TeamPicture";
 
 class TeamController {
 
@@ -46,7 +47,15 @@ class TeamController {
       const { id } = req.params;
       if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
 
-      const team = await Team.findByPk(id);
+      const team = await Team.findByPk(id, {
+        include: [
+          {
+            model: TeamPicture,
+            as: 'team_picture',
+            attributes: ['url', 'filename']
+          }
+        ]
+      });
 
       if (!team) return res.status(404).json({ errors: ['Team doesn\'t exists!'] });
 

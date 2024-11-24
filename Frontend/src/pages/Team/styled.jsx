@@ -325,6 +325,7 @@ export const DriverDescription = styled.div`
     width: 90%;
     text-align: justify;
     font-size: 1em;
+    word-wrap: break-word;
     font-weight: 540;
     margin: 0 0 2em 0;
     

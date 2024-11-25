@@ -28,7 +28,7 @@ export const TitleHeader = styled.div`
     align-items: start;
     flex-direction: column;
     width: 100%;
-    margin: 0 0 2em 0;
+    margin: 0 0 1em 0;
 
     hr {
         border: 2.5px solid ${colors.mainRed};

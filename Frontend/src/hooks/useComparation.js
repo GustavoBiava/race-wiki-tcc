@@ -14,6 +14,8 @@ export const useComparation = () => {
   const [ drivers, setDrivers ] = useState([]);
   const [ driver1, setDriver1 ] = useState('');
   const [ driver2, setDriver2 ] = useState('');
+  const [ labels, setLabels ] = useState([]);
+  const [ datasets, setDatasets ] = useState([]);
 
   useEffect(() => {
     if (mode === 'admin') unsetAdmin();
@@ -30,25 +32,45 @@ export const useComparation = () => {
         }
       }));
     })();
-
-  }, [mode]);
+  }, []);
 
   const handleCompareClick = async () => {
     if (!driver1) return toast.error('Piloto 1 inválido');
     if (!driver2) return toast.error('Piloto 2 inválido');
-    const labels = [];
+    if (driver1 === driver2) return toast.error('Pilotos não podem ser iguais!');
 
-    (async function() {
-      const response = await axios.get(`/pages/comparation/${drivers.filter(driver => `${driver.name} ${driver.surname}` === driver1)[0].id}`);
-      const data = get(response, 'data');      
-      labels.push(get(data, 'Race.name'));
-    })();
+    const newLabels = [];
+    const newDatasets = [];
 
-    (async function() {
-      const response = await axios.get(`/pages/comparation/${drivers.filter(driver => `${driver.name} ${driver.surname}` === driver2)[0].id}`);
-      const data = get(response, 'data');     
-      labels.push(get(data, 'Race.name'));
-    })();
+      const response1 = await axios.get(`/pages/comparation/${drivers.filter(driver => `${driver.name} ${driver.surname}` === driver1)[0].id}`);
+      const data1 = get(response1, 'data');  
+      newDatasets.push({
+      fill: true,
+        label: driver1,
+        data: data1.map((race) => race.points),
+        backgroundColor: 'rgba(179, 0, 15, 0.5)',
+      });    
+      data1.map((result) => {
+        return newLabels.push(get(result, 'Race.name'));
+      });
+     
+    const response2 = await axios.get(`/pages/comparation/${drivers.filter(driver => `${driver.name} ${driver.surname}` === driver2)[0].id}`);
+    const data2 = get(response2, 'data');     
+    newDatasets.push({
+      fill: true,
+      label: driver2,
+      data: data2.map((race) => race.points),
+      backgroundColor: 'rgba(179, 0, 15, 0.5)',
+    });  
+
+    if (data2.length > newLabels.length) {
+      data2.map((result) => {
+        return newLabels.push(get(result, 'Race.name'));
+      });
+    }
+
+    setLabels(newLabels);
+    setDatasets(newDatasets);
   }
 
   Chart.defaults.font = {
@@ -60,19 +82,19 @@ export const useComparation = () => {
 Chart.defaults.color = theme.mode === 'dark' ? colors.lightBackground : colors.darkText;
 
     const data = {
-        labels: ['Max Verstappen', 'Lando Norris', 'March', 'April', 'May', 'June'],
-        datasets: [
+        labels: labels || ['Brasil', 'Baku', 'Monza', 'Singapura', 'Las Vegas', 'Arábia'],
+        datasets: datasets || [
           {
-            fill: true,
-            label: 'Pontos',
-            data: [12, 19, 3, 5, 2, 3],
+            fill: false,
+            label: 'Max Verstappen',
+            data: [15, 12, 8, 6, 2, 3],
             backgroundColor: colors.secondRed,
           },
           {
-            fill: true,
-            label: 'Pontos',
-            data: [15, 19, 3, 5, 2, 3],
-            backgroundColor: colors.mainRed,
+            fill: false,
+            label: 'Lando Norris',
+            data: [25, 18, 2, 1, 2, 2],
+            backgroundColor: colors.secondRed,
           },
           
         ],
@@ -84,10 +106,6 @@ Chart.defaults.color = theme.mode === 'dark' ? colors.lightBackground : colors.d
           legend: {
             position: 'top',
           },
-        },
-        title: {
-          display: true,
-          text: 'Chart.js Line Chart',
         },
         scales: {
           x: {

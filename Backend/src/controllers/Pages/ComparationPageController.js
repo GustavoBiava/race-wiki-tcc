@@ -28,6 +28,7 @@ class ComparationPageController {
         where: { driver_id: id },
         order: [['created_at', 'ASC']],
         attributes: ['points'],
+        limit: 5,
         include: [
           {
             model: Race,

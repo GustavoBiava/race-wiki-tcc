@@ -5,7 +5,6 @@ import { get } from 'lodash';
 import { isFloat, isDate } from 'validator';
 import { useSelector } from 'react-redux';
 import { AdminContext } from '../../../contexts/AdminContext';
-import NotAllowed from '../../../components/NotAllowed';
 
 import { AdminContainer, Button } from '../../../styles/GlobalStyles';
 import axios from '../../../services/axios';

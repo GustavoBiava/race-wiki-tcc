@@ -85,6 +85,10 @@ export const LinksList = styled.ul`
         color: ${colors.mainRed};
     }
 
+    @media (max-width: 965px) {
+        align-items: center;
+    }
+
 `;
 
 export const ResponsiveHr = styled.hr`

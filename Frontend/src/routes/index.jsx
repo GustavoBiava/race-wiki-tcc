@@ -25,6 +25,7 @@ import Contracts from '../pages/Admin/Contracts';
 import Contract from '../pages/Admin/Contract';
 
 import Races from '../pages/Admin/Races';
+import AdminRace from '../pages/Admin/Race';
 
 import AdminTeams from '../pages/Admin/Teams';
 import AdminTeam from '../pages/Admin/Team';
@@ -75,6 +76,7 @@ function Router() {
             <Route exact path='/admin/contrato/:id?' element={<Contract />} />
 
             <Route exact path='/admin/corridas' element={<Races />} />
+            <Route exact path='/admin/corrida/:id?' element={<AdminRace />} />
 
             <Route exact path='/admin/equipes' element={<AdminTeams />} />
             <Route exact path='/admin/equipe/:id?' element={<AdminTeam />} />

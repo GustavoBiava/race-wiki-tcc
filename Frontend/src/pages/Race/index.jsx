@@ -97,23 +97,6 @@ function Race() {
                     <RaceStats>
                         <RaceStatsContainer>
                             <RaceStatTable cellSpacing={10}>
-
-                            { race.is_done 
-                                    ? (
-                                        <>
-                                            <tr>
-                                                <td><TdTitle>Vencedor: </TdTitle></td>
-                                                <td><TdContent>{race.winner_driver.name} {race.winner_driver.surname}</TdContent></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td><TdTitle>Pole Position: </TdTitle></td>
-                                                <td><TdContent>{race.position_pole.name} {race.position_pole.surname}</TdContent></td>
-                                            </tr>
-                                        </>
-                                    )
-                                    : ''
-                                }
                                 <tr>
                                     <td><TdTitle>País: </TdTitle></td>
                                     <td><TdContent>{get(race, 'place.name')}</TdContent></td>
@@ -149,15 +132,10 @@ function Race() {
                                     <td><TdContent>{get(race, 'circuit.circuit_length')} km</TdContent></td>
                                 </tr>
 
-                                { !race.is_done ? (
-                                    <tr>
-                                        <td><TdTitle>Primeira Aparição Circuito: </TdTitle></td>
-                                        <td><TdContent>{formatDate(get(race, 'circuit.first_apparition'))}</TdContent></td>
-                                    </tr>
-                                ) : ''}
-
-                                
-
+                                <tr>
+                                    <td><TdTitle>Primeira Aparição Circuito: </TdTitle></td>
+                                    <td><TdContent>{formatDate(get(race, 'circuit.first_apparition'))}</TdContent></td>
+                                </tr>
                             </RaceStatTable>
                         </RaceStatsContainer>
 

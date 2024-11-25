@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import { FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AdminContainer, Table, Button } from '../../../styles/GlobalStyles';
 import axios from '../../../services/axios';
@@ -85,9 +85,11 @@ function Races() {
                                     <td>{race.updated_at}</td>
                                     <td>
                                         <ButtonDiv>
-                                            <Button>
-                                                <MdEditSquare size={20}/>
-                                            </Button>
+                                            <Link to={`/admin/corrida/${race.id}`}>
+                                                <Button>
+                                                    <MdEditSquare size={20}/>
+                                                </Button>
+                                            </Link>
                                         </ButtonDiv>
                                     </td>
                                     <td>
@@ -102,7 +104,9 @@ function Races() {
                         ) : ''}
                     </Table>
                     <ButtonContainer>
-                        <Button>ADICIONAR NOVO</Button>
+                        <Link to='/admin/corrida'>
+                            <Button>ADICIONAR NOVO</Button>
+                        </Link>
                     </ButtonContainer>
                 </Container>
             </Content>

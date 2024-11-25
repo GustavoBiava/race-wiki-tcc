@@ -3,6 +3,7 @@ import Circuit from '../models/Circuit';
 import Season from '../models/Season';
 import Driver from '../models/Driver';
 import Country from '../models/Country';
+import RacePicture from '../models/Pictures/RacePicture';
 
 class RaceController {
 
@@ -65,11 +66,11 @@ class RaceController {
           { model: Season, as: 'season' },
           { model: Driver, as: 'position_pole' },
           { model: Driver, as: 'winner_driver' },
+          { model: RacePicture, as: 'race_picture', attributes: ['url', 'filename'] },
         ],
-        attributes: { exclude: ['circuit_id', 'season_id', 'pole_position', 'race_winner' ] }
       });
 
-      if (!race) return res.status(404).json({ errors: ['Race doesn\'t exists!'] });
+      if (!race) return res.status(204).json({ errors: ['Race doesn\'t exists!'] });
 
       return res.status(200).json(race);
     }

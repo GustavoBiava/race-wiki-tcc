@@ -1,8 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { isFloat, isDate } from 'validator';
+import { useSelector } from 'react-redux';
+import { AdminContext } from '../../../contexts/AdminContext';
+import NotAllowed from '../../../components/NotAllowed';
 
 import { AdminContainer, Button } from '../../../styles/GlobalStyles';
 import axios from '../../../services/axios';
@@ -25,6 +28,8 @@ function Circuit() {
     const [name, setName] = useState('');
     const [length, setLength] = useState('');
     const [firstApparition, setFirstApparition] = useState('');
+    const { isLogged, user } = useSelector(states => states.auth);
+    const { mode, unsetAdmin, setAdmin } = useContext(AdminContext);
 
     const handleButtonClick = (e) => {
         e.preventDefault();
@@ -59,6 +64,9 @@ function Circuit() {
     }
 
     useEffect(() => {
+        if (!isLogged) return navigate('/');
+        if (user.type !== 'ADMIN') return navigate('/');
+        if (mode !== 'admin') setAdmin();
         if (!id) return;
 
         try {

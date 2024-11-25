@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import Select from '../../../components/Select';
 import Checkbox from '../../../components/Checkbox';
+import { useSelector } from 'react-redux';
 
 import { AdminContainer, Button } from '../../../styles/GlobalStyles';
 import axios from '../../../services/axios';
@@ -16,12 +17,14 @@ import {
     FormButton,
     TitleHeader,
 } from './styled';
+import { AdminContext } from '../../../contexts/AdminContext';
 
 function Contract() {
 
     const { id } = useParams();
     
     const navigate = useNavigate();
+    const { mode, unsetAdmin, setAdmin } = useContext(AdminContext);
 
     const [drivers, setDrivers] = useState([]);
     const [teams, setTeams] = useState([]);
@@ -29,6 +32,7 @@ function Contract() {
     const [selectedDriver, setSelectedDriver] = useState('');
     const [selectedTeam, setSelectedTeam] = useState('');
     const [checkbox, setCheckbox] = useState(false);
+    const { isLogged, user } = useSelector(states => states.auth);
 
     const handleButtonClick = (e) => {
         e.preventDefault();
@@ -87,7 +91,10 @@ function Contract() {
         })();
     }, []);
 
-    useEffect(() => {        
+    useEffect(() => {       
+        if (!isLogged) return navigate('/');
+        if (user.type !== 'ADMIN') return navigate('/'); 
+        if (mode !== 'admin') setAdmin();
         if (!id) return;
 
         try {

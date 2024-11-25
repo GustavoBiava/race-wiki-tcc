@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { FaTrashAlt } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 import { AdminContainer, Table, Button } from '../../../styles/GlobalStyles';
 import axios from '../../../services/axios';
+import { AdminContext } from '../../../contexts/AdminContext';
 import { 
     TitleHeader,
     Container,
@@ -22,6 +23,7 @@ function Drivers() {
     const [drivers, setDrivers] = useState([]);
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
+    const { mode, unsetAdmin, setAdmin } = useContext(AdminContext);
 
     const handleDeleteClick = (e) => {
         const id = e.currentTarget.parentNode.parentNode.id;
@@ -40,6 +42,7 @@ function Drivers() {
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
+        if (mode !== 'admin') setAdmin();
         try {
             (async function() {
                 const response = await axios.get('/drivers');

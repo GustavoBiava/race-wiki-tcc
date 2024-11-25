@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import Select from '../../../components/Select';
 import { FaFileUpload } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 import { AdminContainer, Button } from '../../../styles/GlobalStyles';
 import axios from '../../../services/axios';
@@ -19,12 +20,15 @@ import {
     SelectImage,
     TitleHeader,
 } from './styled';
+import { AdminContext } from '../../../contexts/AdminContext';
 
 function Driver() {
 
     const { id } = useParams();
     
     const navigate = useNavigate();
+    const { isLogged, user } = useSelector(states => states.auth);
+    const { mode, unsetAdmin, setAdmin } = useContext(AdminContext);
 
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -133,6 +137,9 @@ function Driver() {
     }, []);
 
     useEffect(() => {
+        if (!isLogged) return navigate('/');
+        if (user.type !== 'ADMIN') return navigate('/');
+        if (mode !== 'admin') setAdmin();
         if (!id) return;
 
         try {

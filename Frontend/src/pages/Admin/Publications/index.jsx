@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { FaTrashAlt } from "react-icons/fa";
@@ -15,12 +15,14 @@ import {
 } from './styled';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { AdminContext } from '../../../contexts/AdminContext';
 
 function Publications() {
 
     const [publications, setPublications] = useState([]);
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
+    const { mode, unsetAdmin, setAdmin } = useContext(AdminContext);
 
     const handleDeleteClick = (e) => {
         const id = e.currentTarget.parentNode.parentNode.id;
@@ -39,6 +41,7 @@ function Publications() {
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
+        if (mode !== 'admin') setAdmin();
         try {
             (async function() {
                 const response = await axios.get('/publications');

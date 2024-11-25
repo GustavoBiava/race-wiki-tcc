@@ -79,7 +79,7 @@ export const LinksList = styled.ul`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 
     li:hover {
         color: ${colors.mainRed};

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { FaTrashAlt } from "react-icons/fa";
@@ -15,11 +15,13 @@ import {
     ButtonContainer,
     Content,
 } from './styled';
+import { AdminContext } from '../../../contexts/AdminContext';
 
 function Races() {
     const [races, setRaces] = useState([]);
     const navigate = useNavigate();
     const { isLogged, user } = useSelector(states => states.auth);
+    const { mode, unsetAdmin, setAdmin } = useContext(AdminContext);
 
     const handleDeleteClick = (e) => {
         const id = e.currentTarget.parentNode.parentNode.id;
@@ -38,6 +40,7 @@ function Races() {
     useEffect(() => {
         if (!isLogged) return navigate('/');
         if (user.type !== 'ADMIN') return navigate('/');
+        if (mode !== 'admin') setAdmin();
         try {
             (async function() {
                 const response = await axios.get('/races');

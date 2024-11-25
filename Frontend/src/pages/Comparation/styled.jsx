@@ -8,6 +8,10 @@ export const Content = styled.div`
     justify-content: center;
     flex-direction: column;
     margin: 7em 0;
+
+    @media (max-width: 930px) {
+        width: 95vw;
+    }
 `;
 
 export const ChartContainer = styled.div`
@@ -28,7 +32,7 @@ export const TitleHeader = styled.div`
     align-items: start;
     flex-direction: column;
     width: 100%;
-    margin: 0 0 1em 0;
+    margin: 0 0 0 0;
 
     hr {
         border: 2.5px solid ${colors.mainRed};
@@ -53,7 +57,7 @@ export const ChartBackground = styled.div`
     width: 100%;
     height: 100%;
     background-color: ${props => props.theme.mode === 'dark' ? colors.mainGrayLight : colors.mainWhiteDark};
-    padding: 1em;
+    padding: 1.5em;
     border-radius: 0.5em;
     gap: 1em;
 `;

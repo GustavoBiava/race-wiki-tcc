@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { get } from 'lodash';
 import { FaFileUpload } from "react-icons/fa";
@@ -18,12 +18,16 @@ import {
     SelectImage,
     ImageDiv,
 } from './styled';
+import { useSelector } from 'react-redux';
+import { AdminContext } from '../../../contexts/AdminContext';
 
 function Country() {
 
     const { id } = useParams();
     
     const navigate = useNavigate();
+    const { isLogged, user } = useSelector(states => states.auth);
+    const { mode, unsetAdmin, setAdmin } = useContext(AdminContext);
 
     const [name, setName] = useState('');
     const [shortName, setShortName] = useState('');
@@ -97,6 +101,9 @@ function Country() {
       };
 
     useEffect(() => {
+        if (!isLogged) return navigate('/');
+        if (user.type !== 'ADMIN') return navigate('/');
+        if (mode !== 'admin') setAdmin();
         if (!id) return;
 
         try {

@@ -167,8 +167,12 @@ export const Table = styled.table`
     }
     
     td {
-        padding: 0.23em;
+        padding: ${props => props.isResult ? '1em' : '0.23em'};
         font-weight: 500;
+    }
+
+    input {
+        height: 2em;
     }
 
     tr:nth-child(even) {

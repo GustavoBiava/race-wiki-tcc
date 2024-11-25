@@ -1,3 +1,4 @@
+import { where } from 'sequelize';
 import Driver from '../models/Driver';
 import DriverClassification from '../models/DriverClassification';
 import Season from '../models/Season';
@@ -54,6 +55,30 @@ class DriverClassificationController {
       return res.status(200).json(driverClassification);
     }
     catch (err) {
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
+    }
+  }
+
+  async showByDriver(req, res) {
+    try {
+      const { id } = req.params;
+      if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
+
+      const driverClassification = await DriverClassification.findOne({
+        where: { driver_id: id },
+        include: [
+          { model: Driver},
+          { model: Season},
+        ],
+      });
+
+      if (!driverClassification) return res.status(204).json({ errors: ['DriverClassification doesn\'t exists!'] });
+
+      return res.status(200).json(driverClassification);
+    }
+    catch (err) {
+      console.log(err)
       const errors = err.errors || [{ message: 'Fatal Error!'}];
       return res.status(400).json({ errors: errors.map(e => e.message) });
     }

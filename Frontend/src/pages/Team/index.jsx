@@ -165,8 +165,8 @@ function Team() {
 
                             <tr>
                                 <th>DATA</th>
-                                <th>VOLTAS</th>
                                 <th>CORRIDA</th>
+                                <th>VOLTAS</th>
                                 <th>PONTOS</th>
                             </tr>
 

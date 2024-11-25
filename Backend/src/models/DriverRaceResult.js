@@ -33,7 +33,8 @@ export default class DriverRaceResult extends Model {
       },
       position: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 1,
         validate: {
           isInt: {
             msg: 'Position not a integer value',

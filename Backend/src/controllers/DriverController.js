@@ -1,7 +1,9 @@
 import Driver from "../models/Driver";
+import Team from "../models/Team";
 import DriverStat from "../models/DriverStat";
 import Country from "../models/Country";
 import DriverPicture from "../models/Pictures/DriverPicture";
+import CareerContracts from "../models/CareerContracts";
 
 class DriverController {
 
@@ -21,6 +23,16 @@ class DriverController {
       if (drivers.length < 0) {
         return res.status(204).json({ message: ['There is no Drivers registered!'] });
       }
+
+      await Promise.all(drivers.map(async (driver) => {
+        const driverContracts = await CareerContracts.findAll({
+          where: { driver_id: driver.id},
+          order: [['is_active', 'DESC']],
+          attributes: ['id', 'team_id'],
+        });
+
+        return driver.setDataValue('team', driverContracts[0]);
+      }));
 
       return res.status(200).json(drivers);
     }

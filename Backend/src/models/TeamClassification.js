@@ -33,7 +33,8 @@ export default class TeamClassification extends Model {
       },
       position: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
+        defaultValue: 1,
         validate: {
           isInt: {
             msg: 'Position not a integer value!',
@@ -51,13 +52,8 @@ export default class TeamClassification extends Model {
       },
       chassis: {
         type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [3, 10],
-            msg: 'Invalid length (Min: 3, Max: 10)',
-          }
-        }
+        allowNull: true,
+        defaultValue: '',
       },
     }, { sequelize });
     return this;

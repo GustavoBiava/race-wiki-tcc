@@ -59,6 +59,30 @@ class TeamClassificationController {
     }
   }
 
+
+  async showByTeam(req, res) {
+    try {
+      const { id } = req.params;
+      if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
+
+      const teamClassification = await TeamClassification.findOne({
+        where: { team_id: id },
+        include: [
+          { model: Team},
+          { model: Season},
+        ],
+      });
+
+      if (!teamClassification) return res.status(204).json({ errors: ['TeamClassification doesn\'t exists!'] });
+
+      return res.status(200).json(teamClassification);
+    }
+    catch (err) {
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
+    }
+  }
+
   async update(req, res) {
     try {
       const { id } = req.params;

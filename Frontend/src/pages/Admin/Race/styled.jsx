@@ -45,6 +45,7 @@ export const Form = styled.form`
     input[type='file'] {
         display: none;
     }
+
 `;
 
 export const FormBody = styled.div`
@@ -61,7 +62,7 @@ export const FormButton = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2em 0;
+    margin: 1em 0;
 `;
 
 export const ImageInput = styled.label`
@@ -100,19 +101,4 @@ export const ImageDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-`;
-
-export const CommentTextarea = styled.textarea`
-    all: unset;
-    background-color: ${props => props.theme.mode === 'dark' ? colors.mainGray : colors.lightText};
-    width: 100%;
-    border-radius: 0.3em;
-    text-indent: 0.5em;
-    overflow-wrap: break-word;
-    height: 12em;
-    padding: 0.5em;
-    text-align: justify;
-    box-sizing: border-box;
-    border: 2px solid ${props => props.theme.mode === 'dark' ? 'rgba(11, 11, 14, 0.6)' : 'rgba(120, 120, 135, 0.2)'};
-    margin: 0 0 1em 0;
 `;

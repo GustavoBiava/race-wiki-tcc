@@ -59,6 +59,32 @@ class TeamRaceResultController {
     }
   }
 
+  async showByRaceAndTeam(req, res) {
+    try {
+      const { id } = req.params;
+      if (!id) return res.status(400).json({ errors: ['Invalid ID!'] });
+
+      const { team_id } = req.params;
+      if (!team_id) return res.status(400).json({ errors: ['Invalid ID!'] });
+
+      const teamRaceResult = await TeamRaceResult.findOne({
+        where: { team_id, race_id: id },
+        include: [
+          { model: Team},
+          { model: Race},
+        ],
+      });
+
+      if (!teamRaceResult) return res.status(204).json({ errors: ['TeamRaceResult doesn\'t exists!'] });
+
+      return res.status(200).json(teamRaceResult);
+    }
+    catch (err) {
+      const errors = err.errors || [{ message: 'Fatal Error!'}];
+      return res.status(400).json({ errors: errors.map(e => e.message) });
+    }
+  }
+
   async update(req, res) {
     try {
       const { id } = req.params;

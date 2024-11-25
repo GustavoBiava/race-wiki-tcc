@@ -18,6 +18,7 @@ import {
     ImageInput,
     SelectImage,
     ImageDiv,
+
 } from './styled';
 
 function Race() {
@@ -35,11 +36,18 @@ function Race() {
     const [selectedCircuit, setSelectedCircuit] = useState('');
     const [selectedSeason, setSelectedSeason] = useState('');
     const [selectedPlace, setSelectedPlace] = useState('');
+    const [selectedDriver, setSelectedDriver] = useState('');
     const [image, setImage] = useState('');
 
     const [circuits, setCircuits] = useState([]);
     const [seasons, setSeasons] = useState([]);
     const [countries, setCountries] = useState([]);
+    const [drivers, setDrivers] = useState([]);
+
+    const [driverLaps, setDriverLaps] = useState(0);
+    const [driverPoints, setDriverPoints] = useState(0);
+    const [driverTotalTime, setDriverTotalTime] = useState('');
+    const [driverInterval, setDriverInterval] = useState('');
 
     const handleButtonClick = (e) => {
         e.preventDefault();
@@ -62,17 +70,81 @@ function Race() {
                 return toast.success('Corrida criada com sucesso!'); 
             }
 
+            if (selectedDriver) {
+                (async function() {
+                    await axios.post(`/driverRaceResults`, { 
+                        driver_id: drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].id,
+                        race_id: id,
+                        laps: driverLaps,
+                        points: driverPoints,
+                        total_race_duration: driverTotalTime,
+                        interval_to_leader: driverInterval,
+                    });
+                })();
+
+                (async function() {
+                    const { data, status } = await axios.get(`/driverClassifications/driver/${drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].id}`);
+                    if (status === 204) {
+                        await axios.post(`/driverClassifications`, {
+                            season_id: seasons.filter(season => season.year === selectedSeason)[0].id,
+                            driver_id: drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].id,
+                            points: driverPoints,
+                        });
+                        return;
+                    }
+
+                    const classificationId = get(data, 'id');
+                    const classificationPoints = get(data, 'points');
+                    
+                    await axios.put(`/driverClassifications/${classificationId}`, {
+                        season_id: seasons.filter(season => season.year === selectedSeason)[0].id,
+                        driver_id: drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].id,
+                        points: Number(classificationPoints) + Number(driverPoints),
+                    });
+                    return;
+                })();
+            }
+
             (async function() {
-                await axios.put(`/races/${id}`, {
-                    name,
-                    date,
-                    laps_quantity: laps,
-                    type: selectedType,
-                    race_distance: raceDistance,
-                    circuit_id: circuits.filter(circuit => circuit.name === selectedCircuit)[0].id,
-                    season_id: seasons.filter(season => season.year === selectedSeason)[0].id,
-                    race_place: countries.filter(country => country.name === selectedPlace)[0].id,
+                const { data, status } = await axios.get(`/teamRaceResults/${id}/${drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].team}`);
+                if (status === 204) {
+                    await axios.post('/teamRaceResults', {
+                        team_id: drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].team,
+                        race_id: id,
+                        laps: driverLaps,
+                        points: driverPoints,
+                    });
+                    return;
+                }
+
+                await axios.put(`/teamRaceResults/${get(data, 'id')}`, {
+                    team_id: drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].team,
+                    race_id: id,
+                    laps: Number(get(data, 'laps')) + Number(driverLaps),
+                    points: Number(get(data, 'points')) + Number(driverPoints),
                 });
+            })();
+
+            (async function() {
+                const { data, status } = await axios.get(`/teamClassifications/team/${drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].team}`);
+                if (status === 204) {
+                    await axios.post(`/teamClassifications`, {
+                        season_id: seasons.filter(season => season.year === selectedSeason)[0].id,
+                        team_id: drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].team,
+                        points: driverPoints,
+                    });
+                    return;
+                }
+
+                const classificationId = get(data, 'id');
+                const classificationPoints = get(data, 'points');
+                
+                await axios.put(`/teamClassifications/${classificationId}`, {
+                    season_id: seasons.filter(season => season.year === selectedSeason)[0].id,
+                    team_id: drivers.filter(driver => `${driver.name} ${driver.surname}` === selectedDriver)[0].team,
+                    points: Number(classificationPoints) + Number(driverPoints),
+                });
+                return;
             })();
             navigate('/admin/corridas');
             return toast.success('Corrida atualizada com sucesso!'); 
@@ -151,6 +223,24 @@ function Race() {
     useEffect(() => {
         if (!id) return;
 
+        (async function() {
+            const response = await axios.get(`/drivers`);
+            const data = get(response, 'data');
+            setDrivers(data.map((driver) => {
+                return {
+                    id: driver.id,
+                    name: driver.name,
+                    surname: driver.surname,
+                    team: get(driver, 'team.team_id')
+                }
+            }));
+        })();
+    }, []);
+
+
+    useEffect(() => {
+        if (!id) return;
+
         try {
             (async function() {
                 const {data, status} = await axios.get(`/races/${id}`);
@@ -221,6 +311,21 @@ function Race() {
             return false;
         }
 
+        if (selectedDriver) {
+
+            if (!/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(driverTotalTime)) {
+                toast.error('Tempo total inválido! (HH:mm:ss)');
+                return false;
+            }
+
+            if (!/^[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}$/.test(driverInterval)) {
+                toast.error('Intervalo inválido! (HH:mm:ss.SSS)');
+                return false;
+            }
+
+            
+        }
+
         return true;
     }
 
@@ -258,7 +363,6 @@ function Race() {
                         <label htmlFor="place">País da corrida:</label>
                         <Select setSelected={setSelectedPlace} selected={selectedPlace} options={countries.map(country => country.name)}/>
                         
-                        
                         { id ? (
                             <>
                                 <label>Imagens da corrida:</label>
@@ -275,6 +379,21 @@ function Race() {
                                 )}
                                 <input type="file" id='image' onChange={handleInputChange} multiple />
                                 </ImageInput>
+
+                                <label htmlFor="driver">Registrar resultado de piloto:</label>
+                                <Select setSelected={setSelectedDriver} selected={selectedDriver} options={drivers.map(driver => `${driver.name} ${driver.surname}`)}/>
+                            
+                                <label htmlFor="laps">Voltas do piloto:</label>
+                                <input type="number" value={driverLaps} onChange={(e) => setDriverLaps(e.target.value)} step='0.1'/>
+
+                                <label htmlFor="points">Pontos do piloto:</label>
+                                <input type="number" value={driverPoints} onChange={(e) => setDriverPoints(e.target.value)} step='0.1'/>
+
+                                <label htmlFor="total_time">Tempo total piloto:</label>
+                                <input type="text" placeholder='(HH:mm:ss)' value={driverTotalTime} onChange={(e) => setDriverTotalTime(e.target.value)} step='0.1'/>
+
+                                <label htmlFor="interval">Intervalo piloto:</label>
+                                <input type="text" placeholder='(HH:mm:ss.SSS)' value={driverInterval} onChange={(e) => setDriverInterval(e.target.value)} step='0.1'/>
                             </>
                         ) : ''}
                     </FormBody>

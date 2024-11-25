@@ -1,16 +1,22 @@
 import { Chart } from 'chart.js/auto';
 import * as colors from '../config/colors';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 import { AdminContext } from '../contexts/AdminContext';
+import axios from '../services/axios';
+import { get } from 'lodash';
 
 export const useComparation = () => {
 
   const { theme } = useContext(ThemeContext);
   const { mode, unsetAdmin } = useContext(AdminContext);
+  const { drivers, setDrivers } = useState([]);
+  const { driver1, setDriver1 } = useState('');
+  const { driver2, setDriver2 } = useState('');
 
   useEffect(() => {
     if (mode === 'admin') unsetAdmin();
+
   }, []);
 
   Chart.defaults.font = {
@@ -47,14 +53,14 @@ Chart.defaults.color = theme.mode === 'dark' ? colors.lightBackground : colors.d
         scales: {
           x: {
             grid: {
-              display: false, // Remove as linhas da grade no eixo X
+              display: false,
             },
             ticks: {
             },
           },
           y: {
             grid: {
-              display: true, // Remove as linhas da grade no eixo Y
+              display: true,
 
             },
             ticks: {
@@ -66,6 +72,11 @@ Chart.defaults.color = theme.mode === 'dark' ? colors.lightBackground : colors.d
     return {
         data,
         options,
+        drivers,
+        setDriver1,
+        driver1,
+        setDriver2,
+        driver2
     }
 
 }

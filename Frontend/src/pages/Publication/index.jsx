@@ -44,7 +44,7 @@ import { get } from 'lodash';
 
 function Publication() {
 
-    const { publication, formatDate  } = usePublication();
+    const { publication, formatDate, handleCommentClick, body, setBody, setTitle, title, response, setResponse, handleResponseClick, liked, setLiked } = usePublication();
     
     return (
         <Container>
@@ -103,7 +103,7 @@ function Publication() {
 
                     <ActionsContainer>
                         <ActionsDiv>
-                            <Like number={publication.likes}/>
+                            {/* <Like number={publication.likes}/> */}
                             <Share />
                         </ActionsDiv>
                     </ActionsContainer>
@@ -117,22 +117,22 @@ function Publication() {
 
                             <TextLabel>
                                 <label>Título:</label>
-                                <CommentTitle placeholder='Título do seu comentário...'/>
+                                <CommentTitle placeholder='Título do seu comentário...' value={title} onChange={(e) => setTitle(e.target.value)}/>
                             </TextLabel>
                             
                             <TextLabel>
                                 <label>Conteúdo:</label>
-                                <CommentTextarea placeholder='Deixe aqui seu comentário...'/>
+                                <CommentTextarea placeholder='Deixe aqui seu comentário...' value={body} onChange={(e) => setBody(e.target.value)}/>
                             </TextLabel>
                             
                             <ButtonDiv>
-                                <Button>COMENTAR</Button>
+                                <Button onClick={handleCommentClick}>COMENTAR</Button>
                             </ButtonDiv>
                         </WriteSection>
 
                         <PublicationComments>
                             { publication.comments ? publication.comments.map((comment, index) => (
-                                <Comment key={index}>
+                                <Comment key={index} id={comment.id} className='comment'>
                                     <CommentHeader>
                                         <UserProfile color={comment.User.color}>
                                             { comment.User.Driver.driver_picture
@@ -183,10 +183,10 @@ function Publication() {
                                                 <FooterDetails>
                                                     <summary>Responder</summary>
                                                     <ReponseSection>
-                                                        <ResponseTextarea placeholder='Deixe aqui sua resposta...' isReponse/>
+                                                        <ResponseTextarea placeholder='Deixe aqui sua resposta...' isReponse value={response} onChange={(e) => setResponse(e.target.value)}/>
 
                                                         <ButtonDiv>
-                                                            <Button>RESPONDER</Button>
+                                                            <Button onClick={handleResponseClick}>RESPONDER</Button>
                                                         </ButtonDiv>
                                                     </ReponseSection>
                                                 </FooterDetails>
@@ -195,10 +195,10 @@ function Publication() {
                                             <FooterDetails>
                                                 <summary>Responder</summary>
                                                 <ReponseSection>
-                                                    <ResponseTextarea placeholder='Deixe aqui sua resposta...' isReponse/>
+                                                    <ResponseTextarea placeholder='Deixe aqui sua resposta...' isReponse value={response} onChange={(e) => setResponse(e.target.value)}/>
 
                                                     <ButtonDiv>
-                                                        <Button>RESPONDER</Button>
+                                                        <Button onClick={handleResponseClick}>RESPONDER</Button>
                                                     </ButtonDiv>
                                                 </ReponseSection>
                                             </FooterDetails>

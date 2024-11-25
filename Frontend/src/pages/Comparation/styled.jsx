@@ -20,7 +20,7 @@ export const ChartContainer = styled.div`
     width: 100%;
     height: 100%; 
     padding: 3em;
-    gap: 1em 0;
+    gap: 2em 0;
 `;
 
 export const TitleHeader = styled.div`
@@ -55,6 +55,7 @@ export const ChartBackground = styled.div`
     background-color: ${props => props.theme.mode === 'dark' ? colors.mainGrayLight : colors.mainWhiteDark};
     padding: 1em;
     border-radius: 0.5em;
+    gap: 1em;
 `;
 
 export const Select = styled.select`

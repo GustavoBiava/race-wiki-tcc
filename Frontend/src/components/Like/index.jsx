@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { LikeContainer, Liked, Unliked } from './styled';
 import { useEffect, useState } from "react";
 
-function Like({ number = 0 }) {
+// eslint-disable-next-line react/prop-types
+function Like({ number = 0, onClick }) {
 
     const [likes, setLikes] = useState(0);
     const [isClicked, setIsClicked] = useState(false);
@@ -15,6 +16,7 @@ function Like({ number = 0 }) {
 
     const handleLikeContainerChange = () => {
         setIsClicked(!isClicked);
+        onClick();
         if (!isClicked) setLikes(likes + 1);
         if (isClicked) setLikes(likes - 1);
     }

@@ -1,5 +1,5 @@
 import { Bar } from 'react-chartjs-2';
-import { IoIosArrowDown } from "react-icons/io";
+import Select from '../../components/Select';
 
 import { Container } from '../../styles/GlobalStyles';
 import { useComparation } from '../../hooks/useComparation';
@@ -8,13 +8,11 @@ import {
     ChartContainer,
     Content,
     TitleHeader,
-    Select,
-    OptionContainer,
 } from './styled';
 
 function Comparation() {
 
-    const { data, options } = useComparation();
+    const { data, options, driver1, driver2, drivers, setDriver1, setDriver2 } = useComparation();
 
     return (
         <Container>
@@ -29,9 +27,8 @@ function Comparation() {
                         <Bar data={data} options={options}/>
                     </ChartBackground>
                     <ChartBackground>
-                        <Select>
-                            <option value=""> <IoIosArrowDown size={25}/>                    </option>
-                        </Select>
+                        <Select selected={driver1} setSelected={setDriver1} options={drivers.map(driver => driver.name)}/>
+                        <Select selected={driver2} setSelected={setDriver2}/>
                     </ChartBackground>
 
                 </ChartContainer>

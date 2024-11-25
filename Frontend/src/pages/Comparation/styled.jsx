@@ -74,3 +74,15 @@ export const OptionContainer = styled.div`
     color: black;
 
 `;
+
+export const DriverContainer = styled.div`
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+
+    label {
+        margin: 0 0 0.5em 0;
+    }
+`;

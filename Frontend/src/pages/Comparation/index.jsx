@@ -1,18 +1,19 @@
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import Select from '../../components/Select';
 
-import { Container } from '../../styles/GlobalStyles';
+import { Button, Container } from '../../styles/GlobalStyles';
 import { useComparation } from '../../hooks/useComparation';
 import { 
     ChartBackground,
     ChartContainer,
     Content,
+    DriverContainer,
     TitleHeader,
 } from './styled';
 
 function Comparation() {
 
-    const { data, options, driver1, driver2, drivers, setDriver1, setDriver2 } = useComparation();
+    const { data, options, driver1, driver2, drivers, setDriver1, setDriver2, handleCompareClick } = useComparation();
 
     return (
         <Container>
@@ -24,11 +25,20 @@ function Comparation() {
                     </TitleHeader>
 
                     <ChartBackground>
-                        <Bar data={data} options={options}/>
+                        <Line data={data} options={options}/>
                     </ChartBackground>
                     <ChartBackground>
-                        <Select selected={driver1} setSelected={setDriver1} options={drivers.map(driver => driver.name)}/>
-                        <Select selected={driver2} setSelected={setDriver2}/>
+                        <DriverContainer>
+                            <label htmlFor="driver1">Piloto 1:</label>
+                            <Select selected={driver1} setSelected={setDriver1} options={drivers.map(driver => `${driver.name} ${driver.surname}`)}/>
+                        </DriverContainer>
+
+                        <DriverContainer>
+                            <label htmlFor="driver2">Piloto 2:</label>
+                            <Select selected={driver2} setSelected={setDriver2} options={drivers.map(driver => `${driver.name} ${driver.surname}`)}/>
+                        </DriverContainer>
+                       
+                        <Button onClick={handleCompareClick}>COMPARAR</Button>
                     </ChartBackground>
 
                 </ChartContainer>

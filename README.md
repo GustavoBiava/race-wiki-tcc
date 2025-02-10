@@ -1,6 +1,6 @@
 # Projeto Integrador: Race Wiki 🏎️
 
-O projeto foi construído ao decorrer do segundo semestre letivo durante as aulas de Projeto Integrador. O principal objetivo do projeto foi construir uma aplicação com o intuito de disponibilizar informações sobre Fórmula 1 de uma maneira facilitada ao público brasileiro, tendo em vista que notícias, dados e estatísticas não são disseminadas em tal população. Além disso, também se teve como objeitvo o aperfeiçomanto técnico no desenvolvimento de um sistema web de maneira prática.  
+O projeto foi construído ao decorrer do segundo semestre letivo durante as aulas de Projeto Integrador. O principal objetivo do projeto foi construir uma aplicação com o intuito de disponibilizar informações sobre Fórmula 1 de uma maneira facilitada ao público brasileiro, tendo em vista que notícias, dados e estatísticas não são disseminadas em tal população. Além disso, também se teve como objetivo o aperfeiçomanto técnico no desenvolvimento de um sistema web de maneira prática.  
   
 ## Diagrama de Classes ✏️:
 ![Modelo conceitual](https://github.com/GustavoBiava/race-wiki-tcc/blob/main/assets/diagrama-de-classes.png)
